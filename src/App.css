@@ -1,3 +1,5 @@
+ 
+
 html {
   color:#000;
   background:#fff
@@ -953,7 +955,7 @@ html {
  }
  .authForm .loginBtn:focus,
  .authForm .loginBtn:hover {
-  background:#e5595a
+   
  }
  .authForm .loginBtn:disabled {
   background:#afaeaf
@@ -973,6 +975,7 @@ html {
   background:#f3f3f3
  }
  .authForm .orContainer {
+  
   width:100%;
   text-align:center;
   position:relative;
@@ -24688,4 +24691,9 @@ html {
    left:-400%
   }
  }
+ .modal-dialog
+{
+  margin-right: auto;
+  margin-left: 500px;
+}
  
