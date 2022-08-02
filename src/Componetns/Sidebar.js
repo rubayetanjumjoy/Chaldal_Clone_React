@@ -1,5 +1,6 @@
 import React from 'react'
- 
+import { Link } from 'react-router-dom'
+
 const Sidebar = () => {
  
   
@@ -15,18 +16,18 @@ const Sidebar = () => {
                 <ul className='misc-menu'>
                     <li className='unselected'>
                      <div className='name'>
-                     <a href='/offers'>
+                     <Link to='/food'>
                      <span>Offers</span>
-                     </a>
+                     </Link>
 
                      </div>
 
                     </li>
                     <li className='unselected'>
                      <div className='name'>
-                     <a href='/offers'>
+                     <Link to='/'>
                      <span>Food Aid</span>
-                     </a>
+                     </Link>
 
                      </div>
 
