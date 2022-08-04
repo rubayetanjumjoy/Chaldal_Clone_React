@@ -7,7 +7,8 @@ const LandingPage = () => {
          <div className='landingPage2'>
          <div className='landingBanner'>
             
-         <img src='https://chaldn.com/asset/Egg.ChaldalWeb.Fabric/Egg.ChaldalWeb1/1.0.0+Deploy-Release-78/Default/stores/chaldal/components/landingPage2/LandingPage/images/landingBannerTop.png'></img>
+          <img src='https://chaldn.com/asset/Egg.ChaldalWeb.Fabric/Egg.ChaldalWeb1/1.0.0+Deploy-Release-78/Default/stores/chaldal/components/landingPage2/LandingPage/images/landingBannerTop.png'></img>
+         
          <div className='mainContainer'>
             <section id='product-categories' className='categoryTiles'>
                 <div className='initialLabel'>
