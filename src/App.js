@@ -28,6 +28,7 @@ function App() {
     setIsOpen(false);
 
   };
+  
   return(
     
     <BrowserRouter>

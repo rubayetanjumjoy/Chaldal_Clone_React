@@ -36,15 +36,15 @@ const ModalLogin = ({isOpen,hideModal}) => {
         return(
             <>
             <button  onClick={()=>setlogtoggle(!logtoggle)} className="loginBtn emailLoginBtn">Login With <b> Phone Number</b> </button>
-            <div class="inputContainer" >
-            <input class="" name="email" type="email" required="" value=""  /><span class="input-placeholder" >Email Address</span><span class="input-error"></span><span class="input-description" ></span><span class="input-extra-content" ></span>
+            <div className="inputContainer" >
+            <input className="" name="email" type="email" required="" value=""  /><span className="input-placeholder" >Email Address</span><span className="input-error"></span><span className="input-description" ></span><span className="input-extra-content" ></span>
             
             </div>
-              <div class="inputContainer" >
-                <input class="" name="password" type="password" required="" value=""  /><span class="input-placeholder" >Password</span>
-                 <span class="input-error" ></span>
-                <span class="input-description" ></span>
-                <span class="input-extra-content">
+              <div className="inputContainer" >
+                <input className="" name="password" type="password" required="" value=""  /><span className="input-placeholder" >Password</span>
+                 <span className="input-error" ></span>
+                <span className="input-description" ></span>
+                <span className="input-extra-content">
                     </span>
             </div>
         
@@ -56,7 +56,7 @@ const ModalLogin = ({isOpen,hideModal}) => {
   
     return (
     <div>
-        <Modal  show={isOpen} onHide={hideModal} style={{marginLeft:'500px'}}>
+        <Modal    show={isOpen} onHide={hideModal} style={{marginLeft:'35%',}}>
 
         <Modal.Header closeButton>
         <Modal.Title> Login</Modal.Title>
@@ -67,7 +67,7 @@ const ModalLogin = ({isOpen,hideModal}) => {
         <button   className="loginBtn emailLoginBtn" style={{backgroundColor:'#49639f' }}> <span style={{color:'white'}}>Login With <b> Facebook</b></span> </button>
         {logtoggle ? emailrender() : phonerender()}
          
-        <button class="loginBtn" type="submit" >SIGN UP / LOGIN</button>
+        <button className="loginBtn" type="submit" >SIGN UP / LOGIN</button>
         </Modal.Body>
 
         <Modal.Footer>

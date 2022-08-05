@@ -5,10 +5,10 @@ const LandingPage = () => {
   return (
     <div>
          <div className='landingPage2'>
-         <div className='landingBanner'>
+         <div className='landingBanner' style={{backgroundSize: 'auto', backgroundSize: 'cover',height: '325px',paddingTop: '100px', backgroundImage:`url('https://chaldn.com/asset/Egg.ChaldalWeb.Fabric/Egg.ChaldalWeb1/1.0.0+Deploy-Release-78/Default/stores/chaldal/components/landingPage2/LandingPage/images/landingBannerTop.png')`}} >
             
-          <img src='https://chaldn.com/asset/Egg.ChaldalWeb.Fabric/Egg.ChaldalWeb1/1.0.0+Deploy-Release-78/Default/stores/chaldal/components/landingPage2/LandingPage/images/landingBannerTop.png'></img>
-         
+        
+         </div> 
          <div className='mainContainer'>
             <section id='product-categories' className='categoryTiles'>
                 <div className='initialLabel'>
@@ -132,7 +132,7 @@ const LandingPage = () => {
             <Corporate/>
 
         </div>
-        </div>   
+          
   
         </div>
     </div>

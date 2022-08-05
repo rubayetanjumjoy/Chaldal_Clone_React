@@ -5,8 +5,8 @@ const Sidebar = () => {
  
   
   return (
-    
-    <div className='menuWrapper' style={{marginTop:'55px'}}>
+    <>
+    <div className='menuWrapper ' >
     
     <div className='topMenu vertical'>
  
@@ -194,6 +194,7 @@ const Sidebar = () => {
     
     </div>
     </div>
+    </>
   )
 }
 

@@ -5,9 +5,11 @@ import Modal from 'react-bootstrap/Modal';
 import ModalLogin from './ModalLogin'
 import {useState} from 'react';
 import { Link } from 'react-router-dom'
+ 
 
-const Navbar = () => {
+const Navbar = ({refnav}) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [sidetoggle, setSidetoggle] = useState(true);
   const showModal = () => {
 
     setIsOpen(true);
@@ -20,19 +22,31 @@ const Navbar = () => {
     setIsOpen(false);
 
   };
-  console.log(isOpen);
+  const sidehandler = () => {
+    if(sidetoggle==false){
+      refnav.current.className='app catalog  navOpen chaldal-theme';
+    }
+    if(sidetoggle==true){
+      refnav.current.className='app catalog  chaldal-theme';
+    }
+    setSidetoggle(!sidetoggle);
+
+  };
+  
+  
   return (
-    <div>
+    <>
       <div className='headerWrapper'>
        <div className='headerWrapperWrapper'>
+       
        <div className='top-header'>
          
-       <button className="hamburgerMenu hidden-xs"  ><Icon.List style={{width:"25px",height:"25px",display:'inline-block',verticalAlign:'middle'}}/></button>
-       <Link to="/"><img class="egg chaldal_logo" src='https://chaldnn.com/asset/Egg.ChaldalWeb.Fabric/Egg.ChaldalWeb/1.0.0+Deploy-Release-78/Default/components/header/Header/images/logo-small.png?q=low&amp;webp=1&amp;alpha=1&quot'   />
+       <button onClick={sidehandler} className="hamburgerMenu hidden-xs"  ><Icon.List style={{width:"25px",height:"25px",display:'inline-block',verticalAlign:'middle'}}/></button>
+       <Link to="/"><img className="egg chaldal_logo" src='https://chaldnn.com/asset/Egg.ChaldalWeb.Fabric/Egg.ChaldalWeb/1.0.0+Deploy-Release-78/Default/components/header/Header/images/logo-small.png?q=low&amp;webp=1&amp;alpha=1&quot'   />
        </Link>
        <div className='searchArea'>
-       <div class="searchInput" style={{marginLeft:'30px'}}  > 
-        <input  class="searchBox" type="text" autocomplete="off" placeholder="Search for products (e.g. eggs, milk, potato)" required=""  />
+       <div className="searchInput" style={{marginLeft:'30px'}}  > 
+        <input  className="searchBox" type="text" autoComplete='off' placeholder="Search for products (e.g. eggs, milk, potato)" required=""  />
          <button> 
           <Icon.Search />
          </button>
@@ -49,21 +63,22 @@ const Navbar = () => {
             <span>Dhaka</span>
     
             </div>
-            <p> <i class="arrow-down"></i></p>
+            <p> <i className="arrow-down"></i></p>
            
             </div>
         </div>
-        <div class="loginArea authButtons area hidden-xs"  ><button onClick={showModal} class="signInBtn" >Sign in</button></div>
+        <div className="loginArea authButtons area hidden-xs"  ><button onClick={showModal} className="signInBtn" >Sign in</button></div>
         <ModalLogin isOpen={isOpen} hideModal={hideModal} />
         
          
-       </div> 
+       </div>
+       <Sidebar/>  
        </div>
       
        </div>
    
        
-    </div>
+    </>
   )
 }
 
