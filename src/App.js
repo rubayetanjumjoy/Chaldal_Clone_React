@@ -11,6 +11,8 @@ import EverythingelseWarper from './Componetns/EverythingelseWarper';
 import Food from './Componetns/Food';
 import LandingPage from './Componetns/LandingPage';
 import Main from './Componetns/Main'
+import Cart from './Componetns/Cart';
+
 
 function App() {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -35,6 +37,8 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Main insideWarper={<LandingPage/>}/>}></Route>
             <Route exact path="/food" element={<Main insideWarper={<Food/>}/>}></Route>
+            
+
           </Routes>
       </BrowserRouter>
     

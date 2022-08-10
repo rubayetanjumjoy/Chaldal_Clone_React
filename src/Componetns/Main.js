@@ -4,13 +4,16 @@ import Sidebar from './Sidebar'
 import ShoppingCartWrapper from './ShoppingCartWrapper'
 import EverythingelseWarper from './EverythingelseWarper'
 import { cartlist } from '../Contexts/CartContext'
+import { CartProvider, useCart } from "react-use-cart";
+
 const Main = ({insideWarper}) => {
   const refnav=useRef(null);
   
   const [cart,setcart]=useState([]);
   return (
     <>
-     <cartlist.Provider value={{cart,setcart}}>
+      <CartProvider>
+
     <div ref={refnav} className='app catalog  navOpen chaldal-theme'>
     <Navbar refnav={refnav} />
     
@@ -18,8 +21,9 @@ const Main = ({insideWarper}) => {
     <EverythingelseWarper insideWarper={insideWarper}/>
     
     </div>
-    </cartlist.Provider>
-    </>
+    </CartProvider>
+
+     </>
   )
 }
 

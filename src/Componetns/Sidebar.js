@@ -25,7 +25,7 @@ const Sidebar = () => {
                     </li>
                     <li className='unselected'>
                      <div className='name'>
-                     <Link to='/food'>
+                     <Link to='/cart'>
                      <span>Food Aid</span>
                      </Link>
 

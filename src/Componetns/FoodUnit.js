@@ -1,16 +1,33 @@
 import React from 'react'
 import { useRef } from 'react'
-import  { useState,useContext } from 'react'
+import  { useState,useContext,useEffect } from 'react'
 import { cartlist } from '../Contexts/CartContext'
+import { CartProvider, useCart } from "react-use-cart";
+
 const FoodUnit = ({item}) => {
+  const { updateItem } = useCart();
+  const { getItem } = useCart();
+
   const [toggle,setToggle]=useState(false);
   const [counter,setCounter]=useState(0);
+  const [qty,setQty]=useState(0);
+  const { addItem } = useCart();
+  const {
+    isEmpty,
+    totalUniqueItems,
+    items,
+    updateItemQuantity,
+    removeItem,
+  } = useCart();
+  
   
   const ref = useRef(null);
+ 
+
+   
   const {cart,setcart} =useContext(cartlist);
  
-  
- 
+
   let onMouseEnter =()=>{
     let product=ref.current
     product.className="product isInCart hasLinkedProduct"
@@ -37,41 +54,29 @@ const FoodUnit = ({item}) => {
       </>
     )
   }
-  let addhandle=()=>{
+  
+  let addhandle=()=>{ 
    
-    
-    
     setToggle(true);
      
     increment();
-     
-
-
   }
+
+  useEffect(() => {
+  console.log(items);
+ 
+  }, )
+  
+ 
+   
   let increment=()=>{
-    
-    
-    setCounter((prevcounter)=>prevcounter+1);
-    setcart((cart)=>[...cart,item]);
-    console.log(cart);
+    addItem(item);
+      
   }
   let decrement=()=>{
-
-   if(counter>1){
-   
-   
-    setCounter((prevcounter)=>prevcounter-1);
-    setcart((cart)=>[...cart,item]);
+    updateItemQuantity(item.id, getItem(item.id)["quantity"]-1);  
   }
-    else
-   {
-    setToggle(false);
-    setCounter(0);
-     
-   }
-    
-  }
- 
+  
   
  
   let actionItems=()=>{
@@ -82,7 +87,7 @@ const FoodUnit = ({item}) => {
                 <span >৳ </span><span >750</span></p>
                 <div>
                 <p className="remove" onClick={decrement}>-</p><p className="quantity" >
-                <span >{counter}</span></p>
+                <span >{getItem(item.id)["quantity"]}</span></p>
                 <p className="add" onClick={increment}>+</p></div>
                 </section>
             <p className="inBag">in bag</p>
@@ -107,17 +112,18 @@ const FoodUnit = ({item}) => {
                        </div>
                        <div className='price'>{item.price}</div>
                        <div className='overlay text'>
-                      {toggle ? actionItems() : renderoverlay() }
+                      {getItem(item.id) ? actionItems() : renderoverlay() }
                        </div>     
                       </div>
                     {
-                    !toggle ?
+                    !getItem(item.id) ?
                      <section className='addButtonWrapper border-radius-small'onClick={addhandle}>
                           <p className='buyText' > Add to Bag</p>
                       </section>
                    :
                       <div className="productQuantityEditor addButtonWrapper border-radius-small">
-                        <button className="minusQuantity" onClick={decrement} >–</button><div className="QuantityTextContainer" ><span>{counter}</span><span > </span><span >in bag</span></div>
+                        <button className="minusQuantity" onClick={decrement} >–</button><div className="QuantityTextContainer" >
+                          <span>{getItem(item.id)["quantity"] }</span><span > </span><span >in bag</span></div>
                         <button className="plusQuantity" onClick={increment} >+</button>
                         </div> }
                      

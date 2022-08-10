@@ -1,35 +1,16 @@
 import React, { useState,useref } from 'react'
 import { useRef } from 'react'
-
+import Items from '../API/Items.json'
 import FoodUnit from './FoodUnit'
-const Food = () => {
-  const [item,setItem]=useState([
-    {
-      "id": 1,
-      "name": "date",
-      "subText": "500gm",
-      "iamge": "https://chaldn.com/_mpimage/ajwa-dates-premium-500-gm?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D99543&q=best&v=1&m=400&webp=1",
-      "price": "20",
-       
-  },
-  {
-    "id": 2,
-    "name": "Egg",
-    "subText": "200gm",
-    "iamge": "https://chaldn.com/_mpimage/moshur-dal-imported-1-kg?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D47049&q=low&v=1&m=400&webp=1",
-    "price": "30",
-  },
-  {
-    "id": 3,
-    "name": "Potato",
-    "subText": "500gm",
-    "iamge": "https://chaldn.com/_mpimage/tang-orange-instant-drink-powder-500-gm?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D113360&q=best&v=1&m=400&webp=1",
-    "price": "150",
-  }
+import { CartProvider, useCart } from "react-use-cart";
 
-  ]);
+const Food = () => {
+ 
+
+  const [item,setItem]=useState(Items);
   
-  
+ 
+     
   return (
     <div>
       <div className='catalogBrowser'>
@@ -37,6 +18,7 @@ const Food = () => {
           <section className='bodyWrapper'>
             <div className='categoryHeader' >
                <a><b>Food</b></a>
+                              
             </div>
             <div className='categorySection miscCategorySection onlyMiscCategorySection'>
               
