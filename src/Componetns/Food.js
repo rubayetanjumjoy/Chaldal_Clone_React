@@ -1,4 +1,4 @@
-import React, { useState,useref } from 'react'
+import React, { useState,useref, useEffect } from 'react'
 import { useRef } from 'react'
 import Items from '../API/Items.json'
 import FoodUnit from './FoodUnit'
@@ -7,7 +7,15 @@ import { CartProvider, useCart } from "react-use-cart";
 const Food = () => {
  
 
-  const [item,setItem]=useState(Items);
+  const [item,setItem]=useState([]);
+  useEffect(() => {
+    fetch('https://fakestoreapi.com/products')
+  .then((response) => response.json())
+  .then((data) =>   setItem(data));
+
+  
+     
+  }, [])
   
  
      

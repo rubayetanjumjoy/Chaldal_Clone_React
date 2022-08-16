@@ -104,7 +104,7 @@ const FoodUnit = ({item}) => {
                     <div ref={ref} onMouseEnter={onMouseEnter}  onMouseLeave={onMouseLeave} className='product'>
                       <div className='imageWrapper'>
                         <div className='imageWrapperWrapper'>
-                         <img src={item.iamge}></img> 
+                         <img src={item.image}></img> 
                         </div>
                         <div className='name'>{item.name} </div>
                        <div className='subText'>

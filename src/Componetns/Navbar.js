@@ -5,9 +5,10 @@ import Modal from 'react-bootstrap/Modal';
 import ModalLogin from './ModalLogin'
 import {useState} from 'react';
 import { Link } from 'react-router-dom'
- 
-
 const Navbar = ({refnav}) => {
+
+
+ 
   const [isOpen, setIsOpen] = useState(false);
   const [sidetoggle, setSidetoggle] = useState(true);
   const showModal = () => {
@@ -15,6 +16,10 @@ const Navbar = ({refnav}) => {
     setIsOpen(true);
 
   };
+  
+  
+  
+    
 
 
   const hideModal = () => {
@@ -40,7 +45,6 @@ const Navbar = ({refnav}) => {
        <div className='headerWrapperWrapper'>
        
        <div className='top-header'>
-         
        <button onClick={sidehandler} className="hamburgerMenu hidden-xs"  ><Icon.List style={{width:"25px",height:"25px",display:'inline-block',verticalAlign:'middle'}}/></button>
        <Link to="/"><img className="egg chaldal_logo" src='https://chaldnn.com/asset/Egg.ChaldalWeb.Fabric/Egg.ChaldalWeb/1.0.0+Deploy-Release-78/Default/components/header/Header/images/logo-small.png?q=low&amp;webp=1&amp;alpha=1&quot'   />
        </Link>

@@ -100,11 +100,11 @@ const ShoppingCartWrapper = ({refnav}) => {
                </div>
                 
                <div className="picture"  >
-                  <div className="productPicture"  ><img src={item.iamge} size="400"  ></img></div>
+                  <div className="productPicture"  ><img src={item.image} size="400"  ></img></div>
                </div>
                <div className="name" >
                   <span  >{item.name}</span>
-                  <div className="subText"  ><span >৳ </span><span  >90</span><span > / 1 kg</span></div>
+                  <div className="subText"  ><span  >{item.title}</span></div>
                </div>
                <div className="amount"  >
                   <section  >

@@ -1,14 +1,66 @@
 import React from 'react'
 import Modal from 'react-bootstrap/Modal';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
+import {auth ,firebase} from '../firebase'
+
 const ModalLogin = ({isOpen,hideModal}) => {
   
     const [logtoggle,setlogtoggle]=useState(false)
+      
+     // Inputs
      
- 
+     const [mynumber, setnumber] = useState('+880');
+     const [otp, setotp] = useState('');
+     const [otpshow, setOtpshow] = useState(false);
+     const [phonevalid, setPhonevalid] = useState(true);
+
+     const [final, setfinal] = useState('');
+     // Sent OTP
+     useEffect(() => {
+       console.log(mynumber)
+       console.log(final)
+     
+       
+     })
+     
+     function validatePhoneNumber(input_str) {
+        var re = /(^(\+88|0088)?(01){1}[3456789]{1}(\d){8})$/;
+      
+        return re.test(input_str);
+      }
+     const signin = () => {
+   
+         if (validatePhoneNumber(mynumber)) {
+            setPhonevalid(true)
+        /* window.reCaptchaVerifier = new firebase.auth.RecaptchaVerifier('login-button', {
+            size: 'invisible',
+            callback: () => {
+              // callback is not being fired automatically
+              // but after the OTP has been sent to user's
+              // phone number which makes this callback useless
+              // as opposed to Firebase's documentation
+            },
+          });
+         auth.signInWithPhoneNumber(mynumber, window.reCaptchaVerifier).then((result) => {
+             setfinal(result);
+             alert("code sent")
+             setOtpshow(true);
+         })
+             .catch((err) => {
+                 alert(err);
+                 window.location.reload()
+             });*/
+            }
+             else{
+                setPhonevalid(false)
+             }
+     }
+   
     let phonerender=()=>{
         return (
-             <>
+            <>
+             <div className='phoneNumberLogin'>
+            <form>    
             <button  onClick={()=>setlogtoggle(!logtoggle)} className="loginBtn emailLoginBtn">Login With <b> Email</b> </button>
             <div className="orContainer">
             <span>or</span>
@@ -17,15 +69,47 @@ const ModalLogin = ({isOpen,hideModal}) => {
             <div className="loginWithPhoneMessage">
                 PLEASE ENTER YOUR PHONE NUMBER
             </div>
-            <div className="phoneNumberInputContainer">
+              <div className="phoneNumberInputContainer">
             <div className="phoneNumberLoginField">
                 <div className="input">
                 <img className='flag flag-bd'src="/img/bangladesh.png" ></img>
-                <input type="tel" placeholder="+880" />
+                <input type="tel"  value={mynumber} onChange={(e) => { 
+                       setnumber(e.target.value) }} />
+                <div>
+                    
             </div>
 
             </div>
+
             </div>
+            
+            </div> 
+            
+            {  !phonevalid && <div className='errorContainer'>
+                <span >
+                Please enter a valid bangladeshi number. e.g. +8801672955886
+                </span>
+            </div> }
+            </form>
+            <form>
+                <div className='inputContainer'>
+                    <input name='otp' type="text" required="" style={{color:'black'}}></input>
+                    <span className='input-placeholder'>
+                    Please enter 4-digit one time pin
+                    </span>
+                    <span className='input-extra-content'>
+
+                    </span>
+                </div>
+                <div className='actions'>
+                    <button className='btn btn-primary' style={{color:'#ff686e'}}>Enter</button>
+                    <button className='btn'>Request PIN again </button>
+                </div>
+            </form>
+            
+            </div>
+            <button className="loginBtn" id="login-button" type="submit" onClick={signin} >SIGN UP / LOGIN</button>
+
          </>
                 
         );
@@ -47,6 +131,8 @@ const ModalLogin = ({isOpen,hideModal}) => {
                 <span className="input-extra-content">
                     </span>
             </div>
+            <button className="loginBtn" id="login-button" type="submit" onClick={signin} >LOGIN</button>
+
         
             </>
         )
@@ -56,9 +142,12 @@ const ModalLogin = ({isOpen,hideModal}) => {
   
     return (
     <div>
+
         <Modal    show={isOpen} onHide={hideModal} style={{marginLeft:'35%',}}>
 
+
         <Modal.Header closeButton>
+
         <Modal.Title> Login</Modal.Title>
 
         </Modal.Header>
@@ -66,16 +155,16 @@ const ModalLogin = ({isOpen,hideModal}) => {
         <Modal.Body className="authForm">
         <button   className="loginBtn emailLoginBtn" style={{backgroundColor:'#49639f' }}> <span style={{color:'white'}}>Login With <b> Facebook</b></span> </button>
         {logtoggle ? emailrender() : phonerender()}
-         
-        <button className="loginBtn" type="submit" >SIGN UP / LOGIN</button>
+
+
         </Modal.Body>
 
         <Modal.Footer>
-
+        
 
 
         </Modal.Footer>
-
+        
         </Modal>
     </div>
   )
