@@ -11,22 +11,21 @@ const Navbar = ({refnav}) => {
  
   const [isOpen, setIsOpen] = useState(false);
   const [sidetoggle, setSidetoggle] = useState(true);
+  const [otpshow, setOtpshow] = useState(false);
+ 
   const showModal = () => {
 
     setIsOpen(true);
 
   };
-  
-  
-  
-    
-
-
   const hideModal = () => {
-
+    setOtpshow(false);
     setIsOpen(false);
 
   };
+
+  
+
   const sidehandler = () => {
     if(sidetoggle==false){
       refnav.current.className='app catalog  navOpen chaldal-theme';
@@ -72,7 +71,7 @@ const Navbar = ({refnav}) => {
             </div>
         </div>
         <div className="loginArea authButtons area hidden-xs"  ><button onClick={showModal} className="signInBtn" >Sign in</button></div>
-        <ModalLogin isOpen={isOpen} hideModal={hideModal} />
+        <ModalLogin isOpen={isOpen} hideModal={hideModal}   otpshow={otpshow} setOtpshow={setOtpshow} />
         
          
        </div>

@@ -1,9 +1,9 @@
 import React from 'react'
 import Modal from 'react-bootstrap/Modal';
 import { useState,useEffect } from 'react';
-import {auth ,firebase} from '../firebase'
+ 
 
-const ModalLogin = ({isOpen,hideModal}) => {
+const ModalLogin = ({isOpen,hideModal,setOtpshow,otpshow}) => {
   
     const [logtoggle,setlogtoggle]=useState(false)
       
@@ -11,7 +11,6 @@ const ModalLogin = ({isOpen,hideModal}) => {
      
      const [mynumber, setnumber] = useState('+880');
      const [otp, setotp] = useState('');
-     const [otpshow, setOtpshow] = useState(false);
      const [phonevalid, setPhonevalid] = useState(true);
 
      const [final, setfinal] = useState('');
@@ -31,7 +30,8 @@ const ModalLogin = ({isOpen,hideModal}) => {
      const signin = () => {
    
          if (validatePhoneNumber(mynumber)) {
-            setPhonevalid(true)
+            setPhonevalid(true);
+            setOtpshow(true);
         /* window.reCaptchaVerifier = new firebase.auth.RecaptchaVerifier('login-button', {
             size: 'invisible',
             callback: () => {
@@ -52,7 +52,7 @@ const ModalLogin = ({isOpen,hideModal}) => {
              });*/
             }
              else{
-                setPhonevalid(false)
+                 setPhonevalid(false)
              }
      }
    
@@ -67,9 +67,9 @@ const ModalLogin = ({isOpen,hideModal}) => {
 
             </div>
             <div className="loginWithPhoneMessage">
-                PLEASE ENTER YOUR PHONE NUMBER
+                { !otpshow ?' PLEASE ENTER YOUR PHONE NUMBER ': <span>We've sent a 4-digit one time PIN in your phone <b>{mynumber}</b></span>}
             </div>
-              <div className="phoneNumberInputContainer">
+             { !otpshow && <div className="phoneNumberInputContainer">
             <div className="phoneNumberLoginField">
                 <div className="input">
                 <img className='flag flag-bd'src="/img/bangladesh.png" ></img>
@@ -83,7 +83,7 @@ const ModalLogin = ({isOpen,hideModal}) => {
 
             </div>
             
-            </div> 
+            </div> }
             
             {  !phonevalid && <div className='errorContainer'>
                 <span >
@@ -91,7 +91,8 @@ const ModalLogin = ({isOpen,hideModal}) => {
                 </span>
             </div> }
             </form>
-            <form>
+            
+     {      otpshow && <form>
                 <div className='inputContainer'>
                     <input name='otp' type="text" required="" style={{color:'black'}}></input>
                     <span className='input-placeholder'>
@@ -102,13 +103,14 @@ const ModalLogin = ({isOpen,hideModal}) => {
                     </span>
                 </div>
                 <div className='actions'>
-                    <button className='btn btn-primary' style={{color:'#ff686e'}}>Enter</button>
+                    <button className='btn btn-primary'>Enter</button>
                     <button className='btn'>Request PIN again </button>
                 </div>
             </form>
+            }
             
             </div>
-            <button className="loginBtn" id="login-button" type="submit" onClick={signin} >SIGN UP / LOGIN</button>
+            { !otpshow && <button className="loginBtn" id="login-button" type="submit" onClick={signin} >SIGN UP / LOGIN</button>}
 
          </>
                 
@@ -119,13 +121,20 @@ const ModalLogin = ({isOpen,hideModal}) => {
     let emailrender=()=>{
         return(
             <>
-            <button  onClick={()=>setlogtoggle(!logtoggle)} className="loginBtn emailLoginBtn">Login With <b> Phone Number</b> </button>
+            <button  onClick={()=>{setlogtoggle(!logtoggle); setOtpshow(false)}} className="loginBtn emailLoginBtn">Login With <b> Phone Number</b> </button>
             <div className="inputContainer" >
-            <input className="" name="email" type="email" required="" value=""  /><span className="input-placeholder" >Email Address</span><span className="input-error"></span><span className="input-description" ></span><span className="input-extra-content" ></span>
+            <input className="" name="email" type="email" required="" /> 
+            <span className="input-placeholder" >Email Address</span>
+            <span className="input-error"></span>
+            <span className="input-description" 
+            ></span>
+            <span className="input-extra-content" >
+
+            </span>
             
             </div>
               <div className="inputContainer" >
-                <input className="" name="password" type="password" required="" value=""  /><span className="input-placeholder" >Password</span>
+                <input className="" name="password" type="password" required=""  /><span className="input-placeholder" >Password</span>
                  <span className="input-error" ></span>
                 <span className="input-description" ></span>
                 <span className="input-extra-content">
@@ -143,7 +152,7 @@ const ModalLogin = ({isOpen,hideModal}) => {
     return (
     <div>
 
-        <Modal    show={isOpen} onHide={hideModal} style={{marginLeft:'35%',}}>
+        <Modal    show={isOpen} onHide={hideModal}  style={{paddingTop:'0px',}}>
 
 
         <Modal.Header closeButton>

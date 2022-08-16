@@ -6,7 +6,7 @@ import Sidebar from './Componetns/Sidebar';
 import Button from 'react-bootstrap/Button';
 import { BrowserRouter } from 'react-router-dom'
 import { Route,Routes } from 'react-router-dom'
-import 'bootstrap/dist/css/bootstrap.min.css';
+ 
 import EverythingelseWarper from './Componetns/EverythingelseWarper';
 import Food from './Componetns/Food';
 import LandingPage from './Componetns/LandingPage';
@@ -18,19 +18,7 @@ function App() {
   const [isOpen, setIsOpen] = React.useState(false);
 
 
-  const showModal = () => {
-
-    setIsOpen(true);
-
-  };
-
-
-  const hideModal = () => {
-
-    setIsOpen(false);
-
-  };
-  
+ 
   return(
     
     <BrowserRouter>
