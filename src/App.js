@@ -17,6 +17,7 @@ import AccountLogin from './Componetns/AccountLogin';
 import PrivateRoute from './Util/PrivateRoute';
 import { authProvider } from './Contexts/Auth';
 import { useEffect } from 'react';
+
 function App() {
   const [isOpen, setIsOpen] = React.useState(false);
   const [auth,setAuth]=useState([])
@@ -41,6 +42,8 @@ function App() {
             <Route exact path="/food" element={<Main insideWarper={<Food/>}/>}></Route>
             <Route exact path="/account/login" element={<Main insideWarper={<AccountLogin/>}/>}></Route>
 
+
+            
             {/* prottected Route */}
             <Route element={<PrivateRoute/>}>
             

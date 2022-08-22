@@ -7,8 +7,9 @@ import {useState,useContext} from 'react';
 import { Link } from 'react-router-dom'
 import { isopen } from '../Contexts/ModalToggle';
 import { authProvider } from '../Contexts/Auth';
+import { useCart } from "react-use-cart";
 const Navbar = ({refnav}) => {
-
+  const { emptyCart } = useCart();
   const {auth,setAuth} =useContext(authProvider);
 
  
@@ -26,7 +27,11 @@ const Navbar = ({refnav}) => {
     setIsOpenmodal(false)
   };
 
-  
+  const handleLocalStorage=()=>{
+    window.localStorage.clear();
+    setAuth([]);
+    emptyCart();
+  }
 
   const sidehandler = () => {
     if(sidetoggle==false){
@@ -47,7 +52,7 @@ const Navbar = ({refnav}) => {
        
        <div className='top-header'>
        <button onClick={sidehandler} className="hamburgerMenu hidden-xs"  ><Icon.List style={{width:"25px",height:"25px",display:'inline-block',verticalAlign:'middle'}}/></button>
-       <Link to="/"><img className="egg chaldal_logo" src='https://chaldnn.com/asset/Egg.ChaldalWeb.Fabric/Egg.ChaldalWeb/1.0.0+Deploy-Release-78/Default/components/header/Header/images/logo-small.png?q=low&amp;webp=1&amp;alpha=1&quot'   />
+       <Link to="/"><img className="egg chaldal_logo" src='https://chaldn.com/asset/Egg.ChaldalWeb.Fabric/Egg.ChaldalWeb1/1.0.0+Deploy-Release-100/Default/components/header/Header/images/logo-small.png?q=low&webp=1&alpha=1'   />
        </Link>
        <div className='searchArea'>
        <div className="searchInput" style={{marginLeft:'30px'}}  > 
@@ -72,10 +77,34 @@ const Navbar = ({refnav}) => {
            
             </div>
         </div>
-        <div className="loginArea authButtons area hidden-xs"  ><button onClick={showModal} className="signInBtn" >{auth['token']?auth['token'] : 'Sign In'}</button></div>
-        <ModalLogin hideModal={hideModal}   otpshow={otpshow} setOtpshow={setOtpshow} />
+        <div className="loginArea authButtons area hidden-xs area-with-dropdown "  >
+          <button onClick={showModal} className="signInBtn" >{auth['token']?auth['name'] : 'Sign In'}</button>
+          { auth['token'] &&
+            <ul class="dropDown" >
+        <li >
+          <a href="/customer/profile" >Your Profile</a>
+        </li>
+        <li >
+          <a href="/customer/orders" >Your Orders</a>
+          </li>
+          <li>
+            <a href="/account-history" >Payment History</a>
+          </li>
+          <li >
+            <a href="/customer/referralprogram" >Referral Program</a>
+          </li>
+          <li >
+            <a href="/customer/changepassword" >Change Password</a>
+          </li>
+          <li >
+            <Link to="/"   onClick={handleLocalStorage} >Log out</Link>
+            </li>
+          </ul>
+}
+       
+        </div>
+       { !auth['token'] && <ModalLogin hideModal={hideModal}   otpshow={otpshow} setOtpshow={setOtpshow} />}
         
-         
        </div>
        <Sidebar/>  
        </div>
