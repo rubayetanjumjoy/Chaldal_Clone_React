@@ -1,37 +1,89 @@
 import React from 'react'
 import Modal from 'react-bootstrap/Modal';
-import { useState,useEffect } from 'react';
- 
+import { useState,useEffect,useContext } from 'react';
+import { isopen } from '../Contexts/ModalToggle';
+import { authProvider } from '../Contexts/Auth';
 
-const ModalLogin = ({isOpen,hideModal,setOtpshow,otpshow}) => {
-  
+const ModalLogin = ({hideModal,setOtpshow,otpshow}) => {
+    const {isopenmodal,setIsOpenmodal} =useContext(isopen);
+
     const [logtoggle,setlogtoggle]=useState(false)
-      
+     
      // Inputs
      
      const [mynumber, setnumber] = useState('+880');
-     const [otp, setotp] = useState('');
+     const [myotp, setMyotp] = useState('');
      const [phonevalid, setPhonevalid] = useState(true);
 
-     const [final, setfinal] = useState('');
-     // Sent OTP
-     useEffect(() => {
-       console.log(mynumber)
-       console.log(final)
+     //auth
+     const {auth,setAuth} =useContext(authProvider);
+      
      
-       
-     })
+   
+     let otpverifyhandler=()=>{
+        let data={"phone_number":mynumber,"otp":myotp}
+        fetch("http://127.0.0.1:8000/v0/verifyotp/",{
+            method: 'POST', // or 'PUT'
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),})
+            .then(res => res.json())
+            .then(
+              (result) => {
+                setOtpshow(false)
+                setIsOpenmodal(false)
+                 
+                localStorage.setItem('items', JSON.stringify(result));
+                const items = JSON.parse(localStorage.getItem('items'));
+                if (items) {
+                 setAuth(items);
+                 }
+                 
+              },
+              // Note: it's important to handle errors here
+              // instead of a catch() block so that we don't swallow
+              // exceptions from actual bugs in components.
+              (error) => {
+                console.log(error);
+              }
+            )
+
+     }
      
      function validatePhoneNumber(input_str) {
         var re = /(^(\+88|0088)?(01){1}[3456789]{1}(\d){8})$/;
       
         return re.test(input_str);
       }
+      
      const signin = () => {
-   
+         let data={
+            "phone_number":mynumber
+         }
          if (validatePhoneNumber(mynumber)) {
             setPhonevalid(true);
             setOtpshow(true);
+            fetch("http://127.0.0.1:8000/v0/sendotp/",{
+            method: 'POST', // or 'PUT'
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),})
+            .then(res => res.json())
+            .then(
+              (result) => {
+                 
+                console.log(result)
+              },
+              // Note: it's important to handle errors here
+              // instead of a catch() block so that we don't swallow
+              // exceptions from actual bugs in components.
+              (error) => {
+                console.log(error);
+              }
+            )
+
         /* window.reCaptchaVerifier = new firebase.auth.RecaptchaVerifier('login-button', {
             size: 'invisible',
             callback: () => {
@@ -60,7 +112,7 @@ const ModalLogin = ({isOpen,hideModal,setOtpshow,otpshow}) => {
         return (
             <>
              <div className='phoneNumberLogin'>
-            <form>    
+            <>    
             <button  onClick={()=>setlogtoggle(!logtoggle)} className="loginBtn emailLoginBtn">Login With <b> Email</b> </button>
             <div className="orContainer">
             <span>or</span>
@@ -90,11 +142,11 @@ const ModalLogin = ({isOpen,hideModal,setOtpshow,otpshow}) => {
                 Please enter a valid bangladeshi number. e.g. +8801672955886
                 </span>
             </div> }
-            </form>
+            </>
             
-     {      otpshow && <form>
+     {      otpshow && <>
                 <div className='inputContainer'>
-                    <input name='otp' type="text" required="" style={{color:'black'}}></input>
+                    <input name='otp' type="text" required="" onChange={(e)=>setMyotp(e.target.value)} style={{color:'black'}}></input>
                     <span className='input-placeholder'>
                     Please enter 4-digit one time pin
                     </span>
@@ -103,10 +155,10 @@ const ModalLogin = ({isOpen,hideModal,setOtpshow,otpshow}) => {
                     </span>
                 </div>
                 <div className='actions'>
-                    <button className='btn btn-primary'>Enter</button>
+                    <button className='btn btn-primary' onClick={otpverifyhandler}>Enter</button>
                     <button className='btn'>Request PIN again </button>
                 </div>
-            </form>
+            </>
             }
             
             </div>
@@ -152,7 +204,7 @@ const ModalLogin = ({isOpen,hideModal,setOtpshow,otpshow}) => {
     return (
     <div>
 
-        <Modal    show={isOpen} onHide={hideModal}  style={{paddingTop:'0px',}}>
+        <Modal    show={isopenmodal} onHide={hideModal}  style={{paddingTop:'0px',}}>
 
 
         <Modal.Header closeButton>

@@ -3,25 +3,27 @@ import * as Icon from 'react-bootstrap-icons';
 import Sidebar from './Sidebar';
 import Modal from 'react-bootstrap/Modal';
 import ModalLogin from './ModalLogin'
-import {useState} from 'react';
+import {useState,useContext} from 'react';
 import { Link } from 'react-router-dom'
+import { isopen } from '../Contexts/ModalToggle';
+import { authProvider } from '../Contexts/Auth';
 const Navbar = ({refnav}) => {
 
+  const {auth,setAuth} =useContext(authProvider);
 
  
   const [isOpen, setIsOpen] = useState(false);
   const [sidetoggle, setSidetoggle] = useState(true);
   const [otpshow, setOtpshow] = useState(false);
- 
+  const {isopenmodal,setIsOpenmodal} =useContext(isopen);
   const showModal = () => {
 
-    setIsOpen(true);
+    setIsOpenmodal(true);
 
   };
   const hideModal = () => {
     setOtpshow(false);
-    setIsOpen(false);
-
+    setIsOpenmodal(false)
   };
 
   
@@ -70,8 +72,8 @@ const Navbar = ({refnav}) => {
            
             </div>
         </div>
-        <div className="loginArea authButtons area hidden-xs"  ><button onClick={showModal} className="signInBtn" >Sign in</button></div>
-        <ModalLogin isOpen={isOpen} hideModal={hideModal}   otpshow={otpshow} setOtpshow={setOtpshow} />
+        <div className="loginArea authButtons area hidden-xs"  ><button onClick={showModal} className="signInBtn" >{auth['token']?auth['token'] : 'Sign In'}</button></div>
+        <ModalLogin hideModal={hideModal}   otpshow={otpshow} setOtpshow={setOtpshow} />
         
          
        </div>

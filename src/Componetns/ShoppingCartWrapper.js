@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useRef ,useContext} from 'react';
-import { cartlist } from '../Contexts/CartContext'
 import { CartProvider, useCart } from "react-use-cart";
+import { Link } from 'react-router-dom'
 import { ArrowDownShort, ArrowRight, ArrowUpShort, X,  } from 'react-bootstrap-icons';
 import Odometer from 'react-odometerjs';
 
@@ -15,8 +15,8 @@ const ShoppingCartWrapper = ({refnav}) => {
       updateItemQuantity,
       removeItem,
     } = useCart();
+
     
-   const {cart,setcart} =useContext(cartlist);
     const [carttoggle,setCarttoggle]=useState(true);
     const cartref=useRef(null);
     
@@ -145,9 +145,15 @@ const ShoppingCartWrapper = ({refnav}) => {
       </div>
       <div className=""  >
          <div className="footer"  >
-         {total() ? <div className="shoppingtCartActionButtons"  ><button id="placeOrderButton" ><span className="placeOrderText" >Place Order</span><span className="totalMoneyCount"  >
+         {total() ? <div className="shoppingtCartActionButtons"  >
+            <Link to="/order"><button id="placeOrderButton" ><span className="placeOrderText" >Place Order</span>
+            <span className="totalMoneyCount"  >
                <span >৳  </span>
-            <span  ><Odometer value={total()}/></span><span  > </span></span></button></div>: <div><span>Hotline : </span><span>16710</span></div>}
+            <span  >
+               <Odometer value={total()}/></span>
+               <span  > </span></span>
+               </button></Link>
+               </div>: <div><span>Hotline : </span><span>16710</span></div>}
          </div>
       </div>
    

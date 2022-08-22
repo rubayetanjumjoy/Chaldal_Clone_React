@@ -12,23 +12,45 @@ import Food from './Componetns/Food';
 import LandingPage from './Componetns/LandingPage';
 import Main from './Componetns/Main'
 import Cart from './Componetns/Cart';
-
-
+import Order from './Componetns/Order';
+import AccountLogin from './Componetns/AccountLogin';
+import PrivateRoute from './Util/PrivateRoute';
+import { authProvider } from './Contexts/Auth';
+import { useEffect } from 'react';
 function App() {
   const [isOpen, setIsOpen] = React.useState(false);
+  const [auth,setAuth]=useState([])
 
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem('items'));
+    if (items) {
+      
+     setAuth(JSON.parse(localStorage.getItem('items')));
+     console.log(auth);
+     
 
- 
+     }
+  }, [])
+
   return(
     
+    <authProvider.Provider value={{auth,setAuth}}>
     <BrowserRouter>
           <Routes>
             <Route exact path="/" element={<Main insideWarper={<LandingPage/>}/>}></Route>
             <Route exact path="/food" element={<Main insideWarper={<Food/>}/>}></Route>
+            <Route exact path="/account/login" element={<Main insideWarper={<AccountLogin/>}/>}></Route>
+
+            {/* prottected Route */}
+            <Route element={<PrivateRoute/>}>
+            
+            <Route exact path="/order" element={<Main insideWarper={<Order/>}/>}></Route>
+            </Route>
             
 
           </Routes>
       </BrowserRouter>
+      </authProvider.Provider>
     
     );
 }

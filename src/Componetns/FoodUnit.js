@@ -1,7 +1,6 @@
 import React from 'react'
 import { useRef } from 'react'
 import  { useState,useContext,useEffect } from 'react'
-import { cartlist } from '../Contexts/CartContext'
 import { CartProvider, useCart } from "react-use-cart";
 
 const FoodUnit = ({item}) => {
@@ -25,7 +24,6 @@ const FoodUnit = ({item}) => {
  
 
    
-  const {cart,setcart} =useContext(cartlist);
  
 
   let onMouseEnter =()=>{
@@ -63,7 +61,6 @@ const FoodUnit = ({item}) => {
   }
 
   useEffect(() => {
-  console.log(items);
  
   }, )
   
