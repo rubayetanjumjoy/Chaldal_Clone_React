@@ -52,7 +52,7 @@ const Navbar = ({refnav}) => {
        
        <div className='top-header'>
        <button onClick={sidehandler} className="hamburgerMenu hidden-xs"  ><Icon.List style={{width:"25px",height:"25px",display:'inline-block',verticalAlign:'middle'}}/></button>
-       <Link to="/"><img className="egg chaldal_logo" src='https://chaldn.com/asset/Egg.ChaldalWeb.Fabric/Egg.ChaldalWeb1/1.0.0+Deploy-Release-100/Default/components/header/Header/images/logo-small.png?q=low&webp=1&alpha=1'   />
+       <Link to="/"><img className="egg chaldal_logo" src='https://chaldnn.com/asset/Egg.ChaldalWeb.Fabric/Egg.ChaldalWeb1/1.0.0+Deploy-Release-100/Default/components/header/Header/images/logo-small.png?q=low&webp=1&alpha=1'   />
        </Link>
        <div className='searchArea'>
        <div className="searchInput" style={{marginLeft:'30px'}}  > 
@@ -82,19 +82,15 @@ const Navbar = ({refnav}) => {
           { auth['token'] &&
             <ul class="dropDown" >
         <li >
-          <a href="/customer/profile" >Your Profile</a>
+          <Link to="/profile" >Your Profile</Link>
         </li>
         <li >
-          <a href="/customer/orders" >Your Orders</a>
+          <Link to="/order" >Your Orders</Link>
           </li>
-          <li>
-            <a href="/account-history" >Payment History</a>
-          </li>
+          
+           
           <li >
-            <a href="/customer/referralprogram" >Referral Program</a>
-          </li>
-          <li >
-            <a href="/customer/changepassword" >Change Password</a>
+            <Link to="/changepassword" >Change Password</Link>
           </li>
           <li >
             <Link to="/"   onClick={handleLocalStorage} >Log out</Link>
