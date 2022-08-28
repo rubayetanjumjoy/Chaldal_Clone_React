@@ -1,37 +1,29 @@
-import React, { useState,useref, useEffect } from 'react'
-import { useRef } from 'react'
-import Items from '../API/Items.json'
-import FoodUnit from './FoodUnit'
-import { CartProvider, useCart } from "react-use-cart";
+import React from 'react'
+import { useContext } from 'react';
+import { isopen } from '../Contexts/ModalToggle';
+import FoodUnit from './FoodUnit';
+const Search = () => {
+    const {searchresult,setSearchesult} =useContext(isopen);
+    console.log(searchresult)
 
-const Food = () => {
- 
-
-  const [item,setItem]=useState([]);
-  useEffect(() => {
-    fetch('http://192.168.100.199:8002/v0/products/')
-  .then((response) => response.json())
-  .then((data) =>   setItem(data));
-
-  
-     
-  }, [])
-  
- 
-     
-  return (
-    <div>
+   return (
+    <>
+     <div>
       <div className='catalogBrowser'>
         <div className='loaded'>
           <section className='bodyWrapper'>
             <div className='categoryHeader' >
-               <a><b>Food</b></a>
+               
                               
             </div>
             <div className='categorySection miscCategorySection onlyMiscCategorySection'>
+            <div class="searchSlagName">
+              <span >Search result for: </span>
+              <strong>a</strong>
+              </div>
               
               <div className='productPane'>{
-                 item.map((item)=>(
+                 searchresult.map((item)=>(
                   
                   <FoodUnit  key={item.id} item={item}/>                   
                  ))
@@ -47,7 +39,9 @@ const Food = () => {
         </div>
       </div>
     </div>
+  
+    </>
   )
 }
 
-export default Food
+export default Search

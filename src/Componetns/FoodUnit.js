@@ -103,9 +103,9 @@ const FoodUnit = ({item}) => {
                         <div className='imageWrapperWrapper'>
                          <img src={item.image}></img> 
                         </div>
-                        <div className='name'>{item.name} </div>
+                        <div className='name'>{item.title} </div>
                        <div className='subText'>
-                       500 gm
+                       {item.description}
                        </div>
                        <div className='price'>{item.price}</div>
                        <div className='overlay text'>

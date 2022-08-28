@@ -12,13 +12,14 @@ const Main = ({insideWarper}) => {
   const {auth,setAuth} =useContext(authProvider);
 
   const [isopenmodal,setIsOpenmodal]=useState(false);
+  const [searchresult,setSearchesult]=useState([]);
   
 
   return (
     <>
       <CartProvider>
         
-    <isopen.Provider value={{isopenmodal,setIsOpenmodal}}>
+    <isopen.Provider value={{isopenmodal,setIsOpenmodal,searchresult,setSearchesult}}>
 
     <div ref={refnav} className='app catalog  navOpen chaldal-theme'>
     <Navbar refnav={refnav} />

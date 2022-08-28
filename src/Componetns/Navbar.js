@@ -8,15 +8,21 @@ import { Link } from 'react-router-dom'
 import { isopen } from '../Contexts/ModalToggle';
 import { authProvider } from '../Contexts/Auth';
 import { useCart } from "react-use-cart";
+import { useNavigate } from 'react-router-dom';
+
 const Navbar = ({refnav}) => {
   const { emptyCart } = useCart();
   const {auth,setAuth} =useContext(authProvider);
+  const {searchresult,setSearchesult} =useContext(isopen);
 
- 
+  
+
   const [isOpen, setIsOpen] = useState(false);
   const [sidetoggle, setSidetoggle] = useState(true);
   const [otpshow, setOtpshow] = useState(false);
+
   const {isopenmodal,setIsOpenmodal} =useContext(isopen);
+  let navigate = useNavigate();
   const showModal = () => {
 
     setIsOpenmodal(true);
@@ -43,7 +49,13 @@ const Navbar = ({refnav}) => {
     setSidetoggle(!sidetoggle);
 
   };
-  
+let handlechangeSearch=(e)=>{
+  fetch(`http://192.168.100.199:8002/v0/search/?q=${e.target.value}`)
+  .then((response) => response.json())
+  .then((data) =>  setSearchesult(data)
+  );
+  navigate('/search');
+}
   
   return (
     <>
@@ -56,7 +68,7 @@ const Navbar = ({refnav}) => {
        </Link>
        <div className='searchArea'>
        <div className="searchInput" style={{marginLeft:'30px'}}  > 
-        <input  className="searchBox" type="text" autoComplete='off' placeholder="Search for products (e.g. eggs, milk, potato)" required=""  />
+        <input onChange={handlechangeSearch} className="searchBox" type="text" autoComplete='off' placeholder="Search for products (e.g. eggs, milk, potato)" required=""  />
          <button> 
           <Icon.Search />
          </button>

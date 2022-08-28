@@ -6,7 +6,7 @@ import Sidebar from './Componetns/Sidebar';
 import Button from 'react-bootstrap/Button';
 import { BrowserRouter } from 'react-router-dom'
 import { Route,Routes } from 'react-router-dom'
- 
+import Search from './Componetns/Search';
 import EverythingelseWarper from './Componetns/EverythingelseWarper';
 import Food from './Componetns/Food';
 import LandingPage from './Componetns/LandingPage';
@@ -42,6 +42,7 @@ function App() {
             <Route exact path="/" element={<Main insideWarper={<LandingPage/>}/>}></Route>
             <Route exact path="/food" element={<Main insideWarper={<Food/>}/>}></Route>
             <Route exact path="/account/login" element={<Main insideWarper={<AccountLogin/>}/>}></Route>
+            <Route exact path="/search" element={<Main insideWarper={<Search/>}/>}></Route>
 
 
             
