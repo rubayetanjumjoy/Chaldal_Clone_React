@@ -4,18 +4,18 @@ import Items from '../API/Items.json'
 import FoodUnit from './FoodUnit'
 import { CartProvider, useCart } from "react-use-cart";
 
-const Food = () => {
+const Food = ({props}) => {
  
-
+ 
   const [item,setItem]=useState([]);
   useEffect(() => {
-    fetch('http://192.168.100.199:8002/v0/products/')
+    fetch(`http://127.0.0.1:8000/v0/products/${props}`)
   .then((response) => response.json())
   .then((data) =>   setItem(data));
 
   
      
-  }, [])
+  }, [props])
   
  
      

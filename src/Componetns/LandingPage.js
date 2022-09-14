@@ -1,6 +1,8 @@
 import React from 'react'
 import HowtoOrder from './HowtoOrder'
 import Corporate from './Corporate'
+import { Link } from 'react-router-dom'
+
 const LandingPage = () => {
   return (
     <div>
@@ -17,7 +19,7 @@ const LandingPage = () => {
                     </h2>
                 </div>
                 <div className='mainTile'>  
-                <a href='fruits-vegetables'>
+                <Link to='/fresh-fruit'>
                     <div className='categoryBox'>
                         <div className='categoryName'>Fruits and Vegetables</div>
                         <div className='categoryImg' > 
@@ -25,8 +27,8 @@ const LandingPage = () => {
 
                         </div>
                     </div>
-                </a>
-                <a href='fruits-vegetables'>
+                </Link>
+                <Link to='coffee'>
                     <div className='categoryBox'>
                         <div className='categoryName'>Stationary</div>
                         <div className='categoryImg' > 
@@ -34,7 +36,7 @@ const LandingPage = () => {
 
                         </div>
                     </div>
-                </a>
+                </Link>
                 <a href='fruits-vegetables'>
                     <div className='categoryBox'>
                         <div className='categoryName'>Kitchen Items</div>
@@ -71,7 +73,7 @@ const LandingPage = () => {
                         </div>
                     </div>
                 </a>
-                <a href='fruits-vegetables'>
+                <Link to='/cooking'>
                     <div className='categoryBox'>
                         <div className='categoryName'>Cooking</div>
                         <div className='categoryImg' > 
@@ -79,7 +81,7 @@ const LandingPage = () => {
 
                         </div>
                     </div>
-                </a>
+                </Link>
                 <a href='fruits-vegetables'>
                     <div className='categoryBox'>
                         <div className='categoryName'>Cleaning</div>
@@ -107,7 +109,7 @@ const LandingPage = () => {
                         </div>
                     </div>
                 </a>
-                <a href='fruits-vegetables'>
+                <Link to='fresh-fruit'>
                     <div className='categoryBox'>
                         <div className='categoryName'>Fruits</div>
                         <div className='categoryImg' > 
@@ -115,7 +117,7 @@ const LandingPage = () => {
 
                         </div>
                     </div>
-                </a>
+                </Link>
                 <a href='fruits-vegetables'>
                     <div className='categoryBox'>
                         <div className='categoryName'>Stationary</div>

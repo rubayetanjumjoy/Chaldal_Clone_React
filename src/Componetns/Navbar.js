@@ -5,7 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import ModalLogin from './ModalLogin'
 import {useState,useContext} from 'react';
 import { Link } from 'react-router-dom'
-import { isopen } from '../Contexts/ModalToggle';
+import { data } from '../Contexts/DataContext';
 import { authProvider } from '../Contexts/Auth';
 import { useCart } from "react-use-cart";
 import { useNavigate } from 'react-router-dom';
@@ -13,7 +13,8 @@ import { useNavigate } from 'react-router-dom';
 const Navbar = ({refnav}) => {
   const { emptyCart } = useCart();
   const {auth,setAuth} =useContext(authProvider);
-  const {searchresult,setSearchesult} =useContext(isopen);
+  const {searchresult,setSearchesult} =useContext(data);
+  const {mysearch,setMysearch} =useContext(data);
 
   
 
@@ -21,7 +22,7 @@ const Navbar = ({refnav}) => {
   const [sidetoggle, setSidetoggle] = useState(true);
   const [otpshow, setOtpshow] = useState(false);
 
-  const {isopenmodal,setIsOpenmodal} =useContext(isopen);
+  const {isopenmodal,setIsOpenmodal} =useContext(data);
   let navigate = useNavigate();
   const showModal = () => {
 
@@ -50,10 +51,8 @@ const Navbar = ({refnav}) => {
 
   };
 let handlechangeSearch=(e)=>{
-  fetch(`http://192.168.100.199:8002/v0/search/?q=${e.target.value}`)
-  .then((response) => response.json())
-  .then((data) =>  setSearchesult(data)
-  );
+  setMysearch(e.target.value)
+   
   navigate('/search');
 }
   

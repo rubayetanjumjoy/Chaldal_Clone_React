@@ -1,10 +1,21 @@
 import React from 'react'
-import { useContext } from 'react';
-import { isopen } from '../Contexts/ModalToggle';
+import { useContext,useEffect } from 'react';
+import { data } from '../Contexts/DataContext';
 import FoodUnit from './FoodUnit';
 const Search = () => {
-    const {searchresult,setSearchesult} =useContext(isopen);
-    console.log(searchresult)
+    const {searchresult,setSearchesult} =useContext(data);
+    const {mysearch,setMysearch} =useContext(data);
+
+    
+    useEffect(() => {
+       fetch(`http://192.168.100.199:8002/v0/search/?q=${mysearch}`)
+      .then((response) => response.json())
+      .then((data) =>  setSearchesult(data)
+      );
+      
+      
+    }, [mysearch])
+    
 
    return (
     <>
@@ -18,8 +29,14 @@ const Search = () => {
             </div>
             <div className='categorySection miscCategorySection onlyMiscCategorySection'>
             <div class="searchSlagName">
-              <span >Search result for: </span>
-              <strong>a</strong>
+              {
+                mysearch[0] ? searchresult[0] ?<span> Search result for: <strong>{mysearch}</strong></span> : 
+                <span>No product found for: <strong>{mysearch}</strong></span>
+                :<div className='noMatch'><p>Search for products (e.g. eggs, milk, potato)</p></div>
+              }
+
+
+            
               </div>
               
               <div className='productPane'>{

@@ -119,7 +119,7 @@ const ShoppingCartWrapper = ({refnav}) => {
             <div className='emptyCart' style={{height: '147px'}}>
                <div className='nothingToSeeHereMoveOn'>
                   <div>
-                     <img src="https://chaldn.com/asset/Egg.ChaldalWeb.Fabric/Egg.ChaldalWeb/1.0.0+Deploy-Release-85/Default/components/header/ShoppingCart/images/emptyShoppingBag.png?q=low&webp=1&alpha=1"></img>
+                     <img src="https://chaldn.com/asset/Egg.ChaldalWeb.Fabric/Egg.ChaldalWeb/1.0.0+Deploy-Release-118/Default/components/header/ShoppingCart/images/emptyShoppingBag.png?q=low&webp=1&alpha=1"></img>
                   </div>
                   <span>Your shopping bag is empty. Start shopping</span>
 

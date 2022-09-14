@@ -19,30 +19,45 @@ import { authProvider } from './Contexts/Auth';
 import { useEffect } from 'react';
 import Profile from './Componetns/Profile';
 import ChangePassword from './Componetns/ChangePassword';
+import NotFound from './Componetns/NotFound';
+import PublicRoute from './Util/PublicRoute'
 function App() {
   const [isOpen, setIsOpen] = React.useState(false);
   const [auth,setAuth]=useState([])
 
   useEffect(() => {
+    if (typeof window !== 'undefined'){
     const items = JSON.parse(localStorage.getItem('items'));
     if (items) {
       
      setAuth(JSON.parse(localStorage.getItem('items')));
-     console.log(auth);
      
 
      }
+    }
   }, [])
+   useEffect(() => {
+    localStorage.setItem('items', JSON.stringify(auth));
 
+   }, [auth])
+   
+  
+ 
   return(
     
     <authProvider.Provider value={{auth,setAuth}}>
     <BrowserRouter>
           <Routes>
             <Route exact path="/" element={<Main insideWarper={<LandingPage/>}/>}></Route>
-            <Route exact path="/food" element={<Main insideWarper={<Food/>}/>}></Route>
+            <Route exact path="/cooking" element={<Main insideWarper={<Food props={'cooking'}/>}/>}></Route>
+            <Route exact path="/meat-fish" element={<Main insideWarper={<Food props={'meat-fish'}/>}/>}></Route>
+            <Route exact path="/fresh-fruit" element={<Main insideWarper={<Food props={'fresh-fruit'}/>}/>}></Route>
+            <Route exact path="/coffee" element={<Main insideWarper={<Food props={'coffee'}/>}/>}></Route>
+            <Route element={<PublicRoute/>}>
             <Route exact path="/account/login" element={<Main insideWarper={<AccountLogin/>}/>}></Route>
+            </Route>
             <Route exact path="/search" element={<Main insideWarper={<Search/>}/>}></Route>
+           
 
 
             
@@ -52,6 +67,8 @@ function App() {
             <Route exact path="/profile" element={<Main insideWarper={<Profile/>}/>}></Route>
             <Route exact path="/order" element={<Main insideWarper={<Order/>}/>}></Route>
             </Route>
+            <Route path="*" exact={true} element={<Main insideWarper={<NotFound/>}/>} />
+
             
 
           </Routes>

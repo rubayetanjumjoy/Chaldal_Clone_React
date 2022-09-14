@@ -1,11 +1,11 @@
 import React from 'react'
 import Modal from 'react-bootstrap/Modal';
 import { useState,useEffect,useContext } from 'react';
-import { isopen } from '../Contexts/ModalToggle';
+import { data } from '../Contexts/DataContext';
 import { authProvider } from '../Contexts/Auth';
 
 const ModalLogin = ({hideModal,setOtpshow,otpshow}) => {
-    const {isopenmodal,setIsOpenmodal} =useContext(isopen);
+    const {isopenmodal,setIsOpenmodal} =useContext(data);
 
     const [logtoggle,setlogtoggle]=useState(false)
      

@@ -7,7 +7,7 @@ const PublicRoute = () => {
 
   
   return (
-    auth ? <Navigate to ="/"/>:<Outlet/>  
+    auth['token'] ? <Navigate to ="/"/>:<Outlet/>  
   )
 }
 

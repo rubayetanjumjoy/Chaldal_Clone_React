@@ -1,9 +1,105 @@
 import React from 'react'
-import { useState,useContext } from 'react'
+import ModalAddress from './ModalAddress'
+import { useState,useContext,useEffect } from 'react'
 import { authProvider } from '../Contexts/Auth'
+import { data } from '../Contexts/DataContext';
+
 const Profile = () => {
   const {auth,setAuth} =useContext(authProvider);
+  const [submitToggle,setSubmitToggle]=useState(false)
+  const [myname,setMyname]=useState('')
+  const [mynametoggle,setMynametoggle]=useState(false)
+  const [myemail,setMyemail]=useState('')
+  const [myemailToggle,setMynameToggle]=useState(false)
+  const [mygender,setMygender]=useState('')
+  const [mygenderedit,setMygenderedit]=useState(false)
+  const [mybirthdate,setMybirthdate]=useState('')
+  const [mybirthdateeidt,setMybirthdateeidt]=useState(false)
 
+  const [isOpen, setIsOpen] = useState(false);
+  const {address} =useContext(data);
+ console.log(address)
+  const showModal = () => {
+
+    setIsOpen(true);
+
+  };
+  const hideModal = () => {
+    setIsOpen(false)
+  };
+
+  console.log(auth)
+
+
+
+ console.log(myname)
+  
+ console.log(isOpen)
+ 
+  let handlenamechange=(e)=>{
+    setSubmitToggle(true)
+    setMynametoggle(true)
+
+    setMyname(e.target.value)
+
+    
+  }
+  let handleemailchange=(e)=>{
+    setSubmitToggle(true)
+    setMyemail(e.target.value)
+    setMynameToggle(true)
+  }
+  let handlegenderchange=(e)=>{
+    setSubmitToggle(true)
+    setMygender(e.target.value)
+    setMygenderedit(true)
+   
+  }
+  let handlebirthchange=(e)=>{
+    setSubmitToggle(true)
+    setMybirthdate(e.target.value)
+    setMybirthdateeidt(true)
+     
+  }
+  let handledelete=(id)=>{
+  console.log(id)
+   
+
+  }
+
+  let handlesubmit=()=>{ 
+  
+      let data={"name":myname,"email":myemail,"date_of_birth":mybirthdate,"gender":mygender,"date_of_birth":mybirthdate,"token":auth['token']}
+       fetch("http://127.0.0.1:8000/v0/updateuser/",{
+        method: 'POST', // or 'PUT'
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),})
+        .then(res => res.json())
+        .then(
+          (response) => {
+            console.log(response)
+              setAuth(response)
+           
+               
+         
+          
+          
+             
+          },
+            
+          (error) => {
+            console.log(error);
+          }
+        )
+
+ 
+     
+  }
+
+
+  
   return (
     <>
       <div >
@@ -11,15 +107,15 @@ const Profile = () => {
       <div className="profile" >
       <h2 className="profile-title">Your Profile</h2>
       <div className="profile-info" >
-      <form >
+       
       <div className="inputContainer">
-      <input className="has-value" name="name" type="text" required="" maxlength="70" value={auth['name']} style={{color:'black'}} />
+      <input className="has-value" name="name" type="text" required="" maxlength="70" onChange={handlenamechange} value={!mynametoggle ? auth['name'] : myname } style={{color:'black'}} />
       <span className="input-placeholder">Name</span>
       <span className="input-error" ></span>
       <span className="input-description" ></span>
       <span className="input-extra-content" ></span></div>
-      <div className="inputContainer disable" >
-      <input className="has-value paddingForExtraContent" name="email" type="email" disabled="" value={auth['email']} style={{color:'black'}} />
+      <div className="inputContainer " >
+      <input className="has-value paddingForExtraContent" name="email" type="email" required="" onChange={handleemailchange} value={!myemailToggle? auth['email'] : myemail} style={{color:'black'}} />
       <span className="input-placeholder" >Email Address</span>
       <span className="input-error" ></span>
       <span className="input-description" ></span>
@@ -35,16 +131,17 @@ const Profile = () => {
      <span className="input-extra-content" ></span></div>
      <div className="inputContainer" >
      <label className="labelClass">Gender</label>
-     <select className="selectClass" >
+     <select className="selectClass"  value={!mygender? auth['gender']: mygender} onChange={handlegenderchange}>
      <option value="Choose">--Select Gender--</option>
-     <option value="Male">Male</option>
-     <option value="Female">Female</option>
-     <option value="Others">Others</option></select></div>
+     
+     <option value="1" >Male</option>
+     <option value="2">Female</option>
+     <option value="3">Others</option></select></div>
      <div className="inputContainer">
-     <input className="" name="date" type="text" value="" style={{color:'black'}} />
-     <span className="input-placeholder">Date of Birth (YYYY-MM-DD)</span>
+     <input className="" name="date" type="text"  value={mybirthdateeidt ? mybirthdate : auth['date_of_birth']} onChange={handlebirthchange} style={{color:'black'}} />
+       <span className="input-placeholder">Date of Birth (YYYY-MM-DD)</span>
      <span className="input-error" ></span>
-     <span className="input-description" ></span><span className="input-extra-content"></span></div></form>
+     <span className="input-description" ></span><span className="input-extra-content"></span></div>
      <div className="address-block checkoutExperience2" >
      <div className="deliveryStep activeStep" >
      <div className="deliveryStepTitle" >
@@ -57,25 +154,32 @@ const Profile = () => {
      <div className="" >
      <section className="" >
      <div className="newAddressAddBtn buttonOnTop" >
-     <section >
-     <span >New Address</span></section></div>
-     { /*<section className="addresses" >
-      <div className="address selectedAddress" >
-        <span className="selectedAddressTickIcon" >
-          </span>
-          <span >
-            <p >banasree</p>
-            <span className="addressArea" >Rampura, Dhaka</span></span>
-            <a className="delete" >delete</a></div>
-            <div className="address" data-address="3122659" >
+    
+     <section onClick={showModal} >
+      
+     <span  >New Address</span></section>
+     
+     </div>
+    
+     
+       {address && address.map((item)=>(
+          
+            <section className="addresses" key={item.id} >
+            <div className="address selectedAddress" >
               <span className="selectedAddressTickIcon" >
                 </span>
                 <span >
-                  <p >454</p>
-                  <span className="addressArea" >Banasree, Dhaka</span></span>
-                  <a className="delete" >delete</a></div>
-  </section> */}
+                  <p >{item.apartment_no}</p>
+                  <span className="addressArea" >{item.street_address}</span></span>
+                  <a className="delete" onClick={handledelete}>delete</a></div>
+                  
        </section>
+       
+       ))  }
+       </section>
+       
+        <ModalAddress hideModal={hideModal}  isOpen={isOpen} />
+
        </div>
        </div>
        </div>
@@ -83,7 +187,9 @@ const Profile = () => {
        </div>
        </div>
        </div>
-                  <div className="submitButtonSection" ></div>
+                 { submitToggle && <div className="submitButtonSection" >
+                    <button type="button" class="btn btn-primary Btn" onClick={handlesubmit} >Submit</button>
+                  </div>}
                   </div>
                   </div>
       
