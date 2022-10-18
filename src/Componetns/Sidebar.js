@@ -48,7 +48,7 @@ const Sidebar = () => {
                     <li className='unselected'>
                      <div className='name'>
                      <Link to='/cooking' >
-                     <img className='MenuItemIcons' src='https://chaldn.com/_mpimage/popular?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D95790&q=best&v=1&m=40&webp=1&alpha=1'></img>
+                     <img className='MenuItemIcons' src='https://chaldn.com/_mpimage/popular?src=https%3A%2F%2Feggyolk.chaldal.com%2Fapi%2FPicture%2FRaw%3FpictureId%3D95790&q=best&v=1&m=40&webp=1&alpha=1'/>
                      <span style={{marginLeft:"5px"}}>Cooking</span>
                      </Link>
 

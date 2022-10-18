@@ -22,7 +22,7 @@ const ModalLogin = ({hideModal,setOtpshow,otpshow}) => {
    
      let otpverifyhandler=()=>{
         let data={"phone_number":mynumber,"otp":myotp}
-        fetch("http://127.0.0.1:8000/v0/verifyotp/",{
+        fetch(`${process.env.REACT_APP_BASE_URL}/v0/verifyotp/`,{
             method: 'POST', // or 'PUT'
             headers: {
               'Content-Type': 'application/json',

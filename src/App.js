@@ -16,7 +16,7 @@ import Order from './Componetns/Order';
 import AccountLogin from './Componetns/AccountLogin';
 import PrivateRoute from './Util/PrivateRoute';
 import { authProvider } from './Contexts/Auth';
-import { useEffect } from 'react';
+import { useEffect,useLayoutEffect } from 'react';
 import Profile from './Componetns/Profile';
 import ChangePassword from './Componetns/ChangePassword';
 import NotFound from './Componetns/NotFound';
@@ -24,15 +24,14 @@ import PublicRoute from './Util/PublicRoute'
 function App() {
   const [isOpen, setIsOpen] = React.useState(false);
   const [auth,setAuth]=useState([])
-
-  console.log(process.env.REACT_APP_BASE_URL)
-  useEffect(() => {
+   
+  useLayoutEffect(() => {
     if (typeof window !== 'undefined'){
     const items = JSON.parse(localStorage.getItem('items'));
     if (items) {
       
      setAuth(JSON.parse(localStorage.getItem('items')));
-     
+     localStorage.setItem('auth', JSON.stringify({"auth":"true"}));
 
      }
     }
