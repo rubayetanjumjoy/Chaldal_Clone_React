@@ -64,7 +64,7 @@ const ModalLogin = ({hideModal,setOtpshow,otpshow}) => {
          if (validatePhoneNumber(mynumber)) {
             setPhonevalid(true);
             setOtpshow(true);
-            fetch("http://127.0.0.1:8000/v0/sendotp/",{
+            fetch(`${process.env.REACT_APP_BASE_URL}/v0/sendotp/`,{
             method: 'POST', // or 'PUT'
             headers: {
               'Content-Type': 'application/json',

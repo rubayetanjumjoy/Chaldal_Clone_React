@@ -9,7 +9,7 @@ const Food = ({props}) => {
  
   const [item,setItem]=useState([]);
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/v0/products/${props}`)
+    fetch(`${process.env.REACT_APP_BASE_URL}/v0/products/${props}`)
   .then((response) => response.json())
   .then((data) =>   setItem(data));
 

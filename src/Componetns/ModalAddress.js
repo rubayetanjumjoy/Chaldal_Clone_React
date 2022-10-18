@@ -16,7 +16,7 @@ const ModalAddress = ({hideModal,isOpen}) => {
 
    let handlesubmit=()=>{
       let data={"street_address":mystreetaddress,"floor_no":myfloorno,"apartment_no":myaptno,"token":auth['token']}
-        fetch("http://127.0.0.1:8000/v0/updateaddress/",{
+        fetch(`${process.env.REACT_APP_BASE_URL}/v0/updateaddress/`,{
             method: 'POST', // or 'PUT'
             headers: {
               'Content-Type': 'application/json',

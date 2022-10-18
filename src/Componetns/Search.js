@@ -8,7 +8,7 @@ const Search = () => {
 
     
     useEffect(() => {
-       fetch(`http://192.168.100.199:8002/v0/search/?q=${mysearch}`)
+       fetch(`${process.env.REACT_APP_BASE_URL}/v0/search/?q=${mysearch}`)
       .then((response) => response.json())
       .then((data) =>  setSearchesult(data)
       );

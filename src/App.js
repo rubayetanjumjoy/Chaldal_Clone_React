@@ -25,6 +25,7 @@ function App() {
   const [isOpen, setIsOpen] = React.useState(false);
   const [auth,setAuth]=useState([])
 
+  console.log(process.env.REACT_APP_BASE_URL)
   useEffect(() => {
     if (typeof window !== 'undefined'){
     const items = JSON.parse(localStorage.getItem('items'));
