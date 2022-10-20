@@ -1,8 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { CartProvider, useCart } from "react-use-cart";
-
+import { useContext } from 'react';
+import AddressUnit from './AddressUnit';
+import { authProvider } from '../Contexts/Auth';
 const Order = () => {
+  const {auth,setAuth} =useContext(authProvider);
+
   const {
     isEmpty,
     totalUniqueItems,
@@ -47,6 +51,7 @@ const Order = () => {
                   </div>
                 </div>
               </div>
+              
             </div>
             <div data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2">
               <div class="deliveryStep activeStep deliverySlot" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0">

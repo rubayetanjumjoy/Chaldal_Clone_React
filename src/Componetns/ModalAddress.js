@@ -6,7 +6,7 @@ import { data } from '../Contexts/DataContext';
 import Modal from 'react-bootstrap/Modal';
 
  
-const ModalAddress = ({hideModal,isOpen}) => {
+const ModalAddress = ({hideModal,isOpen,setIsOpen}) => {
    const [mystreetaddress, setMystreetaddress] = useState('');
    const [myfloorno, setMyfloorno] = useState('');
    const [myaptno, setMyaptno] = useState('');
@@ -25,6 +25,7 @@ const ModalAddress = ({hideModal,isOpen}) => {
             .then(
               (result) => {
                setAuth(result)
+               setIsOpen(false)
                  
               },
               // Note: it's important to handle errors here

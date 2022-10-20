@@ -3,6 +3,7 @@ import ModalAddress from './ModalAddress'
 import { useState,useContext,useEffect } from 'react'
 import { authProvider } from '../Contexts/Auth'
 import { data } from '../Contexts/DataContext';
+import AddressUnit from './AddressUnit';
 
 const Profile = () => {
   const {auth,setAuth} =useContext(authProvider);
@@ -61,14 +62,11 @@ const Profile = () => {
     setMybirthdateeidt(true)
      
   }
-  let handledelete=(id)=>{
-  console.log(id)
-   
-
-  }
+ 
   
-  
-
+ useEffect(() => {
+    console.log(`nested${auth}`)
+ }, [])
   let handlesubmit=()=>{ 
   
       let data={"name":myname,"email":myemail,"date_of_birth":mybirthdate,"gender":mygender,"date_of_birth":mybirthdate,"token":auth['token']}
@@ -82,7 +80,7 @@ const Profile = () => {
         .then(
           (response) => {
             console.log(response)
-              setAuth(response) 
+            setAuth(prev=>({...prev,user:response}))
              
           },
             
@@ -105,6 +103,7 @@ const Profile = () => {
       <div className="profile" >
       <h2 className="profile-title">Your Profile</h2>
       <div className="profile-info" >
+         
        
       <div className="inputContainer">
       <input className="has-value" name="name" type="text" required="" maxlength="70" onChange={handlenamechange} value={!mynametoggle ? auth['user']['name'] : myname } style={{color:'black'}} />
@@ -162,21 +161,12 @@ const Profile = () => {
      
        {auth && auth['address'].map((item)=>(
           
-            <section className="addresses" key={item.id} >
-            <div className="address selectedAddress" >
-              <span className="selectedAddressTickIcon" >
-                </span>
-                <span >
-                  <p >{item.apartment_no}</p>
-                  <span className="addressArea" >{item.street_address}</span></span>
-                  <a className="delete" onClick={handledelete}>delete</a></div>
-                  
-       </section>
+           <AddressUnit key= {item.id}item={item} />
        
        ))  }
        </section>
        
-        <ModalAddress hideModal={hideModal}  isOpen={isOpen} />
+        <ModalAddress hideModal={hideModal} setIsOpen={setIsOpen}  isOpen={isOpen} />
 
        </div>
        </div>
