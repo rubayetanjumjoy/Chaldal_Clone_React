@@ -24,22 +24,24 @@ import PublicRoute from './Util/PublicRoute'
 function App() {
   const [isOpen, setIsOpen] = React.useState(false);
   const [auth,setAuth]=useState([])
-   
-  useLayoutEffect(() => {
-    if (typeof window !== 'undefined'){
+   useLayoutEffect(() => {
+    
     const items = JSON.parse(localStorage.getItem('items'));
     if (items) {
-      
-     setAuth(JSON.parse(localStorage.getItem('items')));
-     localStorage.setItem('auth', JSON.stringify({"auth":"true"}));
-
+      setAuth(JSON.parse(localStorage.getItem('items')));
+     
+ 
      }
-    }
+    
   }, [])
    useEffect(() => {
     localStorage.setItem('items', JSON.stringify(auth));
 
    }, [auth])
+   useEffect(() => {
+   
+   }, [])
+   
    
   
  

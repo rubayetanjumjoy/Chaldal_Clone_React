@@ -66,6 +66,8 @@ const Profile = () => {
    
 
   }
+  
+  
 
   let handlesubmit=()=>{ 
   
@@ -80,12 +82,7 @@ const Profile = () => {
         .then(
           (response) => {
             console.log(response)
-              setAuth(response)
-           
-               
-         
-          
-          
+              setAuth(response) 
              
           },
             
@@ -101,7 +98,8 @@ const Profile = () => {
 
   
   return (
-    <>
+    <>{
+      auth['token'] &&
       <div >
       <div className="outer-profile-container" >
       <div className="profile" >
@@ -109,13 +107,13 @@ const Profile = () => {
       <div className="profile-info" >
        
       <div className="inputContainer">
-      <input className="has-value" name="name" type="text" required="" maxlength="70" onChange={handlenamechange} value={!mynametoggle ? auth['name'] : myname } style={{color:'black'}} />
+      <input className="has-value" name="name" type="text" required="" maxlength="70" onChange={handlenamechange} value={!mynametoggle ? auth['user']['name'] : myname } style={{color:'black'}} />
       <span className="input-placeholder">Name</span>
       <span className="input-error" ></span>
       <span className="input-description" ></span>
       <span className="input-extra-content" ></span></div>
       <div className="inputContainer " >
-      <input className="has-value paddingForExtraContent" name="email" type="email" required="" onChange={handleemailchange} value={!myemailToggle? auth['email'] : myemail} style={{color:'black'}} />
+      <input className="has-value paddingForExtraContent" name="email" type="email" required="" onChange={handleemailchange} value={!myemailToggle? auth['user']['email'] : myemail} style={{color:'black'}} />
       <span className="input-placeholder" >Email Address</span>
       <span className="input-error" ></span>
       <span className="input-description" ></span>
@@ -124,21 +122,21 @@ const Profile = () => {
       {/*<span className="verified" >
      <span>Verified</span></span>*/}</div></span></div>
      <div className="inputContainer disable" >
-     <input className="has-value" name="number" type="text" disabled="" value={auth['phone_number']} style={{color:'black'}}/>
+     <input className="has-value" name="number" type="text" disabled="" value={auth['user']['phone_number']} style={{color:'black'}}/>
      <span className="input-placeholder">Phone Number</span>
      <span className="input-error" ></span>
      <span className="input-description" ></span>
      <span className="input-extra-content" ></span></div>
      <div className="inputContainer" >
      <label className="labelClass">Gender</label>
-     <select className="selectClass"  value={!mygender? auth['gender']: mygender} onChange={handlegenderchange}>
+     <select className="selectClass"  value={!mygender? auth['user']['gender']: mygender} onChange={handlegenderchange}>
      <option value="Choose">--Select Gender--</option>
      
      <option value="1" >Male</option>
      <option value="2">Female</option>
      <option value="3">Others</option></select></div>
      <div className="inputContainer">
-     <input className="" name="date" type="text"  value={mybirthdateeidt ? mybirthdate : auth['date_of_birth']} onChange={handlebirthchange} style={{color:'black'}} />
+     <input className="" name="date" type="text"  value={mybirthdateeidt ? mybirthdate : auth['user']['date_of_birth']} onChange={handlebirthchange} style={{color:'black'}} />
        <span className="input-placeholder">Date of Birth (YYYY-MM-DD)</span>
      <span className="input-error" ></span>
      <span className="input-description" ></span><span className="input-extra-content"></span></div>
@@ -162,7 +160,7 @@ const Profile = () => {
      </div>
     
      
-       {address && address.map((item)=>(
+       {auth && auth['address'].map((item)=>(
           
             <section className="addresses" key={item.id} >
             <div className="address selectedAddress" >
@@ -192,7 +190,7 @@ const Profile = () => {
                   </div>}
                   </div>
                   </div>
-      
+      }
     </>
   )
 }

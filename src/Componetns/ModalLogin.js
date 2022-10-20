@@ -38,6 +38,8 @@ const ModalLogin = ({hideModal,setOtpshow,otpshow}) => {
                 const items = JSON.parse(localStorage.getItem('items'));
                 if (items) {
                  setAuth(items);
+                 localStorage.setItem('auth', JSON.stringify({"auth":"true"}));
+
                  }
                  
               },

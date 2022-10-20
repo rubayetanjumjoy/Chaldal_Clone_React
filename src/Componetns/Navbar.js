@@ -3,7 +3,7 @@ import * as Icon from 'react-bootstrap-icons';
 import Sidebar from './Sidebar';
 import Modal from 'react-bootstrap/Modal';
 import ModalLogin from './ModalLogin'
-import {useState,useContext} from 'react';
+import {useState,useContext,useEffect} from 'react';
 import { Link } from 'react-router-dom'
 import { data } from '../Contexts/DataContext';
 import { authProvider } from '../Contexts/Auth';
@@ -55,6 +55,8 @@ let handlechangeSearch=(e)=>{
    
   navigate('/search');
 }
+ 
+
   
   return (
     <>
@@ -89,7 +91,7 @@ let handlechangeSearch=(e)=>{
             </div>
         </div>
         <div className="loginArea authButtons area hidden-xs area-with-dropdown "  >
-          <button onClick={showModal} className="signInBtn" >{auth['token']?auth['name'] : 'Sign In'}</button>
+          <button onClick={showModal} className="signInBtn" >{auth['token']?auth['user']['name'] : 'Sign In'}</button>
           { auth['token'] &&
             <ul class="dropDown" >
         <li >

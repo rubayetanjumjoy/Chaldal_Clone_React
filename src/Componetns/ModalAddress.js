@@ -11,8 +11,7 @@ const ModalAddress = ({hideModal,isOpen}) => {
    const [myfloorno, setMyfloorno] = useState('');
    const [myaptno, setMyaptno] = useState('');
    const {auth,setAuth} =useContext(authProvider);
-   const {setMyaddress} =useContext(data);
-
+ 
 
    let handlesubmit=()=>{
       let data={"street_address":mystreetaddress,"floor_no":myfloorno,"apartment_no":myaptno,"token":auth['token']}
@@ -25,9 +24,7 @@ const ModalAddress = ({hideModal,isOpen}) => {
             .then(res => res.json())
             .then(
               (result) => {
-               localStorage.setItem('address', JSON.stringify(result));
-               setMyaddress(result)
-                 console.log(result)
+               setAuth(result)
                  
               },
               // Note: it's important to handle errors here
