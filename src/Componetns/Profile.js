@@ -19,15 +19,11 @@ const Profile = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const {address} =useContext(data);
- console.log(address)
-  const showModal = () => {
-
-    setIsOpen(true);
-
-  };
-  const hideModal = () => {
-    setIsOpen(false)
-  };
+  //toggle selected item
+  const [selected,setSelected]=useState('')
+   
+ 
+  
 
   console.log(auth)
 
@@ -149,25 +145,17 @@ const Profile = () => {
      <div className="deliveryStepContent" >
      <div className="addressComponent mui" >
      <div className="" >
-     <section className="" >
-     <div className="newAddressAddBtn buttonOnTop" >
     
-     <section onClick={showModal} >
-      
-     <span  >New Address</span></section>
-     
-     </div>
     
      
-       {auth && auth['address'].map((item)=>(
+     
           
-           <AddressUnit key= {item.id}item={item} />
+           <AddressUnit     />
        
-       ))  }
-       </section>
+        
+      
        
-        <ModalAddress hideModal={hideModal} setIsOpen={setIsOpen}  isOpen={isOpen} />
-
+      
        </div>
        </div>
        </div>

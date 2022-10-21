@@ -29,18 +29,16 @@ function App() {
     const items = JSON.parse(localStorage.getItem('items'));
     if (items) {
       setAuth(JSON.parse(localStorage.getItem('items')));
-     
+      
  
      }
     
   }, [])
    useEffect(() => {
     localStorage.setItem('items', JSON.stringify(auth));
-
+    
    }, [auth])
-   useEffect(() => {
-   
-   }, [])
+ 
    
    
   

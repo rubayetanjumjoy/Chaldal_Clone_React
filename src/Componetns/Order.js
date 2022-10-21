@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom'
 import { CartProvider, useCart } from "react-use-cart";
 import { useContext } from 'react';
 import AddressUnit from './AddressUnit';
-import { authProvider } from '../Contexts/Auth';
+import { authProvider } from '../Contexts/Auth'; 
+import { useState } from 'react';
+import { useEffect } from 'react';
 const Order = () => {
   const {auth,setAuth} =useContext(authProvider);
-
+  const [changeButton,setChangeButton]=useState(false)
+  const [address,setAddress]=useState('')
   const {
     isEmpty,
     totalUniqueItems,
@@ -14,6 +17,27 @@ const Order = () => {
     updateItemQuantity,
     removeItem,
   } = useCart();
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem('selected'));
+    if (items) {
+      setAddress(items);
+    }
+  }, []);
+  useEffect(() => {
+    localStorage.setItem('selected', JSON.stringify(address));
+
+   }, [address])
+
+  const handleclick=(obj)=>{
+    setAddress(obj)
+    
+  }
+  useEffect(() => {
+  if(address){
+    setChangeButton(false)
+  }
+  }, [address])
+  
   return (
     <>
     <div data-reactid=".d6snlzz9k2.9.2.0">
@@ -31,26 +55,35 @@ const Order = () => {
                   <h2 data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.0.0.0.1">Delivery Address</h2>
                 </div>
               </div>
-              <div class="deliveryStepContent" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.0.1">
-                <div class="addressComponent mui" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.0.1.0">
-                  <div class="theSelectedAddress" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.0.1.0.0">
-                    <div class="wholeAddress" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.0.1.0.0.0">
-                      <span class="wrap" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.0.1.0.0.0.0">
-                        <span data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.0.1.0.0.0.0.0">banasree</span>
-                        <span data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.0.1.0.0.0.0.1"></span>
-                        <br data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.0.1.0.0.0.0.2"/>
-                        <span data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.0.1.0.0.0.0.3"></span>
-                        <span data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.0.1.0.0.0.0.4">Rampura, Dhaka</span>
-                        <span data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.0.1.0.0.0.0.5"></span>
-                        <span data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.0.1.0.0.0.0.6"></span>
-                      </span>
-                    </div>
-                    <div class="stepAction" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.0.1.0.0.1">
-                      <button data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.0.1.0.0.1.0">Change</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <div class="" >
+             {//delevery address  
+              !changeButton  && <div class="deliveryStepContent" data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1">
+  <div class="addressComponent mui" data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0">
+    <div class="theSelectedAddress" data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0.0">
+      <div class="wholeAddress" data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0.0.0">
+        <span class="wrap" data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0.0.0.0">
+          <span data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0.0.0.0.0">{address['apartment_no']}</span>
+          <span data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0.0.0.0.1"></span>
+          <br data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0.0.0.0.2"/>
+          <span data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0.0.0.0.3"></span>
+          <span data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0.0.0.0.4">{address['street_address']}</span>
+          <span data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0.0.0.0.5"></span>
+          <span data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0.0.0.0.6"></span>
+        </span>
+      </div>
+      <div class="stepAction" data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0.0.1">
+        <button onClick={()=>setChangeButton(true)}>Change</button>
+      </div>
+    </div>
+  </div>
+</div>}
+  
+  { changeButton && <div class="deliveryStepContent" data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1">
+    <div class="addressComponent mui" data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0">
+      { auth['token'] && <AddressUnit handleclick={handleclick}/>}
+    </div>
+  </div> }
+</div>
               
             </div>
             <div data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2">

@@ -1,12 +1,35 @@
+import { counter } from '@fortawesome/fontawesome-svg-core';
 import React from 'react'
-import { useState ,useContext} from 'react'
+import { useState ,useContext,useEffect} from 'react'
 import { authProvider } from '../Contexts/Auth';
-
-const AddressUnit = ({item}) => {
+import ModalAddress from './ModalAddress';
+const AddressUnit = ({handleclick}) => {
   const {auth,setAuth} =useContext(authProvider);
+  const [selected,setSelected]=useState('')
+  const [isOpen, setIsOpen] = useState(false);
+  const hideModal = () => {
+    setIsOpen(false)
+  };
+  const showModal = () => {
 
-    let dlt=()=>{
-      fetch(`${process.env.REACT_APP_BASE_URL}/v0/updateaddress/${item.id}`,{
+    setIsOpen(true);
+
+  };
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem('selected'));
+    if (items) {
+     setSelected(items);
+    }
+  }, []);
+  useEffect(() => {
+    localStorage.setItem('selected', JSON.stringify(selected));
+
+   }, [selected])
+   
+   
+    
+    let dlt=(id)=>{
+      fetch(`${process.env.REACT_APP_BASE_URL}/v0/updateaddress/${id}`,{
         method: 'delete', // or 'PUT'
         headers: {
           'Content-Type': 'application/json',
@@ -17,6 +40,7 @@ const AddressUnit = ({item}) => {
         .then(
           (response) => {
             console.log(response)
+               
               setAuth(response) 
              
           },
@@ -28,18 +52,45 @@ const AddressUnit = ({item}) => {
   
   
     }
+    const handleidclick=(obj)=>{
+      setSelected(obj)
+      handleclick(obj)
+     
+    }
+     
+   
+    
+    
   return (
     <div> 
-        <section className="addresses" key={item.id} >
-            <div className="address" >
+     <section className="" >
+     <div className="newAddressAddBtn buttonOnTop" >
+    
+     <section onClick={showModal} >
+      
+     <span  >New Address</span></section>
+     
+     </div>
+      {auth && auth['address'].map((item)=>(
+        <section className="addresses" onClick={()=>handleidclick(item)} >
+       
+            <div className={selected['id'] == item.id ? "address selectedAddress" : "address" } >
+            
               <span className="selectedAddressTickIcon" >
                 </span>
                 <span >
                   <p >{item.apartment_no}</p>
-                  <span className="addressArea" >{item.street_address}</span></span>
-                  <a className="delete" onClick={dlt}>delete</a></div>
-                  
-       </section>
+               
+                    <span   className="addressArea " >{item.street_address}</span>
+                 
+                 
+                  </span>
+                  <a className="delete" onClick={()=>dlt(item.id)}>delete</a></div>
+                 
+       </section>))
+      }
+      </section>
+      <ModalAddress hideModal={hideModal} setIsOpen={setIsOpen}  isOpen={isOpen} />
 
     </div>
   )
