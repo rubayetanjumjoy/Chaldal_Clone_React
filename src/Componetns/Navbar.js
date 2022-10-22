@@ -98,7 +98,7 @@ let handlechangeSearch=(e)=>{
           <Link to="/profile" >Your Profile</Link>
         </li>
         <li >
-          <Link to="/order" >Your Orders</Link>
+          <Link to="/myorder" >Your Orders</Link>
           </li>
           
            

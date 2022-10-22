@@ -13,6 +13,7 @@ import LandingPage from './Componetns/LandingPage';
 import Main from './Componetns/Main'
 import Cart from './Componetns/Cart';
 import Order from './Componetns/Order';
+import MyOrder from './Componetns/MyOrder';
 import AccountLogin from './Componetns/AccountLogin';
 import PrivateRoute from './Util/PrivateRoute';
 import { authProvider } from './Contexts/Auth';
@@ -21,6 +22,7 @@ import Profile from './Componetns/Profile';
 import ChangePassword from './Componetns/ChangePassword';
 import NotFound from './Componetns/NotFound';
 import PublicRoute from './Util/PublicRoute'
+
 function App() {
   const [isOpen, setIsOpen] = React.useState(false);
   const [auth,setAuth]=useState([])
@@ -66,6 +68,7 @@ function App() {
             <Route exact path="/changepassword" element={<Main insideWarper={<ChangePassword/>}/>}></Route>
             <Route exact path="/profile" element={<Main insideWarper={<Profile/>}/>}></Route>
             <Route exact path="/order" element={<Main insideWarper={<Order/>}/>}></Route>
+            <Route exact path="/myorder" element={<Main insideWarper={<MyOrder/>}/>}></Route>
             </Route>
             <Route path="*" exact={true} element={<Main insideWarper={<NotFound/>}/>} />
 

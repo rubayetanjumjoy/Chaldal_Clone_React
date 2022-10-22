@@ -5,11 +5,19 @@ import { useContext } from 'react';
 import AddressUnit from './AddressUnit';
 import { authProvider } from '../Contexts/Auth'; 
 import { useState } from 'react';
-import { useEffect } from 'react';
+import { useEffect ,useRef} from 'react';
+import moment from 'moment';
+import "react-datepicker/dist/react-datepicker.css";
 const Order = () => {
   const {auth,setAuth} =useContext(authProvider);
   const [changeButton,setChangeButton]=useState(false)
   const [address,setAddress]=useState('')
+  const [dateselect,setDateselect]=useState('')
+  //datetime
+  const [dateToggle,setdateToggle]=useState(false)
+  const [timeToggle,setTimeToggle]=useState(false)
+  const [slottoggle,setSlotToggle]=useState(false)
+  
   const {
     isEmpty,
     totalUniqueItems,
@@ -37,31 +45,38 @@ const Order = () => {
     setChangeButton(false)
   }
   }, [address])
+
   
-  return (
+  
+  const handleDate=(number)=>{
+    setDateselect(number)
+    setdateToggle(false)
+  }
+   return (
     <>
     <div data-reactid=".d6snlzz9k2.9.2.0">
-  <div class="checkoutExperience2" data-reactid=".d6snlzz9k2.9.2.0.0">
+     
+  <div className="checkoutExperience2" data-reactid=".d6snlzz9k2.9.2.0.0">
     <div data-reactid=".d6snlzz9k2.9.2.0.0.0">
       <div data-reactid=".d6snlzz9k2.9.2.0.0.0.0">
-        <div class="checkoutDelivery" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0">
+        <div className="checkoutDelivery" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0">
           <div data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1">
-            <div class="deliveryStep" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.0">
-              <div class="deliveryStepTitle" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.0.0">
-                <div class="titleLeft" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.0.0.0">
-                  <div class="stepIcon" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.0.0.0.0">
+            <div className="deliveryStep" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.0">
+              <div className="deliveryStepTitle" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.0.0">
+                <div className="titleLeft" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.0.0.0">
+                  <div className="stepIcon" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.0.0.0.0">
                     
                   </div>
                   <h2 data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.0.0.0.1">Delivery Address</h2>
                 </div>
               </div>
-              <div class="" >
+              <div className="" >
              {//delevery address  
-              !changeButton  && <div class="deliveryStepContent" data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1">
-  <div class="addressComponent mui" data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0">
-    <div class="theSelectedAddress" data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0.0">
-      <div class="wholeAddress" data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0.0.0">
-        <span class="wrap" data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0.0.0.0">
+              !changeButton  && <div className="deliveryStepContent" data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1">
+  <div className="addressComponent mui" data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0">
+    <div className="theSelectedAddress" data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0.0">
+      <div className="wholeAddress" data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0.0.0">
+        <span className="wrap" data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0.0.0.0">
           <span data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0.0.0.0.0">{address['apartment_no']}</span>
           <span data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0.0.0.0.1"></span>
           <br data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0.0.0.0.2"/>
@@ -71,128 +86,224 @@ const Order = () => {
           <span data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0.0.0.0.6"></span>
         </span>
       </div>
-      <div class="stepAction" data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0.0.1">
+      <div className="stepAction" data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0.0.1">
         <button onClick={()=>setChangeButton(true)}>Change</button>
       </div>
     </div>
   </div>
 </div>}
-  
-  { changeButton && <div class="deliveryStepContent" data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1">
-    <div class="addressComponent mui" data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0">
+      {/*firstValue.format("dddd Do MMMM YYYY")*/}
+      
+  { changeButton && <div className="deliveryStepContent" data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1">
+    <div className="addressComponent mui" data-reactid=".3q84otdxu0.a.2.0.0.0.0.0.1.0.1.0">
       { auth['token'] && <AddressUnit handleclick={handleclick}/>}
     </div>
   </div> }
 </div>
               
             </div>
-            <div data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2">
-              <div class="deliveryStep activeStep deliverySlot" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0">
-                <div class="deliveryStepTitle" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.0">
-                  <div class="titleLeft" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.0.0">
-                    <div class="stepIcon" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.0.0.0">
-                      
-                    </div>
-                    <h2 data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.0.0.1">Preferred Delivery Time</h2>
-                  </div>
+            <div className="deliveryStep activeStep deliverySlot" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0">
+  <div className="deliveryStepTitle" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.0">
+    <div className="titleLeft" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.0.0">
+      <div className="stepIcon" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.0.0.0">
+         
+      </div>
+      <h2 data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.0.0.1">Preferred Delivery Time</h2>
+    </div>
+  </div>
+  <div className="deliveryStepContent" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1">
+    <div className="deliveryComponent isBothDropDown" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0">
+      <div data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0">
+        <div className="timings" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1">
+          <div className="onlyExpressItems" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1">
+            <div className="deliveryTimeWrapper" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0">
+              <div className="deliveryTime" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0">
+                <div className="iconAndDescription" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.0">
+                  <p data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.0.0">
+                    
+                    <span data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.0.0.1"></span>
+                    <span data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.0.0.2">When would you like your <b>Express Delivery</b>? </span>
+                  </p>
                 </div>
-                <div class="deliveryStepContent" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1">
-                  <div class="deliveryComponent isBothDropDown" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0">
-                    <div data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0">
-                      <div class="timings" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1">
-                        <div class="onlyExpressItems" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1">
-                          <div class="deliveryTimeWrapper" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0">
-                            <div class="deliveryTime" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0">
-                              <div class="iconAndDescription" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.0">
-                                <p data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.0.0">
-                                  
-                                  <span data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.0.0.1"></span>
-                                  <span data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.0.0.2">When would you like your <b>Express Delivery</b>? </span>
-                                </p>
-                              </div>
-                              <div class="clearAll" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.1"></div>
-                              <div class="dropdownContainer" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2">
-                                <section class="selectOptions daySelect" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.0">
-                                  <div class="firstBlock" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.0.0">
-                                    <p class="dayName" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.0.0.0">Today</p>
-                                    <p class="dateName" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.0.0.1">23 Aug</p>
-                                  </div>
-                                  <div class="tooltipSuggestion" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.0.1">
-                                    <i class="caret-down" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.0.1.0"></i>
-                                  </div>
-                                </section>
-                                <section class="mobileDaySelect mobileDropDown" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1">
-                                  <select data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0">
-                                    <option value="" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$">- Select Day -</option>
-                                    <option value="1661191200" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$23 Aug">Today - 23 Aug</option>
-                                    <option value="1661277600" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$24 Aug">Tomorrow - 24 Aug</option>
-                                    <option value="1661364000" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$25 Aug">Thursday - 25 Aug</option>
-                                    <option value="1661450400" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$26 Aug">Friday - 26 Aug</option>
-                                    <option value="1661536800" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$27 Aug">Saturday - 27 Aug</option>
-                                  </select>
-                                </section>
-                                <section class="selectOptions timeSelect" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.2">
-                                  <div class="firstBlock" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.2.0">
-                                    <p class="dayName" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.2.0.0"></p>
-                                    <p class="dateName" style={{marginTop:'17px'}} data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.2.0.1">4:00 PM - 4:30 PM</p>
-                                  </div>
-                                  <div class="tooltipSuggestion" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.2.1">
-                                    <i class="caret-down" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.2.1.0"></i>
-                                  </div>
-                                </section>
-                                <section class="mobileTimeSelect mobileDropDown" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.3">
-                                  <select data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.3.0">
-                                    <option value="" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.3.0.$">- Select Time -</option>
-                                    <option value="4:00 PM - 4:30 PM" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.3.0.$2022082316001630">4:00 PM - 4:30 PM</option>
-                                    <option value="5:00 PM - 6:00 PM" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.3.0.$2022082317001800">5:00 PM - 6:00 PM</option>
-                                    <option value="6:00 PM - 7:00 PM" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.3.0.$2022082318001900">6:00 PM - 7:00 PM</option>
-                                    <option value="7:00 PM - 8:00 PM" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.3.0.$2022082319002000">7:00 PM - 8:00 PM</option>
-                                    <option value="8:00 PM - 9:00 PM" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.3.0.$2022082320002100">8:00 PM - 9:00 PM</option>
-                                    <option value="9:00 PM - 10:00 PM" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.3.0.$2022082321002200">9:00 PM - 10:00 PM</option>
-                                    <option value="10:00 PM - 11:00 PM" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.3.0.$2022082322002300">10:00 PM - 11:00 PM</option>
-                                  </select>
-                                </section>
-                              </div>
-                              <div class="countDownTimer" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.5">
-                                <span data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.5.0">Your selected slot will close in</span>
-                                <span data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.5.1"></span>
-                                <span class="time" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.5.2">0:35</span>
-                              </div>
-                            </div>
-                            <div class="clearAll" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.3"></div>
-                          </div>
-                        </div>
-                      </div>
+                <div className="clearAll" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.1"></div>
+                <div className="dropdownContainer" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2">
+                  <section className={dateToggle? "selectOptions daySelect open" : "selectOptions daySelect "} onClick={()=>setdateToggle(!dateToggle)} data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.0">
+                    <div className="firstBlock" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.0.0">
+                      <p className="dayName" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.0.0.0">Today</p>
+                      <p className="dateName" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.0.0.1">21 Oct</p>
                     </div>
-                  </div>
+                    <div className="tooltipSuggestion"   data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.0.1"  >
+                      <i className="caret-down" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.0.1.0"></i>
+                    </div>
+                  </section>
+                  <section className="mobileDaySelect mobileDropDown" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1">
+                    <select data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0">
+                      <option value="" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$">- Select Day -</option>
+                      <option value="1666288800" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$21 Oct">Today - 21 Oct</option>
+                      <option value="1666375200" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$22 Oct">Tomorrow - 22 Oct</option>
+                      <option value="1666461600" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$23 Oct">Sunday - 23 Oct</option>
+                      <option value="1666548000" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$24 Oct">Monday - 24 Oct</option>
+                      <option value="1666634400" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$25 Oct">Tuesday - 25 Oct</option>
+                    </select>
+                  </section>
+                  <section className="selectOptions timeSelect" onClick={()=>setSlotToggle(!slottoggle) } data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.2">
+                    <div className="firstBlock" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.2.0">
+                      <p className="dayName" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.2.0.0"></p>
+                      <p className="dateName" style={{marginTop:'17px'}} data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.2.0.1">10:30 PM - 11:00 PM</p>
+                    </div>
+                    <div className="tooltipSuggestion" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.2.1">
+                      <i className="caret-down" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.2.1.0"></i>
+                    </div>
+                  </section>
+                  <section className="mobileTimeSelect mobileDropDown" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.3">
+                    <select data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.3.0">
+                      <option value="" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.3.0.$">- Select Time -</option>
+                      <option value="10:30 PM - 11:00 PM" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.3.0.$2022102122302300">10:30 PM - 11:00 PM</option>
+                    </select>
+                  </section>
+                 { slottoggle && <div class="times dropdown timesSplit" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4">
+  <div class="timesForTheDaySplit" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0">
+    <div class="firstBlockForSlots" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0">
+      <div class="singleTime selected" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102208000900">
+        <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102208000900.0">
+          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102208000900.0.0">8:00 AM - 9:00 AM</span>
+          <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102208000900.0.1"></span>
+        </p>
+      </div>
+      <div class="singleTime" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102209001000">
+        <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102209001000.0">
+          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102209001000.0.0">9:00 AM - 10:00 AM</span>
+          <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102209001000.0.1"></span>
+        </p>
+      </div>
+      <div class="singleTime" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102210001100">
+        <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102210001100.0">
+          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102210001100.0.0">10:00 AM - 11:00 AM</span>
+          <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102210001100.0.1"></span>
+        </p>
+      </div>
+      <div class="singleTime" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102211001200">
+        <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102211001200.0">
+          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102211001200.0.0">11:00 AM - 12:00 PM</span>
+          <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102211001200.0.1"></span>
+        </p>
+      </div>
+      <div class="singleTime" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102212001300">
+        <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102212001300.0">
+          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102212001300.0.0">12:00 PM - 1:00 PM</span>
+          <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102212001300.0.1"></span>
+        </p>
+      </div>
+      <div class="singleTime" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102214001500">
+        <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102214001500.0">
+          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102214001500.0.0">2:00 PM - 3:00 PM</span>
+          <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102214001500.0.1"></span>
+        </p>
+      </div>
+      <div class="singleTime" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102215001600">
+        <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102215001600.0">
+          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102215001600.0.0">3:00 PM - 4:00 PM</span>
+          <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102215001600.0.1"></span>
+        </p>
+      </div>
+    </div>
+    <div class="secondBlockForSlots" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1">
+      <div class="singleTime" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102216001700">
+        <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102216001700.0">
+          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102216001700.0.0">4:00 PM - 5:00 PM</span>
+          <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102216001700.0.1"></span>
+        </p>
+      </div>
+      <div class="singleTime" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102217001800">
+        <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102217001800.0">
+          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102217001800.0.0">5:00 PM - 6:00 PM</span>
+          <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102217001800.0.1"></span>
+        </p>
+      </div>
+      <div class="singleTime" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102218001900">
+        <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102218001900.0">
+          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102218001900.0.0">6:00 PM - 7:00 PM</span>
+          <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102218001900.0.1"></span>
+        </p>
+      </div>
+      <div class="singleTime" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102219002000">
+        <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102219002000.0">
+          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102219002000.0.0">7:00 PM - 8:00 PM</span>
+          <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102219002000.0.1"></span>
+        </p>
+      </div>
+      <div class="singleTime" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102220002100">
+        <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102220002100.0">
+          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102220002100.0.0">8:00 PM - 9:00 PM</span>
+          <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102220002100.0.1"></span>
+        </p>
+      </div>
+      <div class="singleTime" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102221002200">
+        <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102221002200.0">
+          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102221002200.0.0">9:00 PM - 10:00 PM</span>
+          <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102221002200.0.1"></span>
+        </p>
+      </div>
+      <div class="singleTime" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102222002300">
+        <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102222002300.0">
+          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102222002300.0.0">10:00 PM - 11:00 PM</span>
+          <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102222002300.0.1"></span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>}
                 </div>
+                
+               { dateToggle && 
+               
+               
+               
+               <div className="days dropdown fullWidth" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.3">
+        
+              { [0,1,2,3,4].map((number)=>(
+                <div  key={number} className={number==dateselect ? 'singleDay selected':'singleDay'} onClick={()=>handleDate(number)} data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.3.$a1666288800">
+                 
+                 <p data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.3.$a1666288800.0">{moment(new Date()).add(number, "days").format("dddd")}</p>
+                 <p data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.3.$a1666288800.1">{moment(new Date()).add(number, "days").format("D MMMM")}</p>
+               
+               </div>
+               ))}
+                </div>}
               </div>
+              <div className="clearAll" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.3"></div>
             </div>
-            <div class="shoppingBagChoice" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+            <div className="shoppingBagChoice" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3">
               <table data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3.1">
                 <tbody data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3.1.0">
-                  <tr class="shoppingBagBlock" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3.1.0.0">
-                    <td class="label" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3.1.0.0.0">
-                      <div class="shoppingBagInfo" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3.1.0.0.0.0">
-                        <span class="choiceIconContainer" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3.1.0.0.0.0.0">
-                          <div class="img-block" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3.1.0.0.0.0.0.0">
+                  <tr className="shoppingBagBlock" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3.1.0.0">
+                    <td className="label" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3.1.0.0.0">
+                      <div className="shoppingBagInfo" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3.1.0.0.0.0">
+                        <span className="choiceIconContainer" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3.1.0.0.0.0.0">
+                          <div className="img-block" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3.1.0.0.0.0.0.0">
                             
                           </div>
                         </span>
                         <h4 data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3.1.0.0.0.0.1">
                           <span data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3.1.0.0.0.0.1.0">Add reusable bags?</span>
                         </h4>
-                        <span class="info-icon" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3.1.0.0.0.0.2">
+                        <span className="info-icon" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3.1.0.0.0.0.2">
                           
                         </span>
                       </div>
                     </td>
-                    <td class="value" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3.1.0.0.1"></td>
+                    <td className="value" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3.1.0.0.1"></td>
                     <td data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3.1.0.0.2">
-                      <div class="switch-block" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3.1.0.0.2.0">
-                        <div class="switch" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3.1.0.0.2.0.0">
-                          <input class="toggle toggle-light" id="toggleSwitch" type="checkbox" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3.1.0.0.2.0.0.0"/>
-                          <label class="toggle-btn" for="toggleSwitch" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3.1.0.0.2.0.0.1"></label>
+                      <div className="switch-block" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3.1.0.0.2.0">
+                        <div className="switch" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3.1.0.0.2.0.0">
+                          <input className="toggle toggle-light" id="toggleSwitch" type="checkbox" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3.1.0.0.2.0.0.0"/>
+                          <label className="toggle-btn" for="toggleSwitch" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.3.1.0.0.2.0.0.1"></label>
                         </div>
                       </div>
                     </td>
@@ -200,12 +311,12 @@ const Order = () => {
                 </tbody>
               </table>
             </div>
-            <div class="placeOrderFooter" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7">
-              <div class="paymentMethodInstruction" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.0">
+            <div className="placeOrderFooter" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7">
+              <div className="paymentMethodInstruction" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.0">
                 <span data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.0.0">Payment options available on the next page</span>
               </div>
-              <div class="confirmBtnContainer" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1">
-                <p class="footNote" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.0">
+              <div className="confirmBtnContainer" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1">
+                <p className="footNote" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.0">
                   <span data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.0.0">
                     <span data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.0.0.0">৳</span>
                     <span data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.0.0.1">29</span>
@@ -213,16 +324,16 @@ const Order = () => {
                   </span>
                   <span data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.0.1">Delivery charge included</span>
                 </p>
-                <button class="confirmBtn confirmOrder" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.1">
+                <button className="confirmBtn confirmOrder" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.1">
                   <div data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.1.0">
-                    <div class="placeOrderText" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.1.0.0">Proceed</div>
-                    <div class="placeOrderPrice" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.1.0.1">
+                    <div className="placeOrderText" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.1.0.0">Proceed</div>
+                    <div className="placeOrderPrice" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.1.0.1">
                       <span data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.1.0.1.0">৳ </span>
                       <span data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.1.0.1.1">{items.reduce((total, item)=>total+(item.price*item.quantity),0)}</span>
                     </div>
                   </div>
                 </button>
-                <p class="termConditionText" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.2">
+                <p className="termConditionText" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.2">
                   <span data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.2.0">By clicking/tapping proceed, I agree to Chaldal's <a href="/t/TermsOfUse" target="_blank">Terms of Services</a>
                   </span>
                 </p>
