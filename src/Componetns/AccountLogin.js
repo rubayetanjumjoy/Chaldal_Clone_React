@@ -30,7 +30,8 @@ const AccountLogin = () => {
           (result) => {
             setOtpshow(false)
             setIsOpenmodal(false)
-             
+            localStorage.setItem('auth', JSON.stringify({"auth":"true"}));
+
             localStorage.setItem('items', JSON.stringify(result));
             const items = JSON.parse(localStorage.getItem('items'));
             if (items) {

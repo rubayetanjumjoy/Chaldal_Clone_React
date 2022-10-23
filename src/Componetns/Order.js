@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { CartProvider, useCart } from "react-use-cart";
-import { useContext } from 'react';
+import { useContext ,useLayoutEffect} from 'react';
 import AddressUnit from './AddressUnit';
 import { authProvider } from '../Contexts/Auth'; 
 import { useState } from 'react';
@@ -15,9 +15,18 @@ const Order = () => {
   const [dateselect,setDateselect]=useState('')
   //datetime
   const [dateToggle,setdateToggle]=useState(false)
-  const [timeToggle,setTimeToggle]=useState(false)
   const [slottoggle,setSlotToggle]=useState(false)
-  
+  const [dateNumber,setDateNumber]=useState(0)
+  const [timeslot,setTimeslot]=useState([
+    "8:00 AM - 9:00 AM","10:00 AM - 11:00 AM","11:00 AM - 12:00 PM","12:00 PM - 1:00 PM",
+    "2:00 PM - 3:00 PM","4:00 PM - 5:00 PM"
+  ])
+  const [timeslot2,setTimeslot2]=useState([
+      "5:00 PM - 6:00 PM","6:00 PM - 7:00 PM","7:00 PM - 8:00 PM","8:00 PM - 9:00 PM","9:00 PM - 10:00 PM"
+  ])
+  const [displaySlot,setdisplaySlot]=useState("8:00 AM - 9:00 AM")
+  const [selectAddress,setSelectAddress]=useState('')
+
   const {
     isEmpty,
     totalUniqueItems,
@@ -35,23 +44,35 @@ const Order = () => {
     localStorage.setItem('selected', JSON.stringify(address));
 
    }, [address])
-
+   useLayoutEffect(() => {
+    const isSelected = JSON.parse(localStorage.getItem('selected'));
+    if (!isSelected) {
+      setChangeButton(true)
+    }
+  }, []);
   const handleclick=(obj)=>{
+    setChangeButton(!changeButton)
     setAddress(obj)
     
   }
-  useEffect(() => {
-  if(address){
-    setChangeButton(false)
-  }
-  }, [address])
+   
 
   
   
   const handleDate=(number)=>{
     setDateselect(number)
     setdateToggle(false)
+    setDateNumber(number)
+     
   }
+  const hadnleTimeslot=(slot)=>{
+    
+    setdisplaySlot(slot)
+    setSlotToggle(false)
+  }
+  
+   
+  
    return (
     <>
     <div data-reactid=".d6snlzz9k2.9.2.0">
@@ -122,15 +143,15 @@ const Order = () => {
                   <p data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.0.0">
                     
                     <span data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.0.0.1"></span>
-                    <span data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.0.0.2">When would you like your <b>Express Delivery</b>? </span>
+                    <span data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.0.0.2">Date would you like your <b>Express Delivery</b>? </span>
                   </p>
                 </div>
                 <div className="clearAll" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.1"></div>
                 <div className="dropdownContainer" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2">
                   <section className={dateToggle? "selectOptions daySelect open" : "selectOptions daySelect "} onClick={()=>setdateToggle(!dateToggle)} data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.0">
                     <div className="firstBlock" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.0.0">
-                      <p className="dayName" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.0.0.0">Today</p>
-                      <p className="dateName" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.0.0.1">21 Oct</p>
+                      <p className="dayName" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.0.0.0">{moment(new Date()).add(dateNumber, "days").format("dddd")}</p>
+                      <p className="dateName" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.0.0.1">{moment(new Date()).add(dateNumber, "days").format("D MMM")}</p>
                     </div>
                     <div className="tooltipSuggestion"   data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.0.1"  >
                       <i className="caret-down" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.0.1.0"></i>
@@ -149,7 +170,7 @@ const Order = () => {
                   <section className="selectOptions timeSelect" onClick={()=>setSlotToggle(!slottoggle) } data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.2">
                     <div className="firstBlock" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.2.0">
                       <p className="dayName" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.2.0.0"></p>
-                      <p className="dateName" style={{marginTop:'17px'}} data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.2.0.1">10:30 PM - 11:00 PM</p>
+                      <p className="dateName" style={{marginTop:'17px'}} data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.2.0.1">{displaySlot}</p>
                     </div>
                     <div className="tooltipSuggestion" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.2.1">
                       <i className="caret-down" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.2.1.0"></i>
@@ -161,95 +182,31 @@ const Order = () => {
                       <option value="10:30 PM - 11:00 PM" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.3.0.$2022102122302300">10:30 PM - 11:00 PM</option>
                     </select>
                   </section>
-                 { slottoggle && <div class="times dropdown timesSplit" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4">
+                 { slottoggle  && <div class="times dropdown timesSplit" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4">
   <div class="timesForTheDaySplit" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0">
     <div class="firstBlockForSlots" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0">
-      <div class="singleTime selected" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102208000900">
+      { timeslot.map((slot)=>(
+        
+        <div key={slot} onClick={()=>hadnleTimeslot(slot)} class={displaySlot ===slot ? 'singleTime selected' : 'singleTime'} data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102208000900">
         <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102208000900.0">
-          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102208000900.0.0">8:00 AM - 9:00 AM</span>
+        
+          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102208000900.0.0">{slot}</span>
           <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102208000900.0.1"></span>
         </p>
       </div>
-      <div class="singleTime" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102209001000">
-        <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102209001000.0">
-          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102209001000.0.0">9:00 AM - 10:00 AM</span>
-          <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102209001000.0.1"></span>
-        </p>
-      </div>
-      <div class="singleTime" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102210001100">
-        <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102210001100.0">
-          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102210001100.0.0">10:00 AM - 11:00 AM</span>
-          <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102210001100.0.1"></span>
-        </p>
-      </div>
-      <div class="singleTime" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102211001200">
-        <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102211001200.0">
-          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102211001200.0.0">11:00 AM - 12:00 PM</span>
-          <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102211001200.0.1"></span>
-        </p>
-      </div>
-      <div class="singleTime" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102212001300">
-        <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102212001300.0">
-          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102212001300.0.0">12:00 PM - 1:00 PM</span>
-          <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102212001300.0.1"></span>
-        </p>
-      </div>
-      <div class="singleTime" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102214001500">
-        <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102214001500.0">
-          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102214001500.0.0">2:00 PM - 3:00 PM</span>
-          <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102214001500.0.1"></span>
-        </p>
-      </div>
-      <div class="singleTime" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102215001600">
-        <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102215001600.0">
-          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102215001600.0.0">3:00 PM - 4:00 PM</span>
-          <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.0.$a2022102215001600.0.1"></span>
-        </p>
-      </div>
+      )) }
+      
     </div>
     <div class="secondBlockForSlots" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1">
-      <div class="singleTime" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102216001700">
+      { timeslot2.map((slot2)=>(
+        <div key={slot2} onClick={()=>hadnleTimeslot(slot2)} class={displaySlot ==slot2 ?'singleTime selected' : 'singleTime'} data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102216001700">
         <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102216001700.0">
-          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102216001700.0.0">4:00 PM - 5:00 PM</span>
+          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102216001700.0.0">{slot2}</span>
           <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102216001700.0.1"></span>
         </p>
       </div>
-      <div class="singleTime" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102217001800">
-        <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102217001800.0">
-          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102217001800.0.0">5:00 PM - 6:00 PM</span>
-          <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102217001800.0.1"></span>
-        </p>
-      </div>
-      <div class="singleTime" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102218001900">
-        <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102218001900.0">
-          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102218001900.0.0">6:00 PM - 7:00 PM</span>
-          <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102218001900.0.1"></span>
-        </p>
-      </div>
-      <div class="singleTime" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102219002000">
-        <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102219002000.0">
-          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102219002000.0.0">7:00 PM - 8:00 PM</span>
-          <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102219002000.0.1"></span>
-        </p>
-      </div>
-      <div class="singleTime" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102220002100">
-        <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102220002100.0">
-          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102220002100.0.0">8:00 PM - 9:00 PM</span>
-          <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102220002100.0.1"></span>
-        </p>
-      </div>
-      <div class="singleTime" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102221002200">
-        <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102221002200.0">
-          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102221002200.0.0">9:00 PM - 10:00 PM</span>
-          <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102221002200.0.1"></span>
-        </p>
-      </div>
-      <div class="singleTime" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102222002300">
-        <p data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102222002300.0">
-          <span data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102222002300.0.0">10:00 PM - 11:00 PM</span>
-          <span class="costOrAvailability" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4.0.1.$a2022102222002300.0.1"></span>
-        </p>
-      </div>
+      )) }
+      
     </div>
   </div>
 </div>}
