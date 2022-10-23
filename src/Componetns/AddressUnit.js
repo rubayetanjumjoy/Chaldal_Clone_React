@@ -5,7 +5,7 @@ import { authProvider } from '../Contexts/Auth';
 import ModalAddress from './ModalAddress';
 const AddressUnit = ({handleclick}) => {
   const {auth,setAuth} =useContext(authProvider);
-  const [selected,setSelected]=useState(auth['address'][0] ?auth['address'][0] :false)
+  const [selected,setSelected]=useState(false)
   const [isOpen, setIsOpen] = useState(false);
   const hideModal = () => {
     setIsOpen(false)
@@ -56,7 +56,7 @@ const AddressUnit = ({handleclick}) => {
               setAuth(response) 
              if(selected){
               if(id==selected['id']){
-                setSelected(auth['address'][0])
+                setSelected(false)
               }
              }
           },
