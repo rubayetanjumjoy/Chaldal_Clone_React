@@ -57,7 +57,7 @@ const OrderDetails = ({item,checked,setChecked}) => {
           </div>
          
           <div class="delivery-time" data-reactid=".1ydwwpysure.a.2.0.0.1.1:$order-item-0.2.2.$order-details-id-0.1.0.1">
-            <span class="date-time-txt" data-reactid=".1ydwwpysure.a.2.0.0.1.1:$order-item-0.2.2.$order-details-id-0.1.0.1.0">অক্টো ২৬, ২০২২ | ২:০০দুপুর - ৩:০০দুপুর</span>
+            <span class="date-time-txt" data-reactid=".1ydwwpysure.a.2.0.0.1.1:$order-item-0.2.2.$order-details-id-0.1.0.1.0">{item.delivery_date} | {item.timeslot}</span>
           </div>
         </div>
         <div class="shipment-rating-report-shipment-section" data-reactid=".1ydwwpysure.a.2.0.0.1.1:$order-item-0.2.2.$order-details-id-0.1.1"></div>

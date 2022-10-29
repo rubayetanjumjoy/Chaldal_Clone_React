@@ -37,12 +37,12 @@ const Order = () => {
   let navigate = useNavigate();
   useEffect(() => {
    
-    
+    console.log(selectAddress)
     
   }, [])
   
   const handleSubmitOrder=()=>{
-    const data={"cart":items}
+    const data={"cart":items,"address": JSON.parse(localStorage.getItem('selected')),"timeslot":displaySlot,"delivery_date":moment(new Date()).add(dateselect, "days").format("dddd MMMM")}
       
         
      fetch(`http://127.0.0.1:8000/v0/order/`,{
@@ -84,17 +84,15 @@ const Order = () => {
     if (items) {
       setAddress(items);
     }
+    if (!items) {
+      setChangeButton(true)
+    }
   }, []);
   useEffect(() => {
     localStorage.setItem('selected', JSON.stringify(address));
 
    }, [address])
-   useLayoutEffect(() => {
-    const isSelected = JSON.parse(localStorage.getItem('selected'));
-    if (!isSelected) {
-      setChangeButton(true)
-    }
-  }, []);
+   
   const handleclick=(obj)=>{
     setChangeButton(!changeButton)
     setAddress(obj)

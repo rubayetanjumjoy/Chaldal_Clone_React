@@ -70,7 +70,7 @@ const AddressUnit = ({handleclick}) => {
     }
     const handleidclick=(obj)=>{
       setSelected(obj)
-      console.log("new jinis",selected)
+       
 
       if(handleclick){
         handleclick(obj)
