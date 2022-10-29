@@ -5,7 +5,7 @@ import Navbar from './Componetns/Navbar';
 import Sidebar from './Componetns/Sidebar';
 import Button from 'react-bootstrap/Button';
 import { BrowserRouter } from 'react-router-dom'
-import { Route,Routes } from 'react-router-dom'
+import { Route,Routes,useLocation } from 'react-router-dom'
 import Search from './Componetns/Search';
 import EverythingelseWarper from './Componetns/EverythingelseWarper';
 import Food from './Componetns/Food';
@@ -22,10 +22,16 @@ import Profile from './Componetns/Profile';
 import ChangePassword from './Componetns/ChangePassword';
 import NotFound from './Componetns/NotFound';
 import PublicRoute from './Util/PublicRoute'
-
+import PlaceAnOrder from './Componetns/PlaceAnOrder';
+ 
 function App() {
+   
+ 
   const [isOpen, setIsOpen] = React.useState(false);
   const [auth,setAuth]=useState([])
+  
+   
+ 
    useLayoutEffect(() => {
     
     const items = JSON.parse(localStorage.getItem('items'));
@@ -40,8 +46,10 @@ function App() {
     localStorage.setItem('items', JSON.stringify(auth));
     
    }, [auth])
- 
+
    
+ 
+  
    
   
  
@@ -69,6 +77,7 @@ function App() {
             <Route exact path="/profile" element={<Main insideWarper={<Profile/>}/>}></Route>
             <Route exact path="/order" element={<Main insideWarper={<Order/>}/>}></Route>
             <Route exact path="/myorder" element={<Main insideWarper={<MyOrder/>}/>}></Route>
+            <Route exact path="/placeanorder" element={<Main insideWarper={<PlaceAnOrder/>}/>}></Route>
             </Route>
             <Route path="*" exact={true} element={<Main insideWarper={<NotFound/>}/>} />
 

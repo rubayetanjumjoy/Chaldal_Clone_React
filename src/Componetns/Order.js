@@ -3,11 +3,16 @@ import { Link } from 'react-router-dom'
 import { CartProvider, useCart } from "react-use-cart";
 import { useContext ,useLayoutEffect} from 'react';
 import AddressUnit from './AddressUnit';
-import { authProvider } from '../Contexts/Auth'; 
+import { authProvider } from '../Contexts/Auth';
+import { data } from '../Contexts/DataContext'; 
 import { useState } from 'react';
 import { useEffect ,useRef} from 'react';
+
 import moment from 'moment';
+
 import "react-datepicker/dist/react-datepicker.css";
+import { useNavigate } from 'react-router-dom';
+
 const Order = () => {
   const {auth,setAuth} =useContext(authProvider);
   const [changeButton,setChangeButton]=useState(false)
@@ -26,6 +31,45 @@ const Order = () => {
   ])
   const [displaySlot,setdisplaySlot]=useState("8:00 AM - 9:00 AM")
   const [selectAddress,setSelectAddress]=useState(false)
+  
+ 
+  const {orderPlaced,setOrderPlaced} =useContext(data);
+  let navigate = useNavigate();
+  useEffect(() => {
+   
+    
+    
+  }, [])
+  
+  const handleSubmitOrder=()=>{
+    const data={"cart":items}
+      
+        
+     fetch(`http://127.0.0.1:8000/v0/order/`,{
+      method: 'POST', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json',
+        'token': auth['token']
+      },
+      body: JSON.stringify(data),})
+      .then(res => res.json())
+      .then(
+        (response) => {
+          console.log(response)
+          setOrderPlaced(response)
+          items.map((item)=>{
+            removeItem(item.id)
+          })
+          navigate('/placeanorder')
+           
+        },
+          
+        (error) => {
+          console.log(error);
+        }
+      ) 
+  }
+
 
   const {
     isEmpty,
@@ -33,6 +77,7 @@ const Order = () => {
     items,
     updateItemQuantity,
     removeItem,
+    clearCartMetadata 
   } = useCart();
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem('selected'));
@@ -222,7 +267,7 @@ const Order = () => {
                 <div  key={number} className={number==dateselect ? 'singleDay selected':'singleDay'} onClick={()=>handleDate(number)} data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.3.$a1666288800">
                  
                  <p data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.3.$a1666288800.0">{moment(new Date()).add(number, "days").format("dddd")}</p>
-                 <p data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.3.$a1666288800.1">{moment(new Date()).add(number, "days").format("D MMMM")}</p>
+                 <p data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.3.$a1666288800.1">{moment(new Date()).add(number, "days").format("D MMM")}</p>
                
                </div>
                ))}
@@ -281,15 +326,15 @@ const Order = () => {
                   </span>
                   <span data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.0.1">Delivery charge included</span>
                 </p>
-                <button className="confirmBtn confirmOrder" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.1">
+                {/*<Link to="/placeanorder" >*/}<button onClick={handleSubmitOrder} className="confirmBtn confirmOrder" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.1">
                   <div data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.1.0">
-                    <div className="placeOrderText" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.1.0.0">Proceed</div>
+                    <div className="placeOrderText" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.1.0.0">Place Order</div>
                     <div className="placeOrderPrice" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.1.0.1">
                       <span data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.1.0.1.0">৳ </span>
                       <span data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.1.0.1.1">{items.reduce((total, item)=>total+(item.price*item.quantity),0)}</span>
                     </div>
                   </div>
-                </button>
+                </button> 
                 <p className="termConditionText" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.2">
                   <span data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.2.0">By clicking/tapping proceed, I agree to Chaldal's <a href="/t/TermsOfUse" target="_blank">Terms of Services</a>
                   </span>

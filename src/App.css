@@ -11791,7 +11791,7 @@ html {
    overflow-y:auto;
    height:75%;
    border:1px solid #e1e1e1;
-   border-top:none
+    
   }
   .order-history-page .order-list .order-items .order-details .product-list-wrap::-webkit-scrollbar,
   .product-list-item-on-dialog .order-list .order-items .order-details .product-list-wrap::-webkit-scrollbar {
