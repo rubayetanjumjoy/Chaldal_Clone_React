@@ -7,10 +7,10 @@ const Sidebar = () => {
   return (
     <>
     <div className='menuWrapper ' >
-    
+    <div>
     <div className='topMenu vertical'>
  
- 
+  
         <div className='menu' style={{height:'100vh'}}>
                 
                <ul className='misc-menu'>
@@ -192,8 +192,11 @@ const Sidebar = () => {
                 
         </div>
     
+   
     </div>
     </div>
+    </div>
+    <div className='openMenuShadowDrop'></div>
     </>
   )
 }

@@ -18,6 +18,15 @@ const Main = ({insideWarper}) => {
   const [mysearch,setMysearch]=useState([]);
   const [address,setMyaddress]=useState([]);
   const [orderPlaced,setOrderPlaced]=useState(false)
+  const [navopen,setNavopen]=useState(true)
+  const [cartopen,setCartopen]=useState(false)
+
+  const handleNav=()=>{
+    setNavopen(!navopen)
+  }
+  const handleCart=(state)=>{
+    setCartopen(state)
+  }
   useEffect(() => {
     if (typeof window !== 'undefined'){
       const items = JSON.parse(localStorage.getItem('address'));
@@ -53,10 +62,10 @@ const Main = ({insideWarper}) => {
         
     <data.Provider value={{isopenmodal,setIsOpenmodal,searchresult,setSearchesult,mysearch,setMysearch,address,setMyaddress,orderPlaced,setOrderPlaced}}>
 
-    <div ref={refnav} className='app catalog  navOpen chaldal-theme'>
-    <Navbar refnav={refnav} />
+    <div  className={`app catalog  ${ navopen ?'navOpen' :''} chaldal-theme ${ cartopen ?'shoppingCartIsExpanded' :''}   `}>
+    <Navbar handleNav={handleNav} />
     
-    <ShoppingCartWrapper refnav={refnav}/>
+    <ShoppingCartWrapper  handleCart={handleCart} cartopen={cartopen} />
     <EverythingelseWarper insideWarper={insideWarper}/>
     </div>
     </data.Provider>

@@ -10,7 +10,7 @@ import { authProvider } from '../Contexts/Auth';
 import { useCart } from "react-use-cart";
 import { useNavigate } from 'react-router-dom';
 
-const Navbar = ({refnav}) => {
+const Navbar = ({refnav,handleNav}) => {
   const { emptyCart } = useCart();
   const {auth,setAuth} =useContext(authProvider);
   const {searchresult,setSearchesult} =useContext(data);
@@ -62,9 +62,10 @@ let handlechangeSearch=(e)=>{
     <>
       <div className='headerWrapper'>
        <div className='headerWrapperWrapper'>
-       
+       <div>
        <div className='top-header'>
-       <button onClick={sidehandler} className="hamburgerMenu hidden-xs"  ><Icon.List style={{width:"25px",height:"25px",display:'inline-block',verticalAlign:'middle'}}/></button>
+       
+       <button onClick={handleNav} className="hamburgerMenu hidden-xs"  ><Icon.List style={{width:"25px",height:"25px",display:'inline-block',verticalAlign:'middle'}}/></button>
        <Link to="/"><img className="egg chaldal_logo" src='https://chaldnn.com/asset/Egg.ChaldalWeb.Fabric/Egg.ChaldalWeb1/1.0.0+Deploy-Release-100/Default/components/header/Header/images/logo-small.png?q=low&webp=1&alpha=1'   />
        </Link>
        <div className='searchArea'>
@@ -114,6 +115,7 @@ let handlechangeSearch=(e)=>{
         </div>
        { !auth['token'] && <ModalLogin hideModal={hideModal}   otpshow={otpshow} setOtpshow={setOtpshow} />}
         
+       </div>
        </div>
        <Sidebar/>  
        </div>

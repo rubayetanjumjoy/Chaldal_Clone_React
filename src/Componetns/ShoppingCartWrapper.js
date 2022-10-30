@@ -6,7 +6,7 @@ import { ArrowDownShort, ArrowRight, ArrowUpShort, X,  } from 'react-bootstrap-i
 import Odometer from 'react-odometerjs';
 
 
-const ShoppingCartWrapper = ({refnav}) => {
+const ShoppingCartWrapper = ({handleCart,cartopen}) => {
    const [counter,setCounter]=useState(0)
    const {
       isEmpty,
@@ -21,19 +21,7 @@ const ShoppingCartWrapper = ({refnav}) => {
     const cartref=useRef(null);
     
     
-    let cartclosehandler=()=>{
-        let expandcart=cartref.current
-      
-        refnav.current.className='app catalog  navOpen chaldal-theme '
-        expandcart.className='shoppingCartWrapper '
-        setCarttoggle(true);
-    }
-    let cartexpandhandle=()=>{
-        let expandcart=cartref.current
-        refnav.current.className+=' shoppingCartWrapperExpanded'
-        expandcart.className='shoppingCartWrapper shoppingCartWrapperExpanded'
-        setCarttoggle(false);
-    }
+    
     let total=()=>{
       let isTotal= items.reduce((total, item)=>total+(item.price*item.quantity),false)
       if(isTotal){
@@ -51,14 +39,14 @@ const ShoppingCartWrapper = ({refnav}) => {
         return(
           <>
             <div className="cartContainer" >
-   <div className="shoppingCartButton" onClick={cartclosehandler} ></div>
+   <div className="shoppingCartButton" onClick={()=>handleCart(false)} ></div>
    <div className="shoppingCart expanded non-empty responsive"  >
       <div className="header"  >
          <div className="cart"  >
             
          </div>
          <div className="itemCount" ><span  >{totalUniqueItems} ITEMS</span><span className="count-mobile" ><span  >2</span></span></div>
-         <button className="closeCartButtonTop" onClick={cartclosehandler} >Close</button>
+         <button className="closeCartButtonTop" onClick={()=>handleCart(false)} >Close</button>
       </div>
       <section className="in-shopping-cart meter-full" id="shipping-cost-meter"  >
          <div className="costMeterSection"  >
@@ -182,7 +170,7 @@ const ShoppingCartWrapper = ({refnav}) => {
             
             <button className="closeCartButtonTop"  >Close</button>
          </div>
-         <section className="stickyHeader" onClick={cartexpandhandle}  >
+         <section className="stickyHeader" onClick={()=>handleCart(true)}  >
             <div className="itemCount"  >
                 
                <p  ><span  >{totalUniqueItems} ITEMS</span></p>
@@ -204,8 +192,8 @@ const ShoppingCartWrapper = ({refnav}) => {
   }
  
   return (
-    <div ref={cartref} className='shoppingCartWrapper '>
-    {carttoggle ? carthead() : cartContainer()}
+    <div  className={`shoppingCartWrapper ${cartopen ? 'shoppingCartWrapperExpanded':''}`}>
+    {!cartopen ? carthead() : cartContainer()}
     </div>
   )
 }
