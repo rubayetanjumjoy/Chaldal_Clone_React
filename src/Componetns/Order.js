@@ -45,7 +45,7 @@ const Order = () => {
     const data={"cart":items,"address": JSON.parse(localStorage.getItem('selected')),"timeslot":displaySlot,"delivery_date":moment(new Date()).add(dateselect, "days").format("dddd MMMM")}
       
         
-     fetch(`http://127.0.0.1:8000/v0/order/`,{
+     fetch(`${process.env.REACT_APP_BASE_URL}/v0/order/`,{
       method: 'POST', // or 'PUT'
       headers: {
         'Content-Type': 'application/json',

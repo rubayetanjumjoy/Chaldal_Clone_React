@@ -41,7 +41,7 @@ const MyOrder = () => {
   
    
   useEffect(() => {
-   fetch(`http://127.0.0.1:8000/v0/order/`,{
+   fetch(`${process.env.REACT_APP_BASE_URL}/v0/order/`,{
       method: 'GET', // or 'PUT'
       headers: {
         'Content-Type': 'application/json',
