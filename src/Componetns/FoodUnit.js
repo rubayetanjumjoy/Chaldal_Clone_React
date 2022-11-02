@@ -41,7 +41,7 @@ const FoodUnit = ({item}) => {
       <>
        <p className='addText' onClick={addhandle}>
 
-          Add to shopping bag 
+          Add to shopping bag a
           </p>
           <span>
           <a className='btnShowDetails'>
@@ -108,7 +108,7 @@ const FoodUnit = ({item}) => {
                        {item.description}
                        </div>
                        <div className='price'>{item.price}</div>
-                       <div className='c'>
+                       <div className='overlay text'>
                       {getItem(item.id) ? actionItems() : renderoverlay() }
                        </div>     
                       </div>
