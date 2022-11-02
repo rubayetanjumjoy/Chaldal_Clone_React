@@ -23,13 +23,11 @@ import ChangePassword from './Componetns/ChangePassword';
 import NotFound from './Componetns/NotFound';
 import PublicRoute from './Util/PublicRoute'
 import PlaceAnOrder from './Componetns/PlaceAnOrder';
- 
 function App() {
    
  
   const [isOpen, setIsOpen] = React.useState(false);
   const [auth,setAuth]=useState([])
-  
    
  
    useLayoutEffect(() => {

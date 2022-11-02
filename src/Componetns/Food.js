@@ -25,7 +25,17 @@ const Food = ({props}) => {
         <div className='loaded'>
           <section className='bodyWrapper'>
             <div className='categoryHeader' >
-               <a><b>Food</b></a>
+            <div class="categoryHeader" data-reactid=".10kt0qhl1y0.a.2.0.0.0.0.2.1">
+  <ol class="breadcrumb" itemscope="" itemtype="http://schema.org/BreadcrumbList" data-reactid=".10kt0qhl1y0.a.2.0.0.0.0.2.1.0:$value:0">
+   
+    <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem" class="crumb selected" data-reactid=".10kt0qhl1y0.a.2.0.0.0.0.2.1.0:$value:0.$crumb-1696">
+      <a  itemtype="http://schema.org/Thing" itemprop="item" id="Meat" itemscope="" data-reactid=".10kt0qhl1y0.a.2.0.0.0.0.2.1.0:$value:0.$crumb-1696.0">
+        <span itemprop="name" data-reactid=".10kt0qhl1y0.a.2.0.0.0.0.2.1.0:$value:0.$crumb-1696.0.0">Meat</span>
+      </a>
+    </li>
+  </ol>
+  <div data-reactid=".10kt0qhl1y0.a.2.0.0.0.0.2.1.1"></div>
+</div>
                               
             </div>
             <div className='categorySection miscCategorySection onlyMiscCategorySection'>

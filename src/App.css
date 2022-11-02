@@ -178,21 +178,15 @@ html {
   padding:0 8px;
   box-sizing:border-box;
   display:flex;
+  margin-left:35%;
   align-items:center
  }
- .modal .modal-dialog .modal-content {
-  position:relative;
-  background-color:#fff;
-  -webkit-background-clip:padding-box;
-  background-clip:padding-box;
-  border:1px solid rgba(0,0,0,.2);
-  border-radius:.3rem;
-  outline:0;
-  width:100%;
-  max-width:900px;
-  margin:auto;
-  padding-top:0px
+ @media(max-width:768px) {
+  .modal .modal-dialog {
+    margin-left:0;
+  }
  }
+  
  .modal .modal-dialog .modal-content .modal-scaler {
   width:100%;
   height:0;
@@ -657,7 +651,7 @@ html {
  .app.catalog .menuWrapper {
   width:220px;
   position:fixed;
-  z-index:3;
+  z-index:5;
   left:-285px;
   -webkit-transition:all 300ms;
   -moz-transition:all 300ms;
@@ -692,7 +686,7 @@ html {
   }
  }
  .app.catalog .everythingElseWrapper {
-  padding-top:85px;
+  padding-top:55px;
   padding-bottom:65px;
   -webkit-transition:all .2s;
   -moz-transition:all .2s;
@@ -816,7 +810,7 @@ html {
  }
  @media(max-width:768px) {
   .fullscreen-menu .openMenuShadowDrop {
-   top:84px
+   top:54px
   }
  }
  .app.ops {
@@ -1689,6 +1683,10 @@ html {
  @media(max-width:500px) {
   .deliveryStep .deliveryStepContent .addressComponent div section.addresses div.address img {
    display:none
+  }
+  
+  .chaldal_logo{
+    display: none;
   }
  }
  .deliveryStep .deliveryStepContent .addressComponent div section.addresses div.address:hover {
@@ -5780,7 +5778,7 @@ html {
   }
  }
  @media(max-width:767px) {
- .menuWrapper {
+ .navOpen .headerWrapper .headerWrapperWrapper .menuWrapper {
    left:0!important
   }
  }
@@ -7717,14 +7715,14 @@ html {
   right:0!important
  }
  @media(max-width:991px) {
-  html.sc-fullscreen .footer {
+  .sc-fullscreen .footer {
    position:fixed;
    bottom:0;
    width:100%;
    height:auto!important;
    padding-top:0!important
   }
-  html.sc-fullscreen #placeOrderButton {
+  .sc-fullscreen #placeOrderButton {
    padding:0;
    width:100%;
    height:50px;
@@ -7734,7 +7732,7 @@ html {
    font-size:18px;
    line-height:47px
   }
-  html.sc-fullscreen .totalMoneyCount {
+  .sc-fullscreen .totalMoneyCount {
    background:#e04f54;
    float:right;
    height:100%;
@@ -7742,89 +7740,89 @@ html {
    margin-right:-5px;
    line-height:50px
   }
-  html.sc-fullscreen .chat_launcher {
+  .sc-fullscreen .chat_launcher {
    display:none
   }
-  html.sc-fullscreen body {
+  .sc-fullscreen body {
    overflow:hidden;
    width:100%;
    height:100%
   }
   
-  html.sc-fullscreen .everythingElseWrapper {
+  .sc-fullscreen .everythingElseWrapper {
    border-left:0;
    overflow:hidden;
    width:10px;
    height:10px
   }
-  html.sc-fullscreen .top-header {
+  .sc-fullscreen .top-header {
    display:none
   }
-  html.sc-fullscreen .top-landingPageHeader {
+  .sc-fullscreen .top-landingPageHeader {
    display:none;
    z-index:4
   }
-  html.sc-fullscreen .shoppingCartWrapper {
+  .sc-fullscreen .shoppingCartWrapper {
    width:100%;
    z-index:4;
    top:0;
    height:100%
   }
-  html.sc-fullscreen .shoppingCartWrapper.shoppingCartWrapperExpanded {
+  .sc-fullscreen .shoppingCartWrapper.shoppingCartWrapperExpanded {
    z-index:4;
    top:0!important;
    background:#fff
   }
-  html.sc-fullscreen .shoppingCartWrapper .shoppingCart {
+  .sc-fullscreen .shoppingCartWrapper .shoppingCart {
    width:100%;
    height:100%
   }
-  html.sc-fullscreen .shoppingCartWrapper .shoppingCart .emptyFooter {
+  .sc-fullscreen .shoppingCartWrapper .shoppingCart .emptyFooter {
    height:100%
   }
-  html.sc-fullscreen .shoppingCartWrapper .shoppingCart .emptyFooter div.footerSpacer {
+  .sc-fullscreen .shoppingCartWrapper .shoppingCart .emptyFooter div.footerSpacer {
    height:0
   }
-  html.sc-fullscreen .shoppingCartWrapper .shoppingCart .header .total {
+  .sc-fullscreen .shoppingCartWrapper .shoppingCart .header .total {
    text-align:right;
    padding-right:20px
   }
-  html.sc-fullscreen .shoppingCartWrapperLandingPage {
+  .sc-fullscreen .shoppingCartWrapperLandingPage {
    width:100%;
    z-index:40;
    top:0;
    height:90%
   }
-  html.sc-fullscreen .shoppingCartWrapperLandingPage .shoppingCart {
+  .sc-fullscreen .shoppingCartWrapperLandingPage .shoppingCart {
    width:100%;
    height:90%
   }
-  html.sc-fullscreen .shoppingCartWrapperLandingPage .shoppingCart .emptyFooter {
+  .sc-fullscreen .shoppingCartWrapperLandingPage .shoppingCart .emptyFooter {
    height:100%
   }
-  html.sc-fullscreen .shoppingCartWrapperLandingPage .shoppingCart .emptyFooter div.footerSpacer {
+  .sc-fullscreen .shoppingCartWrapperLandingPage .shoppingCart .emptyFooter div.footerSpacer {
    height:0
   }
-  html.sc-fullscreen .shoppingCartWrapperLandingPage .shoppingCart .emptyFooter .footer {
+  .sc-fullscreen .shoppingCartWrapperLandingPage .shoppingCart .emptyFooter .footer {
    height:inherit
   }
-  html.sc-fullscreen .shoppingCartWrapperLandingPage .shoppingCart .header .total {
+  .sc-fullscreen .shoppingCartWrapperLandingPage .shoppingCart .header .total {
    text-align:right;
    padding-right:20px
   }
  }
  @media(max-width:420px) {
-  html.sc-fullscreen .shoppingCart div.footer {
+  .sc-fullscreen .shoppingCart div.footer {
    background-color:#fff
   }
-  html.sc-fullscreen .shoppingCart div.footer .closeCartButton,
-  html.sc-fullscreen .shoppingCart div.footer .mui-raised-button {
+  .sc-fullscreen .shoppingCart div.footer .closeCartButton,
+  .sc-fullscreen .shoppingCart div.footer .mui-raised-button {
    width:140px
   }
-  html.sc-fullscreen .shoppingCart div.footer .closeCartButton .mui-raised-button-label,
-  html.sc-fullscreen .shoppingCart div.footer .closeCartButton span,
-  html.sc-fullscreen .shoppingCart div.footer .mui-raised-button .mui-raised-button-label,
-  html.sc-fullscreen .shoppingCart div.footer .mui-raised-button span {
+  .sc-fullscreen .shoppingCart div.footer .closeCartButton .mui-raised-button-label,
+  .sc-fullscreen .shoppingCart div.footer .closeCartButton span,
+  .sc-fullscreen .shoppingCart div.footer .mui-raised-button .mui-raised-button-label,
+  .sc-fullscreen .shoppingCart div.footer .mui-raised-button span {
    font-size:12px;
    letter-spacing:1px
   }
@@ -8090,12 +8088,12 @@ html {
   margin-bottom:30px
  }
  @media(max-width:1001px) {
-  html.sc-fullscreen section.productInfo {
+  .sc-fullscreen section.productInfo {
    position:absolute;
    left:0;
    bottom:0
   }
-  html.sc-fullscreen .amount {
+  .sc-fullscreen .amount {
    padding:0!important
   }
  }
@@ -16434,7 +16432,9 @@ html {
    max-width:100%
   }
  }
+  
  .chat_launcher {
+ 
   -moz-transition:all 300ms;
   -ms-transition:all 300ms;
   -o-transition:all 300ms;
@@ -16447,7 +16447,7 @@ html {
   text-align:center;
   color:#fff;
   font-weight:700;
-  z-index:999;
+  z-index:3;
   cursor:pointer;
   -webkit-box-shadow:0 0 4px 0 #ff8641;
   -moz-box-shadow:0 0 4px 0 #ff8641;
@@ -16458,6 +16458,7 @@ html {
   transition:all 300ms ease-in-out
  }
  .chat_launcher .chatContent {
+  display: none;
   display:inline-block
  }
  .chat_launcher .chatContent span {
@@ -17763,6 +17764,7 @@ html {
    display:inline-block;
    top:10px
   }
+   
  }
  .bar1,
  .bar2,
@@ -24706,4 +24708,11 @@ html {
   margin-right: auto;
   margin-left: 500px;
 }
- 
+.modal-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #252424cc;
+  height: 100%;
+  width: 100vw;
+}

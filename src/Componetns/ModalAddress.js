@@ -2,15 +2,17 @@ import React from 'react'
 import { useState,useEffect,useContext } from 'react';
 import { authProvider } from '../Contexts/Auth';
 import { data } from '../Contexts/DataContext';
-
+import GetWindowSize from '../CustomHooks/GetWindowSize';
 import Modal from 'react-bootstrap/Modal';
 
  
 const ModalAddress = ({hideModal,isOpen,setIsOpen}) => {
+   
    const [mystreetaddress, setMystreetaddress] = useState('');
    const [myfloorno, setMyfloorno] = useState('');
    const [myaptno, setMyaptno] = useState('');
    const {auth,setAuth} =useContext(authProvider);
+   const windowsize=GetWindowSize()
  
 
    let handlesubmit=()=>{
@@ -44,7 +46,7 @@ const ModalAddress = ({hideModal,isOpen,setIsOpen}) => {
 
 
 
-<Modal    show={isOpen} onHide={hideModal}  style={{paddingTop:'0px',}} >
+<Modal  className= { windowsize.width < 700 && 'sm'}  show={isOpen} onHide={hideModal}  style={{paddingTop:'0px',}} >
 <Modal.Header closeButton>
 
 <Modal.Title> New Address</Modal.Title>

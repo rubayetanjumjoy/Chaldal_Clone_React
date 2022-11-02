@@ -203,11 +203,11 @@ const Order = () => {
                   <section className="mobileDaySelect mobileDropDown" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1">
                     <select data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0">
                       <option value="" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$">- Select Day -</option>
-                      <option value="1666288800" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$21 Oct">Today - 21 Oct</option>
-                      <option value="1666375200" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$22 Oct">Tomorrow - 22 Oct</option>
-                      <option value="1666461600" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$23 Oct">Sunday - 23 Oct</option>
-                      <option value="1666548000" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$24 Oct">Monday - 24 Oct</option>
-                      <option value="1666634400" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$25 Oct">Tuesday - 25 Oct</option>
+                      <option value="1666288800" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$21 Oct">{moment(new Date()).add(1, "days").format("dddd")}- {moment(new Date()).add(0, "days").format("D MMM")}</option>
+                      <option value="1666375200" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$22 Oct">{moment(new Date()).add(2, "days").format("dddd")}- {moment(new Date()).add(0, "days").format("D MMM")}</option>
+                      <option value="1666461600" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$23 Oct">{moment(new Date()).add(3, "days").format("dddd")}- {moment(new Date()).add(0, "days").format("D MMM")}</option>
+                      <option value="1666548000" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$24 Oct">{moment(new Date()).add(4, "days").format("dddd")}- {moment(new Date()).add(0, "days").format("D MMM")}</option>
+                      <option value="1666634400" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$25 Oct">{moment(new Date()).add(5, "days").format("dddd")}- {moment(new Date()).add(0, "days").format("D MMM")}</option>
                     </select>
                   </section>
                   <section className="selectOptions timeSelect" onClick={()=>setSlotToggle(!slottoggle) } data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.2">
@@ -222,7 +222,14 @@ const Order = () => {
                   <section className="mobileTimeSelect mobileDropDown" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.3">
                     <select data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.3.0">
                       <option value="" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.3.0.$">- Select Time -</option>
-                      <option value="10:30 PM - 11:00 PM" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.3.0.$2022102122302300">10:30 PM - 11:00 PM</option>
+                     
+                      { timeslot.map((slot)=>(
+        
+          <option value={slot} data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.3.0.$2022102122302300">{slot}</option>
+
+      )) }
+
+                     
                     </select>
                   </section>
                  { slottoggle  && <div class="times dropdown timesSplit" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4">
@@ -322,7 +329,7 @@ const Order = () => {
                     <span data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.0.0.1">29</span>
                     <span data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.0.0.2"></span>
                   </span>
-                  <span data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.0.1">Delivery charge included</span>
+                  <span data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.0.1"> Delivery charge included</span>
                 </p>
                 {/*<Link to="/placeanorder" >*/}<button onClick={handleSubmitOrder} className="confirmBtn confirmOrder" data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.1">
                   <div data-reactid=".d6snlzz9k2.9.2.0.0.0.0.0.1.7.1.1.0">
