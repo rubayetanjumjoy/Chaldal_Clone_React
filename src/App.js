@@ -23,6 +23,8 @@ import ChangePassword from './Componetns/ChangePassword';
 import NotFound from './Componetns/NotFound';
 import PublicRoute from './Util/PublicRoute'
 import PlaceAnOrder from './Componetns/PlaceAnOrder';
+import { CartProvider, useCart } from "react-use-cart";
+
 function App() {
    
  
@@ -54,7 +56,8 @@ function App() {
   return(
     
     <authProvider.Provider value={{auth,setAuth}}>
-    <BrowserRouter>
+      <CartProvider>
+        <BrowserRouter>
           <Routes>
             <Route exact path="/" element={<Main insideWarper={<LandingPage/>}/>}></Route>
             <Route exact path="/cooking" element={<Main insideWarper={<Food props={'cooking'}/>}/>}></Route>
@@ -83,6 +86,8 @@ function App() {
 
           </Routes>
       </BrowserRouter>
+      </CartProvider>
+    
       </authProvider.Provider>
     
     );

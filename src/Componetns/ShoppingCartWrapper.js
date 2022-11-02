@@ -17,7 +17,6 @@ const ShoppingCartWrapper = ({handleCart,cartopen}) => {
       removeItem,
     } = useCart();
 
-    
     const [carttoggle,setCarttoggle]=useState(true);
     const cartref=useRef(null);
     

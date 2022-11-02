@@ -21,7 +21,6 @@ const Main = ({insideWarper}) => {
    //getting path url
   const { pathname } = useLocation();
   const [showorderbtn,setShoworderbtn]=useState('')
-  console.log(totalUniqueItems)
   const refnav=useRef(null);
   const {auth,setAuth} =useContext(authProvider);
 
@@ -33,14 +32,15 @@ const Main = ({insideWarper}) => {
   const [navopen,setNavopen]=useState(true)
   const [cartopen,setCartopen]=useState(false)
   const [otpshow, setOtpshow] = useState(false);
- 
+
+
   const handleNav=()=>{
     setNavopen(()=>!navopen)
    }
   const handleCart=(state)=>{
     setCartopen(state)
   }
-
+ 
   const windowsize=GetWindowSize()
   
   
@@ -98,13 +98,14 @@ const Main = ({insideWarper}) => {
   
   return (
     <>
-      <CartProvider>
+      
         
     <data.Provider value={{isopenmodal,setIsOpenmodal,searchresult,setSearchesult,mysearch,setMysearch,address,setMyaddress,orderPlaced,setOrderPlaced}}>
     
  
     
     <div  className={`app catalog  ${ navopen ? windowsize.width <700 ? 'navOpen fullscreen-menu':'navOpen' :''} chaldal-theme ${ cartopen ? windowsize.width <700 ? 'shoppingCartIsExpanded sc-fullscreen' :'shoppingCartIsExpanded':''}   `}>
+    <p>{totalUniqueItems}</p>
     <div className='mui'>
     { !auth['token'] && isopenmodal && <SignIn isopenmodal={isopenmodal} setIsOpenmodal={setIsOpenmodal} otpshow={otpshow} setOtpshow={setOtpshow}/> }
      
@@ -113,15 +114,14 @@ const Main = ({insideWarper}) => {
      <ShoppingCartWrapper  handleCart={handleCart} cartopen={cartopen} otpshow={otpshow} setOtpshow={setOtpshow}/>
      </>}
       <Navbar handleNav={handleNav} setNavopen={setNavopen}   />
-   {  showorderbtn && <Link to ={isEmpty ? '/':'/order'}><div class="primary_shopping_bottom_btn shopping_bottom_btn"  data-reactid=".rgoiat4a6g.8"><button class="place_order_btn" data-reactid=".rgoiat4a6g.8.0">{!isEmpty ? 'Place Order':'Start Shopping'}</button></div></Link>}
+   {  showorderbtn && <Link to ={isEmpty ? '/':'/order'}><div class="primary_shopping_bottom_btn shopping_bottom_btn"  data-reactid=".rgoiat4a6g.8"><button class="place_order_btn" data-reactid=".rgoiat4a6g.8.0">{!isEmpty ? 'Place Order' :'Start Shopping'}</button></div></Link>}
      <EverythingelseWarper    insideWarper={insideWarper}/>
      
     </div>
    
     </data.Provider>
 
-    </CartProvider>
-
+ 
      </>
   )
 }

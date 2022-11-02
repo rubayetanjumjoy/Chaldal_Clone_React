@@ -1,18 +1,28 @@
 import React from 'react'
 import { useContext } from 'react';
 import { useCart } from "react-use-cart";
-
+import { useEffect } from 'react';
 import { authProvider } from '../Contexts/Auth'
 import { Link } from 'react-router-dom';
+import { data } from '../Contexts/DataContext';
+import { useLayoutEffect } from 'react';
 const ProfileResponsive = ({setSmallSignin}) => {
     const { emptyCart } = useCart();
-
+    const {isopenmodal,setIsOpenmodal} =useContext(data);
+    
     const {auth,setAuth} =useContext(authProvider);
     const handleLocalStorage=()=>{
         window.localStorage.clear();
         setAuth([]);
         emptyCart();
       }
+    const handleloginmodal=()=>{
+      setIsOpenmodal(true)
+     
+      
+    }
+  
+    
     return (
     <>
     <div className="mui" data-reactid=".1f53q7t4nfi.4.0.0.0.8">
@@ -77,29 +87,30 @@ const ProfileResponsive = ({setSmallSignin}) => {
               <span data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.9.0.1">Log out</span>
             </Link>
           </li>
-          </>:
+          </>
+          :
           <>
            
   <li data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.0">
     <span className="dotMenuItemsTitle" data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.0.0">Chaldal 🥚</span>
   </li>
-  <li data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.1">
+  <li  onClick={handleloginmodal} data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.1">
     <svg width="24px" height="19px" style={{display: 'inline-block', verticalAlign: 'middle'}} viewBox="0 0 100 100" data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.1.0">
       <g data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.1.0.0">
         <path d="m66.668 50l-33.336-34.512v17.844h-33.332v33.336h33.332v16.664z" data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.1.0.0.0" />
         <path d="m75 8.332h-20.832c-2.3008 0-4.168 1.8672-4.168 4.168s1.8672 4.168 4.168 4.168h20.832c4.5977 0 8.332 3.7383 8.332 8.332v50c0 4.5977-3.7383 8.332-8.332 8.332h-20.832c-2.3008 0-4.168 1.8633-4.168 4.168s1.8672 4.168 4.168 4.168h20.832c9.168 0 16.668-7.5 16.668-16.668v-50c0-9.168-7.5-16.668-16.668-16.668z" data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.1.0.0.1" />
       </g>
     </svg>
-    <span data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.1.1">Login</span>
+    <span   data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.1.1">Login</span>
   </li>
-  <li data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.2">
+  <li  onClick={handleloginmodal} data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.2">
     <svg width="24px" height="19px" style={{display: 'inline-block', verticalAlign: 'middle'}} viewBox="0 0 100 100" data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.2.0">
       <g data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.2.0.0">
         <path d="m95.266 63h-15.266v-15.734c0-0.13672-0.51562-0.26562-0.64844-0.26562h-11.246c-0.13281 0-0.10547 0.12891-0.10547 0.26562v15.734h-15.812c-0.13281 0-0.1875 0.050781-0.1875 0.18359v11.242c0 0.13281 0.054688 0.57422 0.1875 0.57422h15.812v15.344c0 0.13281-0.027344 0.65625 0.10547 0.65625h11.246c0.13281 0 0.64844-0.52344 0.64844-0.65625v-15.344h15.266c0.13672 0 0.73438-0.44141 0.73438-0.57422v-11.242c0-0.13281-0.59766-0.18359-0.73438-0.18359z" data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.2.0.0.0" />
         <path d="m52.188 77c-1.2344 0-2.1875-1.3398-2.1875-2.5742v-11.242c0-1.2383 0.95312-2.1836 2.1875-2.1836h13.812v-9.7461c-3.918-4.6367-9.1484-8.1641-15.156-9.9883 6.0234-3.3125 10.109-9.6836 10.109-17.004 0-10.727-8.7617-19.422-19.57-19.422-10.809 0-19.566 8.6953-19.566 19.422 0 7.3203 4.082 13.691 10.109 17.004-13.051 3.9609-22.527 15.887-22.527 29.996 0 17.34 14.316 20.324 31.98 20.324 9.9023 0 18.754-0.9375 24.617-4.8203l0.003906-9.7656z" data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.2.0.0.1" />
       </g>
     </svg>
-    <span data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.2.1">Sign Up</span>
+    <span  data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.2.1">Sign Up</span>
   </li>
    
   <li data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.4">
