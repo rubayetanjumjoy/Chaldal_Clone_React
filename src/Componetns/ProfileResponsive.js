@@ -52,7 +52,7 @@ const ProfileResponsive = ({setSmallSignin}) => {
           </li>
           
           <li data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.2">
-            <Link to="/order" data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.2.0" onClick={()=>setSmallSignin(()=>false)}>
+            <Link to="/myorder" data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.2.0" onClick={()=>setSmallSignin(()=>false)}>
               <svg version="1.1" id="Calque_1" x="0px" y="0px" width="24px" height="19px" viewBox="0 0 100 160.13" data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.2.0.0">
                 <g data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.2.0.0.0">
                   <polygon points="11.052,154.666 21.987,143.115 35.409,154.666  " data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.2.0.0.0.0" />
