@@ -6,7 +6,9 @@ import { authProvider } from '../Contexts/Auth'
 import { Link } from 'react-router-dom';
 import { data } from '../Contexts/DataContext';
 import { useLayoutEffect } from 'react';
-const ProfileResponsive = ({setSmallSignin}) => {
+import GetWindowSize from '../CustomHooks/GetWindowSize';
+const ProfileResponsive = ({setSmallSignin,setNavopen}) => {
+    const windowsize=GetWindowSize()
     const { emptyCart } = useCart();
     const {isopenmodal,setIsOpenmodal} =useContext(data);
     
@@ -18,8 +20,13 @@ const ProfileResponsive = ({setSmallSignin}) => {
       }
     const handleloginmodal=()=>{
       setIsOpenmodal(true)
-     
+      setSmallSignin(()=>false)
+      windowsize.width <700 && setNavopen(false)
       
+    }
+    const handlenav=()=>{
+      setSmallSignin(()=>false)
+      windowsize.width <700 && setNavopen(false)
     }
   
     
@@ -40,7 +47,7 @@ const ProfileResponsive = ({setSmallSignin}) => {
            
         
           <li data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.1">
-            <Link to="/profile" data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.1.0" onClick={()=>setSmallSignin(()=>false)}>
+            <Link to="/profile" data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.1.0" onClick={handlenav}>
               <svg style={{display: 'inline-block', verticalAlign: 'middle'}} width="24px" height="19px" viewBox="0 0 26 32.5" data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.1.0.0">
                 <g data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.1.0.0.0">
                   <path d="M25.7,3.4l-3.1-3.1c-0.4-0.4-1-0.4-1.4,0l-1.9,1.9c0,0,0,0,0,0s0,0,0,0l-7.4,7.4c0,0,0,0,0,0c-0.1,0.1-0.1,0.2-0.2,0.3   c0,0,0,0,0,0.1c0,0,0,0,0,0l-1.6,4.7c-0.1,0.4,0,0.8,0.2,1c0.2,0.2,0.4,0.3,0.7,0.3c0.1,0,0.2,0,0.3-0.1l4.7-1.6c0,0,0,0,0,0   c0,0,0,0,0.1,0c0.1,0,0.2-0.1,0.3-0.2c0,0,0,0,0,0l9.3-9.3C26.1,4.4,26.1,3.8,25.7,3.4z M23.6,4.1l-0.5,0.5l-1.7-1.7l0.5-0.5   L23.6,4.1z M15.7,12l-0.8-0.8L14,10.3l6-6l1.7,1.7L15.7,12z M12.6,13.4l0.4-1.2l0.8,0.8L12.6,13.4z" data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.1.0.0.0.0" />
@@ -52,7 +59,7 @@ const ProfileResponsive = ({setSmallSignin}) => {
           </li>
           
           <li data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.2">
-            <Link to="/myorder" data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.2.0" onClick={()=>setSmallSignin(()=>false)}>
+            <Link to="/myorder" data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.2.0"onClick={handlenav}>
               <svg version="1.1" id="Calque_1" x="0px" y="0px" width="24px" height="19px" viewBox="0 0 100 160.13" data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.2.0.0">
                 <g data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.2.0.0.0">
                   <polygon points="11.052,154.666 21.987,143.115 35.409,154.666  " data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.2.0.0.0.0" />
@@ -65,7 +72,7 @@ const ProfileResponsive = ({setSmallSignin}) => {
            
           
           <li data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.6">
-            <Link to="/changepassword" data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.6.0" onClick={()=>setSmallSignin(()=>false)}>
+            <Link to="/changepassword" data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.6.0" onClick={handlenav}>
               <svg width="24px" height="19px" style={{fill: '#4f4f4f', stroke: '#4f4f4f', display: 'inline-block', verticalAlign: 'middle'}} version="1.1" viewBox="0 0 100 100" data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.6.0.0">
                 <g data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.6.0.0.0">
                   <path d="m80.371 51.176c4.3594-4.3594 6.5312-10.059 6.5312-15.773 0-5.6992-2.1719-11.414-6.5312-15.773s-10.059-6.5312-15.773-6.5312c-5.6992 0-11.414 2.1719-15.773 6.5312-2.7695 2.7695-4.6562 6.0703-5.6562 9.5547-1.043 3.6328-1.1602 7.4844-0.3125 11.16l0.14844 0.65625-0.47656 0.47656c-9.8047 9.8047-19.598 19.598-29.406 29.406l0.51953 15.461 15.461 0.51953 29.883-29.883 0.65625 0.14844c3.6758 0.83203 7.5312 0.73047 11.16-0.3125 3.4961-1.0117 6.8008-2.8867 9.5547-5.6562zm-9.4922-9.4922c-3.4688 3.4688-9.0781 3.4688-12.543 0-3.4688-3.4688-3.4688-9.0781 0-12.543 3.4688-3.4688 9.0781-3.4688 12.543 0 3.4688 3.4688 3.4688 9.0781 0 12.543z" data-reactid=".1f53q7t4nfi.4.0.0.0.8.0.0.2.0.6.0.0.0.0" />

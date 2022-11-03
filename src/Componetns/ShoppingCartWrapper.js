@@ -6,6 +6,7 @@ import { ArrowDownShort, ArrowRight, ArrowUpShort, X,  } from 'react-bootstrap-i
 import Odometer from 'react-odometerjs';
 import 'animate.css';
 
+import { useLocation } from 'react-router'
 
 const ShoppingCartWrapper = ({handleCart,cartopen}) => {
    const [counter,setCounter]=useState(0)
@@ -19,7 +20,8 @@ const ShoppingCartWrapper = ({handleCart,cartopen}) => {
 
     const [carttoggle,setCarttoggle]=useState(true);
     const cartref=useRef(null);
-    
+    const { pathname } = useLocation();
+
     
     
     let total=()=>{
@@ -124,7 +126,7 @@ const ShoppingCartWrapper = ({handleCart,cartopen}) => {
       <div className=""  >
          <div className="footer"  >
          {total() ? <div className="shoppingtCartActionButtons"  >
-            <Link to="/order"><button id="placeOrderButton" ><span className="placeOrderText" >Place Order</span>
+            <Link to="/order"><button id="placeOrderButton" onClick={()=>handleCart(false)}><span className="placeOrderText" >Place Order</span>
             <span className="totalMoneyCount"  >
                <span >৳  </span>
             <span  >

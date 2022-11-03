@@ -2,7 +2,7 @@ import React from 'react'
 import * as Icon from 'react-bootstrap-icons';
 import Sidebar from './Sidebar';
 import Modal from 'react-bootstrap/Modal';
-import ModalLogin from './ModalLogin'
+ 
 import {useState,useContext,useEffect} from 'react';
 import { Link } from 'react-router-dom'
 import { data } from '../Contexts/DataContext';
@@ -125,7 +125,7 @@ let handlesmlogin=()=>
             <li data-reactid=".1zdhas409fm.4.0.0.0.9.0.2"></li>
           </ul>
         </div>
-      { smallSignin && <ProfileResponsive setSmallSignin ={setSmallSignin}/> } 
+      { smallSignin && <ProfileResponsive setSmallSignin ={setSmallSignin} setNavopen={setNavopen}/> } 
             
       </div>
        </div>

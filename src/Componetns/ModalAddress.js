@@ -58,7 +58,7 @@ const ModalAddress = ({hideModal,isOpen,setIsOpen}) => {
             <div class="show" >
                < >
                   <div class="inputContainer alternateStyle" >
-                     <div class="input-label" ><span >Street address<span class="required"> *</span></span></div>
+                     <div class="input-label" ><span >Delivery Address<span class="required"> *</span></span></div>
                      <textarea onChange={(e)=>setMystreetaddress(e.target.value)} req class="" name="address" type="text" maxlength="400" rows="3" ></textarea>
                      <span class="input-error" ></span><span class="input-description" >e.g House No 73, Road 14, Block F, Bashundhara R/A, Dhaka - 1216</span><span class="input-extra-content" ></span>
                   </div>

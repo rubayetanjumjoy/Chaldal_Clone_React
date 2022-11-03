@@ -99,7 +99,7 @@ const AddressUnit = ({handleclick}) => {
               <span className="selectedAddressTickIcon" >
               </span>
                 <span >
-                  <p >{item.apartment_no}</p>
+                  <p > Apartment No<span style={{fontWeight:'bold'}}> {item.apartment_no} </span> </p> 
                    
                
                     <span   className="addressArea " >{item.street_address}</span>

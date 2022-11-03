@@ -10,8 +10,7 @@ import { useLocation } from 'react-router'
 import ProfileIcon from './ProfileIcon'
 import GetWindowSize from '../CustomHooks/GetWindowSize'
 import { Link } from 'react-router-dom'
-import OutsideClickHandler from 'react-outside-click-handler';
-import SignIn from './SignIn'
+ import SignIn from './SignIn'
 const Main = ({insideWarper}) => {
   const {
     isEmpty,
