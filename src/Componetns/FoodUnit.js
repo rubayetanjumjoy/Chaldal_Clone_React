@@ -41,7 +41,7 @@ const FoodUnit = ({item}) => {
       <>
        <p className='addText' onClick={addhandle}>
 
-          Add to shopping bag a
+          Add to shopping bag  
           </p>
           <span>
           <a className='btnShowDetails'>
@@ -114,7 +114,7 @@ const FoodUnit = ({item}) => {
                       </div>
                     {
                     !getItem(item.id) ?
-                     <section className='addButtonWrapper border-radius-small'onClick={addhandle}>
+                     <section className='addButtonWrapper border-radius-small' onClick={addhandle}>
                           <p className='buyText' > Add to Bag</p>
                       </section>
                    :

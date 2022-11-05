@@ -13129,7 +13129,7 @@ html {
    font-size:40px
   }
   div.product .imageWrapper .overlay.text p.addText {
-   pointer-events:none;
+    
    margin-top:5px;
    padding-top:5px;
    font-size:18px;
