@@ -14,6 +14,7 @@ import SignIn from './SignIn';
 import ProfileIcon from './ProfileIcon';
 import ProfileResponsive from './ProfileResponsive';
 import AccountLogin from './AccountLogin';
+import zIndex from '@mui/material/styles/zIndex';
 const Navbar = ({handleNav,setNavopen}) => {
   const { emptyCart } = useCart();
   const {auth,setAuth} =useContext(authProvider);
@@ -130,7 +131,7 @@ let handlesmlogin=()=>
       </div>
        </div>
        <Sidebar handleNav={handleNav} setNavopen={setNavopen}/>  
-       <div className='openMenuShadowDrop' onClick={(e) => {if (e.target.className === 'openMenuShadowDrop') {handleNav() }}}
+       <div className='openMenuShadowDrop' style={{zIndex:'-100'}} onClick={(e) => {if (e.target.className === 'openMenuShadowDrop') {handleNav() }}}
        >
     
  </div>

@@ -18,7 +18,7 @@ const Sidebar = ({handleNav,setNavopen}) => {
           </div>
       </div>
   
-        <div className='menu' style={{height:'100vh'}}>
+        <div className='menu' style={{height:windowsize.height}}>
                 
                <ul className='misc-menu'>
                     <li className='unselected'>
