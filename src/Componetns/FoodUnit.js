@@ -81,7 +81,7 @@ const FoodUnit = ({item}) => {
         <>
            <section className="actionItems">
                 <p className="total">
-                <span >৳ </span><span >750</span></p>
+                <span >৳ </span><span >{item.price * getItem(item.id)["quantity"]}</span></p>
                 <div>
                 <p className="remove" onClick={decrement}>-</p><p className="quantity" >
                 <span >{getItem(item.id)["quantity"]}</span></p>

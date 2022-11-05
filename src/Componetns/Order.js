@@ -118,7 +118,7 @@ const Order = () => {
   
    return (
     <>
-    <div data-reactid=".d6snlzz9k2.9.2.0">
+   { !isEmpty ? <div data-reactid=".d6snlzz9k2.9.2.0">
      
   <div className="checkoutExperience2" data-reactid=".d6snlzz9k2.9.2.0.0">
     <div data-reactid=".d6snlzz9k2.9.2.0.0.0">
@@ -351,7 +351,25 @@ const Order = () => {
       </div>
     </div>
   </div>
+</div> :
+
+<div data-reactid=".1kzpuuzndw4.a.2.0">
+  <div className="checkoutExperience2" data-reactid=".1kzpuuzndw4.a.2.0.0">
+    <div data-reactid=".1kzpuuzndw4.a.2.0.0.0">
+      <div data-reactid=".1kzpuuzndw4.a.2.0.0.0.0">
+        <div className="emptyCartError" data-reactid=".1kzpuuzndw4.a.2.0.0.0.0.0">
+          <img src="https://chaldn.com/asset/Egg.ChaldalWeb.Fabric/Egg.ChaldalWeb/1.0.0+Deploy-Release-156/Default/components/header/ShoppingCart/images/emptyShoppingBag.png?q=low&webp=1&alpha=1" data-reactid=".1kzpuuzndw4.a.2.0.0.0.0.0.0" />
+          <h1 data-reactid=".1kzpuuzndw4.a.2.0.0.0.0.0.1">
+            <span data-reactid=".1kzpuuzndw4.a.2.0.0.0.0.0.1.0"></span>
+            <span data-reactid=".1kzpuuzndw4.a.2.0.0.0.0.0.1.1">Your shopping cart is empty, Please add some products before you checkout.</span>
+          </h1>
+          <Link to="/" className="confirmBtn primaryFixedBtn" data-reactid=".1kzpuuzndw4.a.2.0.0.0.0.0.2">Start shopping now</Link>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+}
     </>
   )
 }

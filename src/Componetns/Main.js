@@ -86,7 +86,8 @@ const Main = ({insideWarper}) => {
         setNavopen(()=>true)
     }
     
-  }, [windowsize])
+  }, [windowsize.width])
+   
   useEffect(() => {
      if(pathname=='/order' || pathname=='/placeanorder' ){
       setShoworderbtn(()=>false)
@@ -95,7 +96,7 @@ const Main = ({insideWarper}) => {
       setShoworderbtn(()=>true)
      }
       }, [pathname])
-  
+   console.log("")
   
   return (
     <>
