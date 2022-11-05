@@ -11,6 +11,8 @@ import ProfileIcon from './ProfileIcon'
 import GetWindowSize from '../CustomHooks/GetWindowSize'
 import { Link } from 'react-router-dom'
  import SignIn from './SignIn'
+ import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Main = ({insideWarper}) => {
   const {
     isEmpty,
@@ -115,7 +117,7 @@ const Main = ({insideWarper}) => {
       <Navbar handleNav={handleNav} setNavopen={setNavopen}   />
    {  showorderbtn && <Link to ={isEmpty ? '/':'/order'}><div class="primary_shopping_bottom_btn shopping_bottom_btn"  data-reactid=".rgoiat4a6g.8"><button class="place_order_btn" data-reactid=".rgoiat4a6g.8.0">{!isEmpty ? 'Place Order' :'Start Shopping'}</button></div></Link>}
      <EverythingelseWarper    insideWarper={insideWarper}/>
-     
+     <ToastContainer />
     </div>
    
     </data.Provider>

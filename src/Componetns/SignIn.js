@@ -1,6 +1,10 @@
 import React from 'react'
 import { useState,useContext } from 'react';
 import { authProvider } from '../Contexts/Auth';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
     
 
@@ -11,7 +15,8 @@ const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
      const [mynumber, setnumber] = useState('+880');
      const [myotp, setMyotp] = useState('');
      const [phonevalid, setPhonevalid] = useState(true);
-
+     const [wrongotp, setWrongotp] = useState(false);
+     
      //auth
      const {auth,setAuth} =useContext(authProvider);
       
@@ -30,7 +35,9 @@ const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
               (result) => {
                 setOtpshow(false)
                 setIsOpenmodal(false)
-                 
+                if(wrongotp){
+                  setWrongotp(false)
+                }
                 localStorage.setItem('items', JSON.stringify(result));
                 const items = JSON.parse(localStorage.getItem('items'));
                 if (items) {
@@ -38,12 +45,24 @@ const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
                  localStorage.setItem('auth', JSON.stringify({"auth":"true"}));
 
                  }
+                 toast.success('Login Successfull', {
+                  position: "top-center",
+                  autoClose: 1500,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "light",
+                  });
+                 
                  
               },
               // Note: it's important to handle errors here
               // instead of a catch() block so that we don't swallow
               // exceptions from actual bugs in components.
               (error) => {
+                setWrongotp(true)
                 console.log(error);
               }
             )
@@ -60,9 +79,11 @@ const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
          let data={
             "phone_number":mynumber
          }
+       
+          
          if (validatePhoneNumber(mynumber)) {
-            setPhonevalid(true);
-            setOtpshow(true);
+          setPhonevalid(true);
+         
             fetch(`${process.env.REACT_APP_BASE_URL}/v0/sendotp/`,{
             method: 'POST', // or 'PUT'
             headers: {
@@ -72,7 +93,7 @@ const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
             .then(res => res.json())
             .then(
               (result) => {
-                 
+                 setOtpshow(true);
                 console.log(result)
               },
               // Note: it's important to handle errors here
@@ -136,32 +157,37 @@ const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
             </div> }
             
             {  !phonevalid && <div className='errorContainer'>
-                <span >
+                <span style={{color:'red'}} >
                 Please enter a valid bangladeshi number. e.g. +8801672955886
                 </span>
-            </div> }
+            </div>
+            
+             }
             </>
             
      {      otpshow && <>
-                <div className='inputContainer'>
-                    <input name='otp' type="text" required="" onChange={(e)=>setMyotp(e.target.value)} style={{color:'black'}}></input>
-                    <span className='input-placeholder'>
+                <div className={wrongotp ? 'inputContainer has-error' :'inputContainer'}>
+                    <input name='otp' class={myotp?'has-value':''} type="text" required="" onChange={(e)=>setMyotp(e.target.value)} style={{color:'black'}}></input>
+                    <span className='input-placeholder '>
                     Please enter 4-digit one time pin
                     </span>
+                    <span class="input-error" data-reactid=".28e1137ykn4.1.0.0.0.2.0.5.0.2">Please enter correct 4-digit one time pin</span>
                     <span className='input-extra-content'>
 
                     </span>
                 </div>
                 <div className='actions'>
                     <button className='btn btn-primary' onClick={otpverifyhandler}>Enter</button>
-                    <button className='btn'>Request PIN again </button>
+                   
+                    <button className='btn' onClick={signin} >Request PIN again </button>
+                    
                 </div>
             </>
             }
             
             </div>
             { !otpshow && <button className="loginBtn" id="login-button" type="submit" onClick={signin} >SIGN UP / LOGIN</button>}
-
+           
          </>
                 
         );
@@ -172,17 +198,31 @@ const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
         return(
             <>
             <button  onClick={()=>{setlogtoggle(!logtoggle); setOtpshow(false)}} className="loginBtn emailLoginBtn">Login With <b> Phone Number</b> </button>
+             
+            <Box
+              
+      component="form"
+      sx={{
+        '& .MuiTextField-root': { m: 0, width: '100%' ,},
+      }}
+      noValidate
+      autoComplete="off"
+    >
+             </Box>
             <div className="inputContainer" >
-            <input className="" name="email" type="email" required="" /> 
-            <span className="input-placeholder" >Email Address</span>
+            <input name="email" type="email" required=""/>
+            <span className="input-placeholder"  >Email Address</span>
+      
             <span className="input-error"></span>
             <span className="input-description" 
             ></span>
             <span className="input-extra-content" >
 
             </span>
-            
+       
             </div>
+            
+            
               <div className="inputContainer" >
                 <input className="" name="password" type="password" required=""  /><span className="input-placeholder" >Password</span>
                  <span className="input-error" ></span>
@@ -191,6 +231,7 @@ const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
                     </span>
             </div>
             <button className="loginBtn" id="login-button" type="submit" onClick={signin} >LOGIN</button>
+            
 
         
             </>
@@ -221,11 +262,13 @@ const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
               </div>
             </div>
             {logtoggle ? emailrender() : phonerender()}
+         
           </div>
         </div>
       </div>
     </div>
   </div>
+
     </>
   )
 }

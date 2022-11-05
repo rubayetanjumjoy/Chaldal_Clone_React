@@ -4,7 +4,8 @@ import { authProvider } from '../Contexts/Auth';
 import { data } from '../Contexts/DataContext';
 import GetWindowSize from '../CustomHooks/GetWindowSize';
 import Modal from 'react-bootstrap/Modal';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
  
 const ModalAddress = ({hideModal,isOpen,setIsOpen}) => {
    
@@ -28,6 +29,16 @@ const ModalAddress = ({hideModal,isOpen,setIsOpen}) => {
               (result) => {
                setAuth(result)
                setIsOpen(false)
+               toast.success('New Address Added', {
+                  position: "top-center",
+                  autoClose: 1500,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "light",
+                  });
                  
               },
               // Note: it's important to handle errors here
@@ -64,7 +75,7 @@ const ModalAddress = ({hideModal,isOpen,setIsOpen}) => {
                   </div>
                    
                   <div class="apartmentFields" >
-                     <div class="inputContainer alternateStyle" >
+                     <div class="inputContainer alternateStyle  "  >
                         <div class="input-label" ><span >Floor No</span></div>
                         <input onChange={(e)=>setMyfloorno(e.target.value)} class="" name="floorNo" type="number" maxlength="10"   style={{color:'black'}} required /><span class="input-error" ></span><span class="input-description" >e.g "1", "2"</span><span class="input-extra-content" ></span>
                      </div>
@@ -96,6 +107,7 @@ const ModalAddress = ({hideModal,isOpen,setIsOpen}) => {
                    */}  
                   <div class="actions" >
                      <button class="btn btn-primary" onClick={handlesubmit} type="submit" >Save Address</button></div>
+                     <ToastContainer />
                </>
                <div class="error dropdownError"></div>
             </div>
@@ -103,7 +115,8 @@ const ModalAddress = ({hideModal,isOpen,setIsOpen}) => {
       </div>
       </Modal.Body>
         
-        </Modal>    
+        </Modal> 
+           
     </div>
   )
 }

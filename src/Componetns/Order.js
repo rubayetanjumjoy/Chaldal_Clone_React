@@ -204,10 +204,10 @@ const Order = () => {
                     <select data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0">
                       <option value="" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$">- Select Day -</option>
                       <option value="1666288800" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$21 Oct">{moment(new Date()).add(1, "days").format("dddd")}- {moment(new Date()).add(0, "days").format("D MMM")}</option>
-                      <option value="1666375200" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$22 Oct">{moment(new Date()).add(2, "days").format("dddd")}- {moment(new Date()).add(0, "days").format("D MMM")}</option>
-                      <option value="1666461600" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$23 Oct">{moment(new Date()).add(3, "days").format("dddd")}- {moment(new Date()).add(0, "days").format("D MMM")}</option>
-                      <option value="1666548000" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$24 Oct">{moment(new Date()).add(4, "days").format("dddd")}- {moment(new Date()).add(0, "days").format("D MMM")}</option>
-                      <option value="1666634400" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$25 Oct">{moment(new Date()).add(5, "days").format("dddd")}- {moment(new Date()).add(0, "days").format("D MMM")}</option>
+                      <option value="1666375200" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$22 Oct">{moment(new Date()).add(2, "days").format("dddd")}- {moment(new Date()).add(1, "days").format("D MMM")}</option>
+                      <option value="1666461600" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$23 Oct">{moment(new Date()).add(3, "days").format("dddd")}- {moment(new Date()).add(2, "days").format("D MMM")}</option>
+                      <option value="1666548000" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$24 Oct">{moment(new Date()).add(4, "days").format("dddd")}- {moment(new Date()).add(3, "days").format("D MMM")}</option>
+                      <option value="1666634400" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$25 Oct">{moment(new Date()).add(5, "days").format("dddd")}- {moment(new Date()).add(4, "days").format("D MMM")}</option>
                     </select>
                   </section>
                   <section className="selectOptions timeSelect" onClick={()=>setSlotToggle(!slottoggle) } data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.2">

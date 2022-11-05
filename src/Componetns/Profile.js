@@ -3,6 +3,8 @@ import ModalAddress from './ModalAddress'
 import { useState,useContext,useEffect } from 'react'
 import { authProvider } from '../Contexts/Auth'
 import { data } from '../Contexts/DataContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import AddressUnit from './AddressUnit';
 
 const Profile = () => {
@@ -64,7 +66,7 @@ const Profile = () => {
     console.log(`nested${auth}`)
  }, [])
   let handlesubmit=()=>{ 
-  
+      
       let data={"name":myname,"email":myemail,"date_of_birth":mybirthdate,"gender":mygender,"date_of_birth":mybirthdate,"token":auth['token']}
        fetch(`${process.env.REACT_APP_BASE_URL}/v0/updateuser/`,{
         method: 'POST', // or 'PUT'
@@ -75,8 +77,20 @@ const Profile = () => {
         .then(res => res.json())
         .then(
           (response) => {
-            console.log(response)
+            setSubmitToggle(false)
+            toast.success('Profile Updated', {
+              position: "top-center",
+              autoClose: 1500,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+              });
+             
             setAuth(prev=>({...prev,user:response}))
+           
              
           },
             
@@ -94,14 +108,20 @@ const Profile = () => {
   return (
     <>{
       auth['token'] &&
+      <form>
       <div >
+      
       <div className="outer-profile-container" >
       <div className="profile" >
       <h2 className="profile-title">Your Profile</h2>
       <div className="profile-info" >
-         
-       
+     
+    
+     
+      
       <div className="inputContainer">
+    
+      
       <input className="has-value" name="name" type="text" required="" maxlength="70" onChange={handlenamechange} value={!mynametoggle ? auth['user']['name'] : myname } style={{color:'black'}} />
       <span className="input-placeholder">Name</span>
       <span className="input-error" ></span>
@@ -109,7 +129,7 @@ const Profile = () => {
       <span className="input-extra-content" ></span></div>
       <div className="inputContainer " >
       <input className="has-value paddingForExtraContent" name="email" type="email" required="" onChange={handleemailchange} value={!myemailToggle? auth['user']['email'] : myemail} style={{color:'black'}} />
-      <span className="input-placeholder" >Email Address</span>
+      <span className="input-placeholder"  required >Email Address</span>
       <span className="input-error" ></span>
       <span className="input-description" ></span>
       <span className="input-extra-content" >
@@ -131,7 +151,7 @@ const Profile = () => {
      <option value="2">Female</option>
      <option value="3">Others</option></select></div>
      <div className="inputContainer">
-     <input className="" name="date" type="text"  value={mybirthdateeidt ? mybirthdate : auth['user']['date_of_birth']} onChange={handlebirthchange} style={{color:'black'}} />
+     <input className={auth['user']['date_of_birth'] ? 'has-value':''}name="date" type="text"  value={mybirthdateeidt ? mybirthdate : auth['user']['date_of_birth']} onChange={handlebirthchange} style={{color:'black'}} />
        <span className="input-placeholder">Date of Birth (YYYY-MM-DD)</span>
      <span className="input-error" ></span>
      <span className="input-description" ></span><span className="input-extra-content"></span></div>
@@ -151,7 +171,7 @@ const Profile = () => {
      
           
            <AddressUnit     />
-       
+         
         
       
        
@@ -165,10 +185,14 @@ const Profile = () => {
        </div>
                  { submitToggle && <div className="submitButtonSection" >
                     <button type="button" class="btn btn-primary Btn" onClick={handlesubmit} >Submit</button>
+                    
                   </div>}
                   </div>
+               
                   </div>
+                  </form>
       }
+
     </>
   )
 }

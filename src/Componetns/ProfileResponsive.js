@@ -17,6 +17,7 @@ const ProfileResponsive = ({setSmallSignin,setNavopen}) => {
         window.localStorage.clear();
         setAuth([]);
         emptyCart();
+        setSmallSignin(()=>false)
       }
     const handleloginmodal=()=>{
       setIsOpenmodal(true)
