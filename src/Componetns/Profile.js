@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import AddressUnit from './AddressUnit';
 
 const Profile = () => {
+  const [required, setRequired] = useState({ required: true });
   const {auth,setAuth} =useContext(authProvider);
   const [submitToggle,setSubmitToggle]=useState(false)
   const [myname,setMyname]=useState('')
@@ -36,6 +37,7 @@ const Profile = () => {
  console.log(isOpen)
  
   let handlenamechange=(e)=>{
+    e.preventDefault()
     setSubmitToggle(true)
     setMynametoggle(true)
 
@@ -62,11 +64,9 @@ const Profile = () => {
   }
  
   
- useEffect(() => {
-    console.log(`nested${auth}`)
- }, [])
-  let handlesubmit=()=>{ 
-      
+  
+  let handlesubmit=( )=>{ 
+   
       let data={"name":myname,"email":myemail,"date_of_birth":mybirthdate,"gender":mygender,"date_of_birth":mybirthdate,"token":auth['token']}
        fetch(`${process.env.REACT_APP_BASE_URL}/v0/updateuser/`,{
         method: 'POST', // or 'PUT'
@@ -118,11 +118,11 @@ const Profile = () => {
      
     
      
-      
+     
       <div className="inputContainer">
     
       
-      <input className="has-value" name="name" type="text" required="" maxlength="70" onChange={handlenamechange} value={!mynametoggle ? auth['user']['name'] : myname } style={{color:'black'}} />
+      <input   className="has-value" name="name" type="text"  maxlength="70" onChange={handlenamechange} value={!mynametoggle ? auth['user']['name'] : myname } style={{color:'black'}} {...required}/>
       <span className="input-placeholder">Name</span>
       <span className="input-error" ></span>
       <span className="input-description" ></span>
@@ -184,7 +184,7 @@ const Profile = () => {
        </div>
        </div>
                  { submitToggle && <div className="submitButtonSection" >
-                    <button type="button" class="btn btn-primary Btn" onClick={handlesubmit} >Submit</button>
+                    <button type="submit" class="btn btn-primary Btn" onClick={handlesubmit} >Submit</button>
                     
                   </div>}
                   </div>

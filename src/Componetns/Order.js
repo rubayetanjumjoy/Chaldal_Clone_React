@@ -9,6 +9,8 @@ import { useState } from 'react';
 import { useEffect ,useRef} from 'react';
 
 import moment from 'moment';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from 'react-router-dom';
@@ -36,13 +38,32 @@ const Order = () => {
   const {orderPlaced,setOrderPlaced} =useContext(data);
   let navigate = useNavigate();
   useEffect(() => {
-   
+    
     console.log(selectAddress)
     
   }, [])
-  
+  let validateSelectAddr=()=>{
+    if(JSON.parse(localStorage.getItem('selected')))
+    {
+      return true
+    }
+    else{
+      toast.error('Please Select Delevery Address', {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+      return false
+    }
+  }
   const handleSubmitOrder=()=>{
-    const data={"cart":items,"address": JSON.parse(localStorage.getItem('selected')),"timeslot":displaySlot,"delivery_date":moment(new Date()).add(dateselect, "days").format("dddd MMMM")}
+    if(validateSelectAddr()){
+    const data={"cart":items,"address": JSON.parse(localStorage.getItem('selected')),"timeslot":displaySlot,"delivery_date":moment(new Date()).add(dateselect, "days").format("dddd MMM")}
       
         
      fetch(`${process.env.REACT_APP_BASE_URL}/v0/order/`,{
@@ -68,6 +89,7 @@ const Order = () => {
           console.log(error);
         }
       ) 
+    }
   }
 
 
@@ -83,6 +105,7 @@ const Order = () => {
     const items = JSON.parse(localStorage.getItem('selected'));
     if (items) {
       setAddress(items);
+      
     }
     if (!items) {
       setChangeButton(true)
@@ -90,7 +113,7 @@ const Order = () => {
   }, []);
   useEffect(() => {
     localStorage.setItem('selected', JSON.stringify(address));
-
+     
    }, [address])
    
   const handleclick=(obj)=>{
@@ -115,7 +138,10 @@ const Order = () => {
   }
   
    
-  
+useEffect(() => {
+  console.log(dateselect)
+}, [dateselect])
+
    return (
     <>
    { !isEmpty ? <div data-reactid=".d6snlzz9k2.9.2.0">
@@ -200,15 +226,13 @@ const Order = () => {
                       <i className="caret-down" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.0.1.0"></i>
                     </div>
                   </section>
-                  <section className="mobileDaySelect mobileDropDown" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1">
+                  <section className="mobileDaySelect mobileDropDown" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1"  >
                     <select data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0">
-                      <option value="" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$">- Select Day -</option>
-                      <option value="1666288800" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$21 Oct">{moment(new Date()).add(1, "days").format("dddd")}- {moment(new Date()).add(0, "days").format("D MMM")}</option>
-                      <option value="1666375200" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$22 Oct">{moment(new Date()).add(2, "days").format("dddd")}- {moment(new Date()).add(1, "days").format("D MMM")}</option>
-                      <option value="1666461600" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$23 Oct">{moment(new Date()).add(3, "days").format("dddd")}- {moment(new Date()).add(2, "days").format("D MMM")}</option>
-                      <option value="1666548000" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$24 Oct">{moment(new Date()).add(4, "days").format("dddd")}- {moment(new Date()).add(3, "days").format("D MMM")}</option>
-                      <option value="1666634400" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$25 Oct">{moment(new Date()).add(5, "days").format("dddd")}- {moment(new Date()).add(4, "days").format("D MMM")}</option>
-                    </select>
+                    { [0,1,2,3,4].map((number)=>(
+                 <option onClick={()=>setDateselect(number)} data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.1.0.$21 Oct">{moment(new Date()).add(number, "days").format("dddd")}- {moment(new Date()).add(number, "days").format("D MMM")}</option>
+               ))}
+                      
+                         </select>
                   </section>
                   <section className="selectOptions timeSelect" onClick={()=>setSlotToggle(!slottoggle) } data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.2">
                     <div className="firstBlock" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.2.0">
@@ -220,16 +244,12 @@ const Order = () => {
                     </div>
                   </section>
                   <section className="mobileTimeSelect mobileDropDown" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.3">
-                    <select data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.3.0">
-                      <option value="" data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.3.0.$">- Select Time -</option>
-                     
+                    <select data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.3.0" value={displaySlot} >
                       { timeslot.map((slot)=>(
         
-          <option value={slot} data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.3.0.$2022102122302300">{slot}</option>
+          <option  onClick={()=>setdisplaySlot(slot)}    data-reactid=".t57rj60t64.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.2.3.0.$2022102122302300">{slot}</option>
 
-      )) }
-
-                     
+                        )) }
                     </select>
                   </section>
                  { slottoggle  && <div class="times dropdown timesSplit" data-reactid=".9130wz7xo.a.2.0.0.0.0.0.1.2.0.1.0.0.1.1.0.0.4">

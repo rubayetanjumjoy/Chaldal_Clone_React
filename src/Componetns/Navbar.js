@@ -14,7 +14,6 @@ import SignIn from './SignIn';
 import ProfileIcon from './ProfileIcon';
 import ProfileResponsive from './ProfileResponsive';
 import AccountLogin from './AccountLogin';
-import zIndex from '@mui/material/styles/zIndex';
 const Navbar = ({handleNav,setNavopen}) => {
   const { emptyCart } = useCart();
   const {auth,setAuth} =useContext(authProvider);

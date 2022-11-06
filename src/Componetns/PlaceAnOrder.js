@@ -117,11 +117,9 @@ const PlaceAnOrder = () => {
                 <div class="deliveryTimeWithDate" data-reactid=".1tjeiakmalq.a.2.0.0.0.0.2.0.0.0.3">
                   <div class="estimatedDeliveryTime" data-reactid=".1tjeiakmalq.a.2.0.0.0.0.2.0.0.0.3.$10-00-PM-11-00-PM-02-11-22">
                     <span data-reactid=".1tjeiakmalq.a.2.0.0.0.0.2.0.0.0.3.$10-00-PM-11-00-PM-02-11-22.0">
-                      <span data-reactid=".1tjeiakmalq.a.2.0.0.0.0.2.0.0.0.3.$10-00-PM-11-00-PM-02-11-22.0.0">10:00 PM</span>
-                      <span data-reactid=".1tjeiakmalq.a.2.0.0.0.0.2.0.0.0.3.$10-00-PM-11-00-PM-02-11-22.0.1"> - </span>
-                      <span data-reactid=".1tjeiakmalq.a.2.0.0.0.0.2.0.0.0.3.$10-00-PM-11-00-PM-02-11-22.0.2">11:00 PM</span>
+                      <span data-reactid=".1tjeiakmalq.a.2.0.0.0.0.2.0.0.0.3.$10-00-PM-11-00-PM-02-11-22.0.0">{orderPlaced.timeslot}</span>
                       <span data-reactid=".1tjeiakmalq.a.2.0.0.0.0.2.0.0.0.3.$10-00-PM-11-00-PM-02-11-22.0.3">, </span>
-                      <span data-reactid=".1tjeiakmalq.a.2.0.0.0.0.2.0.0.0.3.$10-00-PM-11-00-PM-02-11-22.0.4">02/11/22</span>
+                      <span data-reactid=".1tjeiakmalq.a.2.0.0.0.0.2.0.0.0.3.$10-00-PM-11-00-PM-02-11-22.0.4">{orderPlaced.delivery_date}</span>
                     </span>
                   </div>
                 </div>
@@ -145,7 +143,7 @@ const PlaceAnOrder = () => {
             <div class="orBlockContainer" data-reactid=".1tjeiakmalq.a.2.0.0.0.0.2.0.1">
               <div class="orBlock" data-reactid=".1tjeiakmalq.a.2.0.0.0.0.2.0.1.0">
                 <div class="divider" data-reactid=".1tjeiakmalq.a.2.0.0.0.0.2.0.1.0.0"></div>
-                <div class="blockText" data-reactid=".1tjeiakmalq.a.2.0.0.0.0.2.0.1.0.1">Or</div>
+                
                 <div class="divider" data-reactid=".1tjeiakmalq.a.2.0.0.0.0.2.0.1.0.2"></div>
               </div>
             </div>
@@ -248,14 +246,14 @@ const PlaceAnOrder = () => {
                         </tr>
                         <tr data-reactid=".1tjeiakmalq.a.2.0.0.0.0.2.1.0.0.0.0.1.0.2">
                           <td class="label" data-reactid=".1tjeiakmalq.a.2.0.0.0.0.2.1.0.0.0.0.1.0.2.0">Address</td>
-                          <td class="value" data-reactid=".1tjeiakmalq.a.2.0.0.0.0.2.1.0.0.0.0.1.0.2.1">{orderPlaced.street_address}</td>
+                          <td class="value" data-reactid=".1tjeiakmalq.a.2.0.0.0.0.2.1.0.0.0.0.1.0.2.1">{orderPlaced.address.street_address}</td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
               </div>
-              <div class="orderInstructionsSection" data-reactid=".1tjeiakmalq.a.2.0.0.0.0.2.1.0.1">
+             { /*<div class="orderInstructionsSection" data-reactid=".1tjeiakmalq.a.2.0.0.0.0.2.1.0.1">
                 <div data-reactid=".1tjeiakmalq.a.2.0.0.0.0.2.1.0.1.0">
                   <h4 data-reactid=".1tjeiakmalq.a.2.0.0.0.0.2.1.0.1.0.0">Instructions</h4>
                   <div class="orderInstructionList" data-reactid=".1tjeiakmalq.a.2.0.0.0.0.2.1.0.1.0.1"></div>
@@ -272,7 +270,7 @@ const PlaceAnOrder = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+          </div>*/}
             </div>
             <div class="back-to-shopping-button" data-reactid=".1tjeiakmalq.a.2.0.0.0.0.2.1.3">
               <a onClick={backtoshopping} class="btn btn-primary"> Back to shopping</a> 

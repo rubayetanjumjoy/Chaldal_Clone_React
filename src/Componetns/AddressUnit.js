@@ -129,7 +129,7 @@ const AddressUnit = ({handleclick}) => {
        </section>)) 
       }
       </section>
-      <ModalAddress hideModal={hideModal} setIsOpen={setIsOpen}  isOpen={isOpen} />
+      <ModalAddress hideModal={hideModal} setIsOpen={setIsOpen}  isOpen={isOpen} setSelected={setSelected} />
     
     </div>
   )

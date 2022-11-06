@@ -7,16 +7,65 @@ import Modal from 'react-bootstrap/Modal';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
  
-const ModalAddress = ({hideModal,isOpen,setIsOpen}) => {
+const ModalAddress = ({hideModal,isOpen,setIsOpen,setSelected}) => {
    
    const [mystreetaddress, setMystreetaddress] = useState('');
    const [myfloorno, setMyfloorno] = useState('');
    const [myaptno, setMyaptno] = useState('');
+   const [error, setError] = useState(false);
    const {auth,setAuth} =useContext(authProvider);
    const windowsize=GetWindowSize()
- 
-
+   function containsOnlyNumbers(str) {
+      return /^\d+$/.test(str);
+    }
+   let validateStreetaddr=()=>{
+      if(mystreetaddress.length<=0){
+        
+         toast.error('Delivery Address Could Not be Empty', {
+            position: "bottom-center",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+            return false
+           
+      }
+      else{
+         return true
+      }
+      
+   } 
+   let validateFloor=()=>{
+      if(myfloorno.length<=0){
+        
+         toast.error('Floor Number can not be Empty!!', {
+            position: "bottom-center",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+            return false
+           
+      }
+      else{
+         return true
+      }
+      
+   } 
+   
+   
    let handlesubmit=()=>{
+       
+      
+      if(validateStreetaddr() && validateFloor()){
       let data={"street_address":mystreetaddress,"floor_no":myfloorno,"apartment_no":myaptno,"token":auth['token']}
         fetch(`${process.env.REACT_APP_BASE_URL}/v0/updateaddress/`,{
             method: 'POST', // or 'PUT'
@@ -29,6 +78,10 @@ const ModalAddress = ({hideModal,isOpen,setIsOpen}) => {
               (result) => {
                setAuth(result)
                setIsOpen(false)
+               setSelected(result['address'][result['address'].length-1])
+               setMyaptno('')
+               setMyfloorno('')
+               setMystreetaddress('')
                toast.success('New Address Added', {
                   position: "top-center",
                   autoClose: 1500,
@@ -48,6 +101,8 @@ const ModalAddress = ({hideModal,isOpen,setIsOpen}) => {
                 console.log(error);
               }
             )
+         }
+          
 
    }
 
@@ -68,16 +123,19 @@ const ModalAddress = ({hideModal,isOpen,setIsOpen}) => {
          <div class="addressInputComponent" >
             <div class="show" >
                < >
-                  <div class="inputContainer alternateStyle" >
+                  <div class="inputContainer alternateStyle " >
                      <div class="input-label" ><span >Delivery Address<span class="required"> *</span></span></div>
                      <textarea onChange={(e)=>setMystreetaddress(e.target.value)} req class="" name="address" type="text" maxlength="400" rows="3" ></textarea>
-                     <span class="input-error" ></span><span class="input-description" >e.g House No 73, Road 14, Block F, Bashundhara R/A, Dhaka - 1216</span><span class="input-extra-content" ></span>
+                      
+                     <span class="input-description" >e.g House No 73, Road 14, Block F, Bashundhara R/A, Dhaka - 1216</span>
+                     <span class="input-extra-content" ></span>
                   </div>
                    
                   <div class="apartmentFields" >
-                     <div class="inputContainer alternateStyle  "  >
+                     <div class="inputContainer alternateStyle has-error  "  >
                         <div class="input-label" ><span >Floor No</span></div>
                         <input onChange={(e)=>setMyfloorno(e.target.value)} class="" name="floorNo" type="number" maxlength="10"   style={{color:'black'}} required /><span class="input-error" ></span><span class="input-description" >e.g "1", "2"</span><span class="input-extra-content" ></span>
+                          
                      </div>
                      <div class="inputContainer alternateStyle" >
                         <div class="input-label" ><span >Apartment No</span></div>

@@ -1,8 +1,7 @@
 import React from 'react'
 import { useState,useContext } from 'react';
 import { authProvider } from '../Contexts/Auth';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+ 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
@@ -199,16 +198,7 @@ const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
             <>
             <button  onClick={()=>{setlogtoggle(!logtoggle); setOtpshow(false)}} className="loginBtn emailLoginBtn">Login With <b> Phone Number</b> </button>
              
-            <Box
-              
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 0, width: '100%' ,},
-      }}
-      noValidate
-      autoComplete="off"
-    >
-             </Box>
+            
             <div className="inputContainer" >
             <input name="email" type="email" required=""/>
             <span className="input-placeholder"  >Email Address</span>
