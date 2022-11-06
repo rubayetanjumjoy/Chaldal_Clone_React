@@ -22,7 +22,7 @@ const ModalAddress = ({hideModal,isOpen,setIsOpen,setSelected}) => {
       if(mystreetaddress.length<=0){
         
          toast.error('Delivery Address Could Not be Empty', {
-            position: "bottom-center",
+            position: "top-center",
             autoClose: 1500,
             hideProgressBar: false,
             closeOnClick: true,
@@ -43,7 +43,7 @@ const ModalAddress = ({hideModal,isOpen,setIsOpen,setSelected}) => {
       if(myfloorno.length<=0){
         
          toast.error('Floor Number can not be Empty!!', {
-            position: "bottom-center",
+            position: "top-center",
             autoClose: 1500,
             hideProgressBar: false,
             closeOnClick: true,

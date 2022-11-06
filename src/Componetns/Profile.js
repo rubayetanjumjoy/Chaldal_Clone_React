@@ -1,6 +1,6 @@
 import React from 'react'
 import ModalAddress from './ModalAddress'
-import { useState,useContext,useEffect } from 'react'
+import { useState,useContext,useEffect,useRef } from 'react'
 import { authProvider } from '../Contexts/Auth'
 import { data } from '../Contexts/DataContext';
 import { ToastContainer, toast } from 'react-toastify';
@@ -24,17 +24,16 @@ const Profile = () => {
   const {address} =useContext(data);
   //toggle selected item
   const [selected,setSelected]=useState('')
-   
+  const nameref=useRef(null);
+
  
   
 
-  console.log(auth)
-
-
-
- console.log(myname)
   
- console.log(isOpen)
+
+
+
+ 
  
   let handlenamechange=(e)=>{
     e.preventDefault()
@@ -63,10 +62,29 @@ const Profile = () => {
      
   }
  
-  
+  let validatename=()=>{
+    let name=nameref.current.value
+    if(name.length<=0){
+      toast.error('Name Can Not be Empty!!', {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+      return false
+    }
+    else{
+      return true
+    }
+  }
   
   let handlesubmit=( )=>{ 
-   
+    
+      if(validatename()){
       let data={"name":myname,"email":myemail,"date_of_birth":mybirthdate,"gender":mygender,"date_of_birth":mybirthdate,"token":auth['token']}
        fetch(`${process.env.REACT_APP_BASE_URL}/v0/updateuser/`,{
         method: 'POST', // or 'PUT'
@@ -99,7 +117,7 @@ const Profile = () => {
           }
         )
 
- 
+      }
      
   }
 
@@ -108,7 +126,7 @@ const Profile = () => {
   return (
     <>{
       auth['token'] &&
-      <form>
+      
       <div >
       
       <div className="outer-profile-container" >
@@ -122,7 +140,7 @@ const Profile = () => {
       <div className="inputContainer">
     
       
-      <input   className="has-value" name="name" type="text"  maxlength="70" onChange={handlenamechange} value={!mynametoggle ? auth['user']['name'] : myname } style={{color:'black'}} {...required}/>
+      <input   className="has-value" name="name" type="text"  maxlength="70"  ref={nameref} onChange={handlenamechange} value={!mynametoggle ? auth['user']['name'] : myname } style={{color:'black'}} {...required}/>
       <span className="input-placeholder">Name</span>
       <span className="input-error" ></span>
       <span className="input-description" ></span>
@@ -184,13 +202,13 @@ const Profile = () => {
        </div>
        </div>
                  { submitToggle && <div className="submitButtonSection" >
-                    <button type="submit" class="btn btn-primary Btn" onClick={handlesubmit} >Submit</button>
+                    <button type="button" class="btn btn-primary Btn" onClick={handlesubmit} >Submit</button>
                     
                   </div>}
                   </div>
                
                   </div>
-                  </form>
+                  
       }
 
     </>
