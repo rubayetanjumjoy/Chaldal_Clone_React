@@ -64,6 +64,14 @@ function App() {
             <Route exact path="/meat-fish" element={<Main insideWarper={<Food props={'meat-fish'}/>}/>}></Route>
             <Route exact path="/fresh-fruit" element={<Main insideWarper={<Food props={'fresh-fruit'}/>}/>}></Route>
             <Route exact path="/coffee" element={<Main insideWarper={<Food props={'coffee'}/>}/>}></Route>
+            <Route exact path="/stationary" element={<Main insideWarper={<Food props={'stationary'}/>}/>}></Route>
+            <Route exact path="/kitchen" element={<Main insideWarper={<Food props={'kitchen'}/>}/>}></Route>
+            <Route exact path="/breverage" element={<Main insideWarper={<Food props={'breverage'}/>}/>}></Route>
+            <Route exact path="/vehicle-essentials" element={<Main insideWarper={<Food props={'vehicle-essentials'}/>}/>}></Route>
+            <Route exact path="/fashion-and-lifestyle" element={<Main insideWarper={<Food props={'fashion-and-lifestyle'}/>}/>}></Route>
+            <Route exact path="/health-care" element={<Main insideWarper={<Food props={'health-care'}/>}/>}></Route>
+            <Route exact path="/baby-products" element={<Main insideWarper={<Food props={'baby-products'}/>}/>}></Route>
+            <Route exact path="/cleaning" element={<Main insideWarper={<Food props={'cleaning'}/>}/>}></Route>
             <Route element={<PublicRoute/>}>
             <Route exact path="/account/login" element={<Main insideWarper={<AccountLogin/>}/>}></Route>
             </Route>

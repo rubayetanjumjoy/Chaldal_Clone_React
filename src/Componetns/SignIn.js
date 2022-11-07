@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState,useContext } from 'react';
 import { authProvider } from '../Contexts/Auth';
- 
+import { useRef } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
@@ -18,8 +18,19 @@ const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
      
      //auth
      const {auth,setAuth} =useContext(authProvider);
-      
+     const inputref=useRef(null)
+     const passref=useRef(null)
+     const otpref=useRef(null)
      
+     let focus=()=>{
+      inputref.current.focus()
+     }
+     let focuspass=()=>{
+      passref.current.focus()
+     }
+     let focusotp=()=>{
+      otpref.current.focus()
+     }
    
      let otpverifyhandler=()=>{
         let data={"phone_number":mynumber,"otp":myotp}
@@ -166,8 +177,8 @@ const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
             
      {      otpshow && <>
                 <div className={wrongotp ? 'inputContainer has-error' :'inputContainer'}>
-                    <input name='otp' class={myotp?'has-value':''} type="text" required="" onChange={(e)=>setMyotp(e.target.value)} style={{color:'black'}}></input>
-                    <span className='input-placeholder '>
+                    <input name='otp' ref={otpref} class={myotp?'has-value':''} type="text" required="" onChange={(e)=>setMyotp(e.target.value)} style={{color:'black'}}></input>
+                    <span onClick={focusotp} className='input-placeholder '>
                     Please enter 4-digit one time pin
                     </span>
                     <span class="input-error" data-reactid=".28e1137ykn4.1.0.0.0.2.0.5.0.2">Please enter correct 4-digit one time pin</span>
@@ -200,8 +211,8 @@ const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
              
             
             <div className="inputContainer" >
-            <input name="email" type="email" required=""/>
-            <span className="input-placeholder"  >Email Address</span>
+            <input ref={inputref} name="email" type="email" required=""/>
+            <span className="input-placeholder" onClick={focus} >Email Address</span>
       
             <span className="input-error"></span>
             <span className="input-description" 
@@ -214,7 +225,7 @@ const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
             
             
               <div className="inputContainer" >
-                <input className="" name="password" type="password" required=""  /><span className="input-placeholder" >Password</span>
+                <input ref={passref} className="" name="password" type="password" required=""  /><span className="input-placeholder" onClick={focuspass} >Password</span>
                  <span className="input-error" ></span>
                 <span className="input-description" ></span>
                 <span className="input-extra-content">

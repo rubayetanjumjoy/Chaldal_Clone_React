@@ -19,6 +19,7 @@ const Profile = () => {
   const [mygenderedit,setMygenderedit]=useState(false)
   const [mybirthdate,setMybirthdate]=useState('')
   const [mybirthdateeidt,setMybirthdateeidt]=useState(false)
+  const [error, setError] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
   const {address} =useContext(data);
@@ -65,19 +66,11 @@ const Profile = () => {
   let validatename=()=>{
     let name=nameref.current.value
     if(name.length<=0){
-      toast.error('Name Can Not be Empty!!', {
-        position: "top-center",
-        autoClose: 1500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        });
+      setError(true)
       return false
     }
     else{
+      setError(false)
       return true
     }
   }
@@ -137,12 +130,14 @@ const Profile = () => {
     
      
      
-      <div className="inputContainer">
+      <div className={ error ? 'inputContainer has-error' :'inputContainer' }>
     
       
       <input   className="has-value" name="name" type="text"  maxlength="70"  ref={nameref} onChange={handlenamechange} value={!mynametoggle ? auth['user']['name'] : myname } style={{color:'black'}} {...required}/>
       <span className="input-placeholder">Name</span>
-      <span className="input-error" ></span>
+      <span className="input-error" >
+      Please fill out the field
+      </span>
       <span className="input-description" ></span>
       <span className="input-extra-content" ></span></div>
       <div className="inputContainer " >

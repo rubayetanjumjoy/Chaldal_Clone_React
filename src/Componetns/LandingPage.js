@@ -2,8 +2,30 @@ import React from 'react'
 import HowtoOrder from './HowtoOrder'
 import Corporate from './Corporate'
 import { Link } from 'react-router-dom'
-
+import { useState,useEffect } from 'react'
 const LandingPage = () => {
+    const [sideitem,setSideitem]=useState([])
+  
+    useEffect(() => {
+      fetch(`${process.env.REACT_APP_BASE_URL}/v0/products/catagorylist`)
+         .then(res => res.json())
+         .then(
+           (response) => {
+             
+            setSideitem(response)
+              
+           },
+             
+           (error) => {
+             console.log(error);
+           }
+         )
+     
+     
+      
+       
+     }, [])
+   
   return (
     <div>
          <div className='landingPage2'>
@@ -19,115 +41,22 @@ const LandingPage = () => {
                     </h2>
                 </div>
                 <div className='mainTile'>  
-                <Link to='/fresh-fruit'>
-                    <div className='categoryBox'>
-                        <div className='categoryName'>Fruits and Vegetables</div>
-                        <div className='categoryImg' > 
-                        <img src="/img/mango.png"></img>
-
+                {
+                    sideitem.map((item)=>(
+                        <Link to={`/${item.slug}`}>
+                        <div className='categoryBox'>
+                            <div className='categoryName'>{item.name}</div>
+                            <div className='categoryImg' > 
+                            <img src={item.icon}></img>
+    
+                            </div>
                         </div>
-                    </div>
-                </Link>
-                <Link to='coffee'>
-                    <div className='categoryBox'>
-                        <div className='categoryName'>Stationary</div>
-                        <div className='categoryImg' > 
-                        <img src="/img/stationary.png"></img>
-
-                        </div>
-                    </div>
-                </Link>
-                <a href='fruits-vegetables'>
-                    <div className='categoryBox'>
-                        <div className='categoryName'>Kitchen Items</div>
-                        <div className='categoryImg' > 
-                        <img src="/img/kitchen.png"></img>
-
-                        </div>
-                    </div>
-                </a>
-                <a href='fruits-vegetables'>
-                    <div className='categoryBox'>
-                        <div className='categoryName'>Breverage</div>
-                        <div className='categoryImg' > 
-                        <img src="/img/hot-chocolate.png"></img>
-
-                        </div>
-                    </div>
-                </a>
-                <a href='fruits-vegetables'>
-                    <div className='categoryBox'>
-                        <div className='categoryName'>Healthcare</div>
-                        <div className='categoryImg' > 
-                        <img src="/img/healthcare.png"></img>
-
-                        </div>
-                    </div>
-                </a>
-                <a href='fruits-vegetables'>
-                    <div className='categoryBox'>
-                        <div className='categoryName'>Fish And Meat</div>
-                        <div className='categoryImg' > 
-                        <img src="/img/fish.png"></img>
-
-                        </div>
-                    </div>
-                </a>
-                <Link to='/cooking'>
-                    <div className='categoryBox'>
-                        <div className='categoryName'>Cooking</div>
-                        <div className='categoryImg' > 
-                        <img src="/img/cooking.png"></img>
-
-                        </div>
-                    </div>
-                </Link>
-                <a href='fruits-vegetables'>
-                    <div className='categoryBox'>
-                        <div className='categoryName'>Cleaning</div>
-                        <div className='categoryImg' > 
-                        <img src="/img/cleaning.png"></img>
-
-                        </div>
-                    </div>
-                </a>
-                <a href='fruits-vegetables'>
-                    <div className='categoryBox'>
-                        <div className='categoryName'>Baby Products</div>
-                        <div className='categoryImg' > 
-                        <img src="/img/baby.png"></img>
-
-                        </div>
-                    </div>
-                </a>
-                <a href='fruits-vegetables'>
-                    <div className='categoryBox'>
-                        <div className='categoryName'>Stationary</div>
-                        <div className='categoryImg' > 
-                        <img src="/img/stationary.png"></img>
-
-                        </div>
-                    </div>
-                </a>
-                <Link to='fresh-fruit'>
-                    <div className='categoryBox'>
-                        <div className='categoryName'>Fruits</div>
-                        <div className='categoryImg' > 
-                        <img src="/img/mango.png"></img>
-
-                        </div>
-                    </div>
-                </Link>
-                <a href='fruits-vegetables'>
-                    <div className='categoryBox'>
-                        <div className='categoryName'>Stationary</div>
-                        <div className='categoryImg' > 
-                        <img src="/img/stationary.png"></img>
-
-                        </div>
-                    </div>
-                </a>
-
+                    </Link>
+                    ))
+                }
+               
+                
+                
                 </div>
             </section>
             <HowtoOrder/>

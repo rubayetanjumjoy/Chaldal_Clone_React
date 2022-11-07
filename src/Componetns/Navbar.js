@@ -67,8 +67,7 @@ let handlesmlogin=()=>
        
        <button onClick={handleNav} className="hamburgerMenu hidden-xs"  ><Icon.List style={{width:"25px",height:"25px",display:'inline-block',verticalAlign:'middle'}}/></button>
        <Link to="/">
-        <img className="egg chaldal_logo" src='https://chaldnn.com/asset/Egg.ChaldalWeb.Fabric/Egg.ChaldalWeb1/1.0.0+Deploy-Release-100/Default/components/header/Header/images/logo-small.png?q=low&webp=1&alpha=1'   />
-       </Link>
+       <img className="egg chaldal_logo" style={{backgroundImage: 'url(https://chaldn.com/asset/Egg.ChaldalWeb.Fabric/Egg.ChaldalWeb/1.0.0+Deploy-Release-157/Default/components/header/Header/images/logo-small.png?q=low&webp=1&alpha=1)', backgroundRepeat: 'no-repeat'}} src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-reactid=".1q905mv54f8.4.0.0.0.1.0.0" />       </Link>
        <div className='searchArea'>
        <div className="searchInput" style={{marginLeft:windowsize.width<700 ? '0px':'30px'}}  > 
         <input onChange={handlechangeSearch} className="searchBox" type="text" autoComplete='off' placeholder="Search for products (e.g. eggs, milk, potato)" required=""  />
@@ -91,7 +90,7 @@ let handlesmlogin=()=>
             <span>Dhaka</span>
     
             </div>
-            <p> <i className="arrow-down"></i></p>
+            {/*<p> <i className="arrow-down"></i></p>*/}
            
             </div>
         </div>
