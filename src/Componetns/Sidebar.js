@@ -55,7 +55,7 @@ const Sidebar = ({handleNav,setNavopen}) => {
                     <li className='unselected' >
                      <div className='name'>
                      <Link to='/coffee' onClick={()=>windowsize.width <700 && setNavopen(false)}>
-                     <span>Trending Item</span>
+                     <span>Trending </span>
                      </Link>
 
                      </div>

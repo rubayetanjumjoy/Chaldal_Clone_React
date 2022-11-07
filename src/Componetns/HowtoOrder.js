@@ -13,7 +13,7 @@ const HowtoOrder = () => {
           <div className='imageCarousel'>
             <div className='banner-carousel-container transition' style={{width: "300%",left: '0%'}}>
                 <span>
-                    <div className='banner-slide slide' style={{backgroundImage:"url("+"https://chaldn.com/asset/Egg.ChaldalWeb.Fabric/Egg.ChaldalWeb1/1.0.0+Deploy-Release-78/Default/stores/chaldal/components/landingPage2/LandingPage/images/how_to_order_chaldal/tutorial-1.jpg?q=best&webp=1"+")",width:"33.33%"}}>
+                    <div className='banner-slide slide' style={{backgroundImage:"url(/img/tutorial.webp)",width:"33.33%"}}>
                         
                     </div>
                 </span>

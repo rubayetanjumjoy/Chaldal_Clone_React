@@ -29,13 +29,13 @@ const LandingPage = () => {
   return (
     <div>
          <div className='landingPage2'>
-         <div className='landingBanner' style={{backgroundSize: 'auto', backgroundSize: 'cover',height: '325px',paddingTop: '100px', backgroundImage:`url('https://chaldn.com/asset/Egg.ChaldalWeb.Fabric/Egg.ChaldalWeb1/1.0.0+Deploy-Release-78/Default/stores/chaldal/components/landingPage2/LandingPage/images/landingBannerTop.png')`}} >
+         <div className='landingBanner' style={{backgroundSize: 'auto', backgroundSize: 'cover',height: '325px',paddingTop: '100px', backgroundImage:`url(/img/landingtop.jpg)`}} >
             
         
          </div> 
          <div className='mainContainer'>
             <section id='product-categories' className='categoryTiles'>
-                <div className='initialLabel'>
+                <div className='initialLabel mt-5'>
                     <h2>
                         <span>Our Product Categories</span>
                     </h2>
