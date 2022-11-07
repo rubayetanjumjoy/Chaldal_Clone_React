@@ -14,7 +14,7 @@ import SignIn from './SignIn';
 import ProfileIcon from './ProfileIcon';
 import ProfileResponsive from './ProfileResponsive';
 import AccountLogin from './AccountLogin';
-const Navbar = ({handleNav,setNavopen}) => {
+const Navbar = ({handleNav,setNavopen,navopen}) => {
   const { emptyCart } = useCart();
   const {auth,setAuth} =useContext(authProvider);
   const {searchresult,setSearchesult} =useContext(data);
@@ -48,6 +48,9 @@ const Navbar = ({handleNav,setNavopen}) => {
 
  
 let handlechangeSearch=(e)=>{
+  if(navopen && windowsize.width<700){
+    setNavopen(false)
+  }
   setMysearch(e.target.value)
    
   navigate('/search');

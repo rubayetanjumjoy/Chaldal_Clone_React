@@ -115,7 +115,7 @@ const Main = ({insideWarper}) => {
     { pathname !='/placeanorder' && <> <ProfileIcon/>
      <ShoppingCartWrapper  handleCart={handleCart} cartopen={cartopen} otpshow={otpshow} setOtpshow={setOtpshow}/>
      </>}
-      <Navbar handleNav={handleNav} setNavopen={setNavopen}   />
+      <Navbar handleNav={handleNav} setNavopen={setNavopen} navopen={navopen}   />
    {  showorderbtn && <Link to ={isEmpty ? '/':'/order'}><div class="primary_shopping_bottom_btn shopping_bottom_btn"  data-reactid=".rgoiat4a6g.8"><button class="place_order_btn" data-reactid=".rgoiat4a6g.8.0">{!isEmpty ? 'Place Order' :'Start Shopping'}</button></div></Link>}
      <EverythingelseWarper    insideWarper={insideWarper}/>
      <ToastContainer />
