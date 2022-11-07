@@ -93,7 +93,7 @@ const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
           
          if (validatePhoneNumber(mynumber)) {
           setPhonevalid(true);
-         
+          setOtpshow(true);
             fetch(`${process.env.REACT_APP_BASE_URL}/v0/sendotp/`,{
             method: 'POST', // or 'PUT'
             headers: {
@@ -103,7 +103,7 @@ const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
             .then(res => res.json())
             .then(
               (result) => {
-                 setOtpshow(true);
+                 
                 console.log(result)
               },
               // Note: it's important to handle errors here
