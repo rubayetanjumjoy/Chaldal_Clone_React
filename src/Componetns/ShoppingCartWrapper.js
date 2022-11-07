@@ -7,7 +7,7 @@ import Odometer from 'react-odometerjs';
 import 'animate.css';
 
 import { useLocation } from 'react-router'
-
+import GetWindowSize from '../CustomHooks/GetWindowSize';
 const ShoppingCartWrapper = ({handleCart,cartopen}) => {
    const [counter,setCounter]=useState(0)
    const {
@@ -17,6 +17,7 @@ const ShoppingCartWrapper = ({handleCart,cartopen}) => {
       updateItemQuantity,
       removeItem,
     } = useCart();
+    let windowsize=GetWindowSize()
 
     const [carttoggle,setCarttoggle]=useState(true);
     const cartref=useRef(null);
@@ -42,7 +43,7 @@ const ShoppingCartWrapper = ({handleCart,cartopen}) => {
           <>
             <div className="cartContainer " >
    <div className="shoppingCartButton" onClick={()=>handleCart(false)} ></div>
-   <div className="shoppingCart expanded non-empty responsive"  >
+   <div className="shoppingCart expanded non-empty responsive" style={{height:windowsize.height}}  >
       <div className="header"  >
          <div className="cart"  >
             
@@ -120,7 +121,7 @@ const ShoppingCartWrapper = ({handleCart,cartopen}) => {
          } 
             
          </div>
-         <div className="extraSpaceContainer"  style={{height:'110px'}}></div>
+         <div className="extraSpaceContainer"  style={{height:'169px'}}></div>
          
       </div>
       <div className=""  >

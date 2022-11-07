@@ -15,7 +15,7 @@ const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
      const [myotp, setMyotp] = useState('');
      const [phonevalid, setPhonevalid] = useState(true);
      const [wrongotp, setWrongotp] = useState(false);
-     
+     const [loading,setLoading]=useState(false);
      //auth
      const {auth,setAuth} =useContext(authProvider);
      const inputref=useRef(null)
@@ -34,6 +34,7 @@ const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
    
      let otpverifyhandler=()=>{
         let data={"phone_number":mynumber,"otp":myotp}
+        setLoading(true)
         fetch(`${process.env.REACT_APP_BASE_URL}/v0/verifyotp/`,{
             method: 'POST', // or 'PUT'
             headers: {
@@ -45,6 +46,7 @@ const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
               (result) => {
                 setOtpshow(false)
                 setIsOpenmodal(false)
+                setLoading(false)
                 if(wrongotp){
                   setWrongotp(false)
                 }
@@ -81,8 +83,10 @@ const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
      
      function validatePhoneNumber(input_str) {
         var re = /(^(\+88|0088)?(01){1}[3456789]{1}(\d){8})$/;
-      
-        return re.test(input_str);
+        
+        let counbtryCode="+880"
+        let checkCountryCode = input_str. slice(0, 4)
+        return re.test(input_str) && counbtryCode==checkCountryCode;
       }
       
      const signin = () => {
@@ -90,10 +94,11 @@ const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
             "phone_number":mynumber
          }
        
-          
+        
          if (validatePhoneNumber(mynumber)) {
           setPhonevalid(true);
-          setOtpshow(true);
+          setLoading(true)
+         
             fetch(`${process.env.REACT_APP_BASE_URL}/v0/sendotp/`,{
             method: 'POST', // or 'PUT'
             headers: {
@@ -103,8 +108,9 @@ const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
             .then(res => res.json())
             .then(
               (result) => {
-                 
+                 setOtpshow(true);
                 console.log(result)
+                setLoading(false)
               },
               // Note: it's important to handle errors here
               // instead of a catch() block so that we don't swallow
@@ -196,7 +202,7 @@ const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
             }
             
             </div>
-            { !otpshow && <button className="loginBtn" id="login-button" type="submit" onClick={signin} >SIGN UP / LOGIN</button>}
+            { !otpshow && <button    disabled={loading} className="loginBtn" id="login-button" type="submit" onClick={signin} >SIGN UP / LOGIN</button>}
            
          </>
                 
@@ -231,7 +237,7 @@ const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
                 <span className="input-extra-content">
                     </span>
             </div>
-            <button className="loginBtn" id="login-button" type="submit" onClick={signin} >LOGIN</button>
+            <button disabled={loading}  className="loginBtn" id="login-button" type="submit" onClick={signin} >LOGIN</button>
             
 
         
@@ -255,7 +261,7 @@ const SignIn = ({setIsOpenmodal,setOtpshow,otpshow}) => {
                   <svg width="20px" height="20px" style={{fill: 'white', stroke: 'white', display: 'inline-block', verticalAlign: 'middle'}} viewBox="0 0 430.113 430.114" data-reactid=".1f53q7t4nfi.1.0.0.0.2.0.0.0.0.0">
                     <path id="Facebook" d="M158.081,83.3c0,10.839,0,59.218,0,59.218h-43.385v72.412h43.385v215.183h89.122V214.936h59.805 c0,0,5.601-34.721,8.316-72.685c-7.784,0-67.784,0-67.784,0s0-42.127,0-49.511c0-7.4,9.717-17.354,19.321-17.354 c9.586,0,29.818,0,48.557,0c0-9.859,0-43.924,0-75.385c-25.016,0-53.476,0-66.021,0C155.878-0.004,158.081,72.48,158.081,83.3z" data-reactid=".1f53q7t4nfi.1.0.0.0.2.0.0.0.0.0.0" />
                   </svg>
-                  <div className="buttonText" data-reactid=".1f53q7t4nfi.1.0.0.0.2.0.0.0.0.1">
+                  <div  className="buttonText" data-reactid=".1f53q7t4nfi.1.0.0.0.2.0.0.0.0.1">
                     <span data-reactid=".1f53q7t4nfi.1.0.0.0.2.0.0.0.0.1.0">Sign Up or Login with <b>Facebook</b>
                     </span>
                   </div>

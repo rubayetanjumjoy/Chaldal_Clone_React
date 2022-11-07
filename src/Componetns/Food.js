@@ -3,15 +3,21 @@ import { useRef } from 'react'
 import Items from '../API/Items.json'
 import FoodUnit from './FoodUnit'
 import { CartProvider, useCart } from "react-use-cart";
+import ReactLoading from 'react-loading';
 
 const Food = ({props}) => {
- 
+  const [loading,setLoading]=useState(false);
  
   const [item,setItem]=useState([]);
   useEffect(() => {
+    setLoading(true)
     fetch(`${process.env.REACT_APP_BASE_URL}/v0/products/${props}`)
   .then((response) => response.json())
-  .then((data) =>   setItem(data));
+  .then((data) =>  { 
+    setItem(data);
+    setLoading(false)
+  }
+  );
 
   
      
@@ -21,6 +27,9 @@ const Food = ({props}) => {
      
   return (
     <div>
+    {loading && <div style={{"position":"fixed","left":"45%","transform":"-ms-translate(-50%, -50%) ", }}>
+     <ReactLoading type={'bubbles'} color={'#f1c40f'}   />
+     </div>}
       <div className='catalogBrowser'>
         <div className='loaded'>
           <section className='bodyWrapper'>
