@@ -3,7 +3,7 @@ import * as Icon from 'react-bootstrap-icons';
 import Sidebar from './Sidebar';
 import Modal from 'react-bootstrap/Modal';
  
-import {useState,useContext,useEffect} from 'react';
+import {useState,useContext,useEffect,useRef} from 'react';
 import { Link } from 'react-router-dom'
 import { data } from '../Contexts/DataContext';
 import { authProvider } from '../Contexts/Auth';
@@ -22,7 +22,7 @@ const Navbar = ({handleNav,setNavopen,navopen}) => {
   const windowsize=GetWindowSize()
   const [smallSignin,setSmallSignin]=useState(false)
   
-
+  const searchref=useRef(null);
 
   const [isOpen, setIsOpen] = useState(false);
   const [sidetoggle, setSidetoggle] = useState(true);
@@ -59,6 +59,10 @@ let handlesmlogin=()=>
  {
   navigate('/account/login')
  }
+let hadnlesearchfoucs=()=>{
+  searchref.current.focus()
+  navigate('/search');
+}
 
   
   return (
@@ -73,9 +77,9 @@ let handlesmlogin=()=>
        <img className="egg chaldal_logo" style={{backgroundImage: 'url(https://chaldn.com/asset/Egg.ChaldalWeb.Fabric/Egg.ChaldalWeb/1.0.0+Deploy-Release-157/Default/components/header/Header/images/logo-small.png?q=low&webp=1&alpha=1)', backgroundRepeat: 'no-repeat'}} src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-reactid=".1q905mv54f8.4.0.0.0.1.0.0" />       </Link>
        <div className='searchArea'>
        <div className="searchInput" style={{marginLeft:windowsize.width<700 ? '0px':'30px'}}  > 
-        <input onChange={handlechangeSearch} className="searchBox" type="text" autoComplete='off' placeholder="Search for products (e.g. eggs, milk, potato)" required=""  />
+        <input onChange={handlechangeSearch}  ref={searchref} className="searchBox" type="text" autoComplete='off' placeholder="Search for products (e.g. eggs, milk, potato)" required=""  />
          <button> 
-         <svg class="search" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" data-reactid=".1rsh2u5c2y6.4.0.0.0.3.0.0.2.0">
+         <svg onClick={hadnlesearchfoucs} class="search" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" data-reactid=".1rsh2u5c2y6.4.0.0.0.3.0.0.2.0">
           <path d="M44.5,78.5c-18.8,0-34-15.3-34-34s15.3-34,34-34s34,15.3,34,34S63.3,78.5,44.5,78.5z M44.5,18.1  C30,18.1,18.2,30,18.2,44.5S30,70.8,44.5,70.8S70.9,59,70.9,44.5S59,18.1,44.5,18.1z" data-reactid=".1rsh2u5c2y6.4.0.0.0.3.0.0.2.0.0"></path>
           <path d="M87.2,91c-1,0-2-0.4-2.7-1.1L63.1,68.5c-1.5-1.5-1.5-3.9,0-5.4s3.9-1.5,5.4,0l21.3,21.3  c1.5,1.5,1.5,3.9,0,5.4C89.2,90.6,88.2,91,87.2,91z" data-reactid=".1rsh2u5c2y6.4.0.0.0.3.0.0.2.0.1"></path>
          </svg>
